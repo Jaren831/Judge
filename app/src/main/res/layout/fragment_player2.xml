@@ -2,13 +2,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/search_fragment"
-    tools:context="com.example.android.judge.CardSearchFragment">
+    tools:context="com.example.android.judge.Match.Player2Fragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="hello_search_fragment" />
+        android:text="@string/hello_blank_fragment" />
 
 </FrameLayout>

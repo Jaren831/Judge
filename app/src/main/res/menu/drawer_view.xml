@@ -2,17 +2,17 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_first_fragment"
+            android:id="@+id/nav_match"
             android:icon="@drawable/fragment_one"
             android:checked="true"
-            android:title="First" />
+            android:title="@string/nav_match_string" />
         <item
-            android:id="@+id/nav_second_fragment"
+            android:id="@+id/nav_card_search"
             android:icon="@drawable/fragment_two"
-            android:title="Second" />
+            android:title="@string/nav_card_search_string" />
         <item
-            android:id="@+id/nav_third_fragment"
+            android:id="@+id/nav_rulebook"
             android:icon="@drawable/fragment_three"
-            android:title="Third" />
+            android:title="@string/nav_rulebook_string" />
     </group>
 </menu>

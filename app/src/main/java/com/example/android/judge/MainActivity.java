@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +14,10 @@ import android.view.MenuItem;
 
 import com.example.android.judge.Match.MatchFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
+
+    private final String LOG_TAG = MainActivity.class.getSimpleName();
     private DrawerLayout mDrawer;
     private Toolbar toolbar;
     private NavigationView nvDrawer;
@@ -40,9 +44,13 @@ public class MainActivity extends AppCompatActivity {
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
         mDrawer.addDrawerListener(drawerToggle);
 
-
         // Setup drawer view
         setupDrawerContent(nvDrawer);
+
+        Fragment matchFragment = new MatchFragment();
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.fragment_container, matchFragment)
+                .commit();
     }
     // `onPostCreate` called when activity start-up is complete after `onStart()`
     // NOTE 1: Make sure to override the method with only a single `Bundle` argument
@@ -84,13 +92,13 @@ public class MainActivity extends AppCompatActivity {
         Fragment fragment = null;
         Class fragmentClass;
         switch(menuItem.getItemId()) {
-            case R.id.nav_first_fragment:
+            case R.id.nav_match:
                 fragmentClass = MatchFragment.class;
                 break;
-            case R.id.nav_second_fragment:
+            case R.id.nav_card_search:
                 fragmentClass = CardSearchFragment.class;
                 break;
-            case R.id.nav_third_fragment:
+            case R.id.nav_rulebook:
                 fragmentClass = RuleBookFragment.class;
                 break;
             default:
@@ -105,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit();
 
         // Highlight the selected item has been done by NavigationView
         menuItem.setChecked(true);
@@ -120,5 +128,31 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         return drawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
 
+    }
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.nav_match:
+                break;
+            case R.id.nav_card_search:
+                break;
+            case R.id.nav_rulebook:
+                break;
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (this.mDrawer.isDrawerOpen(GravityCompat.START)) {
+            this.mDrawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 }

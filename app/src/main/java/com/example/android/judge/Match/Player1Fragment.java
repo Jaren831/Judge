@@ -1,4 +1,4 @@
-package com.example.android.judge;
+package com.example.android.judge.Match;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -7,12 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class CardSearchFragment extends Fragment {
+import com.example.android.judge.R;
+
+public class Player1Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_card_search, container, false);
+        return inflater.inflate(R.layout.fragment_player1, container, false);
     }
 
     @Override
