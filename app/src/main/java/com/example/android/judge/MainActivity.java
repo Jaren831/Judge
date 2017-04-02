@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity
 
         Fragment matchFragment = new MatchFragment();
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragment_container, matchFragment)
+                .add(R.id.main_container, matchFragment)
                 .commit();
     }
     // `onPostCreate` called when activity start-up is complete after `onStart()`
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity
 
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.main_container, fragment).commit();
 
         // Highlight the selected item has been done by NavigationView
         menuItem.setChecked(true);
