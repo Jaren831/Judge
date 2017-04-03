@@ -5,9 +5,10 @@
     android:id="@+id/player2_fragment"
     tools:context="com.example.android.judge.Match.Player2LifeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <android.support.v4.view.ViewPager
+        android:id="@+id/player2_view_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimary"/>
 
 </FrameLayout>

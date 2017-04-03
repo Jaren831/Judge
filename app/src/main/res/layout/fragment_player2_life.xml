@@ -5,10 +5,10 @@
     android:id="@+id/player2_life_fragment"
     tools:context="com.example.android.judge.Match.Player2Fragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center"
         android:text="player2_life" />
 
 </FrameLayout>

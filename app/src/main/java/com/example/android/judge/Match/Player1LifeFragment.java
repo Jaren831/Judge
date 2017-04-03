@@ -10,12 +10,22 @@ import android.view.ViewGroup;
 import com.example.android.judge.R;
 
 public class Player1LifeFragment extends Fragment {
+
+    public static Player1LifeFragment newInstance() {
+        Player1LifeFragment player1LifeFragment = new Player1LifeFragment();
+//        Bundle args = new Bundle();
+//        args.putInt("someInt", page);
+//        args.putString("someTitle", title);
+//        player1LifeFragment.setArguments(args);
+        return player1LifeFragment;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(
-                R.layout.fragment_player1, container, false);
         // Inflate the layout for this fragment
+        ViewGroup rootView = (ViewGroup) inflater.inflate(
+                R.layout.fragment_player1_life, container, false);
         return rootView;
     }
 

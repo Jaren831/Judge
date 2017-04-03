@@ -1,5 +1,6 @@
 package com.example.android.judge;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -10,9 +11,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
-
-import com.example.android.judge.Match.MatchFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity
     private DrawerLayout mDrawer;
     private Toolbar toolbar;
     private NavigationView nvDrawer;
+    private Fragment currentFragment;
 
     // Make sure to be using android.support.v7.app.ActionBarDrawerToggle version.
     // The android.support.v4.app.ActionBarDrawerToggle has been deprecated.
@@ -123,10 +125,33 @@ public class MainActivity extends AppCompatActivity
         mDrawer.closeDrawers();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.settings_menu, menu);
+        return true;
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        return drawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            currentFragment = getSupportFragmentManager().findFragmentById(R.id.main_container);
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+
+            if (currentFragment instanceof MatchFragment) {
+                settingsIntent.putExtra("fragment", R.id.match_container);
+            } else if (currentFragment instanceof CardSearchFragment) {
+                settingsIntent.putExtra("fragment", R.id.search_container);
+            } else if (currentFragment instanceof RuleBookFragment) {
+                settingsIntent.putExtra("fragment", R.id.rulebook_container);
+            }
+            startActivity(settingsIntent);
+            return true;
+
+        } else {
+            return drawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
+        }
 
     }
     @Override

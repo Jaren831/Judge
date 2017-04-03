@@ -10,6 +10,16 @@ import android.view.ViewGroup;
 import com.example.android.judge.R;
 
 public class Player2InfoFragment extends Fragment {
+
+    public static Player2InfoFragment newInstance() {
+        Player2InfoFragment player2InfoFragment = new Player2InfoFragment();
+//        Bundle args = new Bundle();
+//        args.putInt("someInt", page);
+//        args.putString("someTitle", title);
+//        player2InfoFragment.setArguments(args);
+        return player2InfoFragment;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

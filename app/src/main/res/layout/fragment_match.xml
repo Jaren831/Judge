@@ -1,20 +1,22 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/match_container"
     android:orientation="vertical"
-    tools:context="com.example.android.judge.Match.MatchFragment">
+    tools:context="com.example.android.judge.MatchFragment">
     <FrameLayout
         android:layout_width="match_parent"
         android:id="@+id/player1_container"
-        android:layout_height="wrap_content">
+        android:layout_height="0dp"
+        android:layout_weight="1">
     </FrameLayout>
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:id="@+id/player2_container">
     </FrameLayout>
 
 
-</FrameLayout>
+</LinearLayout>
