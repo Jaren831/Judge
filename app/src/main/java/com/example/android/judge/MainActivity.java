@@ -1,6 +1,5 @@
 package com.example.android.judge;
 
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -23,6 +22,7 @@ public class MainActivity extends AppCompatActivity
     private Toolbar toolbar;
     private NavigationView nvDrawer;
     private Fragment currentFragment;
+    private SettingsFragment settingsFragment;
 
     // Make sure to be using android.support.v7.app.ActionBarDrawerToggle version.
     // The android.support.v4.app.ActionBarDrawerToggle has been deprecated.
@@ -136,17 +136,28 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            currentFragment = getSupportFragmentManager().findFragmentById(R.id.main_container);
-            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            Fragment currentFragment = fragmentManager.findFragmentById(R.id.main_container);
 
+            Bundle bundle = new Bundle();
             if (currentFragment instanceof MatchFragment) {
-                settingsIntent.putExtra("fragment", R.id.match_container);
+                bundle.putInt("fragment", 0);
             } else if (currentFragment instanceof CardSearchFragment) {
-                settingsIntent.putExtra("fragment", R.id.search_container);
+                bundle.putInt("fragment", 1);
             } else if (currentFragment instanceof RuleBookFragment) {
-                settingsIntent.putExtra("fragment", R.id.rulebook_container);
+                bundle.putInt("fragment", 2);
             }
-            startActivity(settingsIntent);
+            settingsFragment = new SettingsFragment();
+            settingsFragment.setArguments(bundle);
+
+
+            // Replace whatever is in the fragment_container view with this fragment,
+            // and add the transaction to the back stack if needed
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.main_container, settingsFragment)
+                    .addToBackStack(null)
+                    .commit();
+
             return true;
 
         } else {
