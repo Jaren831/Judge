@@ -1,5 +1,6 @@
 package com.example.android.judge;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -21,8 +22,6 @@ public class MainActivity extends AppCompatActivity
     private DrawerLayout mDrawer;
     private Toolbar toolbar;
     private NavigationView nvDrawer;
-    private Fragment currentFragment;
-    private SettingsFragment settingsFragment;
 
     // Make sure to be using android.support.v7.app.ActionBarDrawerToggle version.
     // The android.support.v4.app.ActionBarDrawerToggle has been deprecated.
@@ -136,10 +135,11 @@ public class MainActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            Fragment currentFragment = fragmentManager.findFragmentById(R.id.main_container);
-
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
             Bundle bundle = new Bundle();
+
+            Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.main_container);
+
             if (currentFragment instanceof MatchFragment) {
                 bundle.putInt("fragment", 0);
             } else if (currentFragment instanceof CardSearchFragment) {
@@ -147,17 +147,8 @@ public class MainActivity extends AppCompatActivity
             } else if (currentFragment instanceof RuleBookFragment) {
                 bundle.putInt("fragment", 2);
             }
-            settingsFragment = new SettingsFragment();
-            settingsFragment.setArguments(bundle);
-
-
-            // Replace whatever is in the fragment_container view with this fragment,
-            // and add the transaction to the back stack if needed
-            getFragmentManager().beginTransaction()
-                    .replace(R.id.main_container, settingsFragment)
-                    .addToBackStack(null)
-                    .commit();
-
+            settingsIntent.putExtras(bundle);
+            startActivity(settingsIntent);
             return true;
 
         } else {

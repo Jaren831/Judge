@@ -16,6 +16,19 @@
     <string name="settings_menu_item">Settings</string>
     <string name="settings">Settings</string>
 
+    <!--Match Settings-->
+    <string name="match_settings_title">Match Settings</string>
+    <string name="life_key">life</string>
+    <string name="life_settings_title">Life</string>
+    <string name="life_dialog_title">Life</string>
+    <string name="life_default_value">20</string>
+
+    <!--Search Settings-->
+    <string name="search_settings_title">Card Search Settings</string>
+
+    <!--Rulebook Settings-->
+    <string name="rulebook_settings_title">RuleBook Settings</string>
+
 
 
     <!-- Example General settings -->
