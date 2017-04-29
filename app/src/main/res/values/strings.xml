@@ -18,10 +18,28 @@
 
     <!--Match Settings-->
     <string name="match_settings_title">Match Settings</string>
-    <string name="life_key">life</string>
-    <string name="life_settings_title">Life</string>
-    <string name="life_dialog_title">Life</string>
-    <string name="life_default_value">20</string>
+
+    <string name="player1_settings_title">Player 1</string>
+    <string name="player1_life_key">player1_life</string>
+    <string name="player1_life_settings_title">Life</string>
+    <string name="player1_life_dialog_title">Life</string>
+    <string name="player1_life_default_value">20</string>
+
+    <string name="player1_color_key">player1_color</string>
+    <string name="player1_color_settings_title">Color</string>
+    <string name="player1_color_default_value">#a9e0f9</string>
+
+    <string name="player2_settings_title">Player 2</string>
+    <string name="player2_life_key">player2_life</string>
+    <string name="player2_life_settings_title">Life</string>
+    <string name="player2_life_dialog_title">Life</string>
+    <string name="player2_life_default_value">20</string>
+
+    <string name="player2_color_key">player2_color</string>
+    <string name="player2_color_settings_title">Color</string>
+    <string name="player2_color_default_value">#faaa8f</string>
+
+
 
     <!--Search Settings-->
     <string name="search_settings_title">Card Search Settings</string>

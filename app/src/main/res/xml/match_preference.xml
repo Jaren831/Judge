@@ -2,11 +2,40 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:title="@string/match_settings_title">
+    <PreferenceCategory
+        android:title="@string/player1_settings_title"
+        android:key="player1_match_settings">
+        <EditTextPreference
+            android:key="@string/player1_life_key"
+            android:title="@string/player1_life_settings_title"
+            android:dialogTitle="@string/player1_life_dialog_title"
+            android:defaultValue="@string/player1_life_default_value"/>
+        <ListPreference
+            android:key="@string/player1_color_key"
+            android:title="@string/player1_color_settings_title"
+            android:entries="@array/colorEntries"
+            android:entryValues="@array/colorValues"
+            android:defaultValue="@string/player1_color_default_value">
 
-    <EditTextPreference
-        android:key="@string/life_key"
-        android:title="@string/life_settings_title"
-        android:dialogTitle="@string/life_dialog_title"
-        android:defaultValue="@string/life_default_value"/>
+        </ListPreference>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/player2_settings_title"
+        android:key="player2_match_settings">
+        <EditTextPreference
+            android:key="@string/player2_life_key"
+            android:title="@string/player2_life_settings_title"
+            android:dialogTitle="@string/player2_life_dialog_title"
+            android:defaultValue="@string/player2_life_default_value"/>
+        <ListPreference
+            android:key="@string/player2_color_key"
+            android:title="@string/player2_color_settings_title"
+            android:entries="@array/colorEntries"
+            android:entryValues="@array/colorValues"
+            android:defaultValue="@string/player2_color_default_value">
+
+        </ListPreference>
+    </PreferenceCategory>
 
 </PreferenceScreen>

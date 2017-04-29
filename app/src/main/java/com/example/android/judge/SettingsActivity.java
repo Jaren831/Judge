@@ -5,9 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
 
-import com.example.android.judge.SettingsFragments.MatchSettingsFragment;
-import com.example.android.judge.SettingsFragments.RulebookSettingsFragment;
-import com.example.android.judge.SettingsFragments.SearchSettingsFragment;
+import com.example.android.judge.SettingsFragments.MatchPreferenceFragment;
+import com.example.android.judge.SettingsFragments.RulebookPreferenceFragment;
+import com.example.android.judge.SettingsFragments.SearchPreferenceFragment;
 
 
 public class SettingsActivity extends AppCompatActivity {
@@ -23,7 +23,7 @@ public class SettingsActivity extends AppCompatActivity {
         switch (bundle.getInt("fragment")) {
             case 0:
                 Toast.makeText(this, "Match", Toast.LENGTH_SHORT).show();
-                MatchSettingsFragment matchPreferenceFragment = new MatchSettingsFragment();
+                MatchPreferenceFragment matchPreferenceFragment = new MatchPreferenceFragment();
                 getFragmentManager().beginTransaction()
                         .add(R.id.settings_container, matchPreferenceFragment)
                         .commit();
@@ -31,17 +31,17 @@ public class SettingsActivity extends AppCompatActivity {
             case 1:
                 Toast.makeText(this, "Search", Toast.LENGTH_SHORT).show();
 
-                SearchSettingsFragment searchSettingsFragment = new SearchSettingsFragment();
+                SearchPreferenceFragment searchPreferenceFragment = new SearchPreferenceFragment();
                 getFragmentManager().beginTransaction()
-                        .add(R.id.settings_container, searchSettingsFragment)
+                        .add(R.id.settings_container, searchPreferenceFragment)
                         .commit();
                 break;
             case 2:
                 Toast.makeText(this, "Rule", Toast.LENGTH_SHORT).show();
 
-                RulebookSettingsFragment rulebookSettingsFragment = new RulebookSettingsFragment();
+                RulebookPreferenceFragment rulebookPreferenceFragment = new RulebookPreferenceFragment();
                 getFragmentManager().beginTransaction()
-                        .add(R.id.settings_container, rulebookSettingsFragment)
+                        .add(R.id.settings_container, rulebookPreferenceFragment)
                         .commit();
                 break;
         }

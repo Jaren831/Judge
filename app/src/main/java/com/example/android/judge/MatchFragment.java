@@ -1,31 +1,47 @@
 package com.example.android.judge;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.example.android.judge.Match.Player1Fragment;
-import com.example.android.judge.Match.Player2Fragment;
+import android.widget.TextView;
 
 public class MatchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ViewGroup rootView = (ViewGroup) inflater.inflate(
-                R.layout.fragment_match, container, false);
-        Fragment player1Fragment = new Player1Fragment();
-        Fragment player2Fragment = new Player2Fragment();
 
-        getFragmentManager().beginTransaction()
-                .add(R.id.player1_container, player1Fragment)
-                .add(R.id.player2_container, player2Fragment)
-                .commit();
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
-        // Inflate the layout for this fragment
-        return rootView;
+        String player1Life = sharedPreferences.getString(
+                getString(R.string.player1_life_key),
+                getString(R.string.player1_life_default_value));
+        String player1Color = sharedPreferences.getString(
+                getString(R.string.player1_color_key),
+                getString(R.string.player1_color_default_value));
+
+        String player2Life = sharedPreferences.getString(
+                getString(R.string.player2_life_key),
+                getString(R.string.player2_life_default_value));
+        String player2Color = sharedPreferences.getString(
+                getString(R.string.player2_color_key),
+                getString(R.string.player2_color_default_value));
+
+        TextView player1LifeView = (TextView) getActivity().findViewById(R.id.player1_life);
+        player1LifeView.setText(player1Life);
+        player1LifeView.setBackgroundColor(Color.parseColor(player1Color));
+
+        TextView player2LifeView = (TextView) getActivity().findViewById(R.id.player2_life);
+        player2LifeView.setText(player2Life);
+        player2LifeView.setBackgroundColor(Color.parseColor(player2Color));
+
+        return inflater.inflate(R.layout.fragment_match, container, false);
+
     }
 
     @Override

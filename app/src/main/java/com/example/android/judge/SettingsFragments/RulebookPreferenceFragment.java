@@ -13,7 +13,7 @@ import com.example.android.judge.R;
  * Created by Jaren Lynch on 4/5/2017.
  */
 
-public class RulebookSettingsFragment extends PreferenceFragment
+public class RulebookPreferenceFragment extends PreferenceFragment
         implements Preference.OnPreferenceChangeListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -13,12 +13,24 @@ import com.example.android.judge.R;
  * Created by Jaren Lynch on 4/5/2017.
  */
 
-public class SearchSettingsFragment extends PreferenceFragment
+public class MatchPreferenceFragment extends PreferenceFragment
         implements Preference.OnPreferenceChangeListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.search_preference);
+        addPreferencesFromResource(R.xml.match_preference);
+
+        Preference player1Life = findPreference(getString(R.string.player1_life_key));
+        Preference player1Color = findPreference(getString(R.string.player1_color_key));
+
+        Preference player2Life = findPreference(getString(R.string.player2_life_key));
+        Preference player2Color = findPreference(getString(R.string.player2_color_key));
+
+        bindPreferenceSummaryToValue(player1Life);
+        bindPreferenceSummaryToValue(player1Color);
+
+        bindPreferenceSummaryToValue(player2Life);
+        bindPreferenceSummaryToValue(player2Color);
 
     }
 

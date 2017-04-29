@@ -13,12 +13,12 @@ import com.example.android.judge.R;
  * Created by Jaren Lynch on 4/5/2017.
  */
 
-public class MatchSettingsFragment extends PreferenceFragment
+public class SearchPreferenceFragment extends PreferenceFragment
         implements Preference.OnPreferenceChangeListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.match_preference);
+        addPreferencesFromResource(R.xml.search_preference);
 
     }
 

@@ -5,19 +5,23 @@
     android:layout_height="match_parent"
     android:id="@+id/match_container"
     android:orientation="vertical"
+    android:divider="?android:dividerHorizontal"
+    android:showDividers="middle"
     tools:context="com.example.android.judge.MatchFragment">
-    <FrameLayout
+    <TextView
         android:layout_width="match_parent"
-        android:id="@+id/player1_container"
+        android:id="@+id/player1_life"
         android:layout_height="0dp"
-        android:layout_weight="1">
-    </FrameLayout>
-    <FrameLayout
+        android:layout_weight="1"
+        android:gravity="center">
+    </TextView>
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:id="@+id/player2_container">
-    </FrameLayout>
+        android:id="@+id/player2_life"
+        android:gravity="center">
+    </TextView>
 
 
 </LinearLayout>
