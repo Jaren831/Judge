@@ -13,11 +13,11 @@ import android.widget.TextView;
 
 public class MatchFragment extends Fragment {
 
-    TextView player1LifeView;
-    TextView player2LifeView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        View rootView = inflater.inflate(R.layout.fragment_match, container, false);
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
 
@@ -35,15 +35,15 @@ public class MatchFragment extends Fragment {
                 getString(R.string.player2_color_key),
                 getString(R.string.player2_color_default_value));
 
-        player1LifeView = (TextView) getActivity().findViewById(R.id.player1_life);
+        TextView player1LifeView = (TextView) getActivity().findViewById(R.id.player1_life);
         player1LifeView.setText(player1Life);
         player1LifeView.setBackgroundColor(Color.parseColor(player1Color));
 
-        player2LifeView = (TextView) getActivity().findViewById(R.id.player2_life);
+        TextView player2LifeView = (TextView) getActivity().findViewById(R.id.player2_life);
         player2LifeView.setText(player2Life);
         player2LifeView.setBackgroundColor(Color.parseColor(player2Color));
 
-        return inflater.inflate(R.layout.fragment_match, container, false);
+        return rootView;
 
     }
 
