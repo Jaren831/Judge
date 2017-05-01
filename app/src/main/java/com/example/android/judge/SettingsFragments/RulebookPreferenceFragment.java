@@ -6,6 +6,7 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.view.Menu;
 
 import com.example.android.judge.R;
 
@@ -19,7 +20,14 @@ public class RulebookPreferenceFragment extends PreferenceFragment
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.rulebook_preference );
+        setHasOptionsMenu(true);
+    }
 
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.action_settings).setVisible(false);
+        menu.findItem(R.id.action_search).setVisible(false);
+        super.onPrepareOptionsMenu(menu);
     }
 
     @Override

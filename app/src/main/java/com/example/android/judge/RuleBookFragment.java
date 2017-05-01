@@ -21,7 +21,7 @@ public class RuleBookFragment extends Fragment {
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         menu.findItem(R.id.action_search).setVisible(false);
-        menu.findItem(R.id.action_settings).setVisible(false);
+        menu.findItem(R.id.action_reset).setVisible(false);
         super.onPrepareOptionsMenu(menu);
     }
 

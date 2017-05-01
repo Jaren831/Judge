@@ -6,6 +6,13 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.example.android.judge.R;
 
@@ -32,6 +39,15 @@ public class MatchPreferenceFragment extends PreferenceFragment
         bindPreferenceSummaryToValue(player2Life);
         bindPreferenceSummaryToValue(player2Color);
 
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.action_search).setVisible(false);
+        menu.findItem(R.id.action_settings).setVisible(false);
+
+        super.onPrepareOptionsMenu(menu);
     }
 
     @Override

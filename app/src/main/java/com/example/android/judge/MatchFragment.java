@@ -40,6 +40,7 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         menu.findItem(R.id.action_search).setVisible(false);
+        menu.findItem(R.id.action_reset).setVisible(false);
         super.onPrepareOptionsMenu(menu);
     }
 
