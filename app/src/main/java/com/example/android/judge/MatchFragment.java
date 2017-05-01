@@ -2,22 +2,17 @@ package com.example.android.judge;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.Switch;
 import android.widget.TextView;
-
-import static android.graphics.Paint.ANTI_ALIAS_FLAG;
 
 public class MatchFragment extends Fragment implements View.OnClickListener {
 
@@ -37,9 +32,15 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
+        setHasOptionsMenu(true);
         rootView = inflater.inflate(R.layout.fragment_match, container, false);
         return rootView;
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        menu.findItem(R.id.action_search).setVisible(false);
+        super.onPrepareOptionsMenu(menu);
     }
 
     @Override
@@ -106,8 +107,8 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
     public void onPause() {
         super.onPause();
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(getString(R.string.player1_life_key), player1CurrentLife.toString());
-        editor.putString(getString(R.string.player2_life_key), player2CurrentLife.toString());
+        editor.putString(getString(R.string.player1_life_key), player1LifeView.getText().toString());
+        editor.putString(getString(R.string.player2_life_key), player2LifeView.getText().toString());
         editor.apply();
 
     }

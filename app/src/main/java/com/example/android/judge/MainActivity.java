@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.settings_menu, menu);
+        inflater.inflate(R.menu.fragment_menus, menu);
         return true;
     }
 
@@ -136,18 +136,7 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             Intent settingsIntent = new Intent(this, SettingsActivity.class);
-            Bundle bundle = new Bundle();
-
-            Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.main_container);
-
-            if (currentFragment instanceof MatchFragment) {
-                bundle.putInt("fragment", 0);
-            } else if (currentFragment instanceof CardSearchFragment) {
-                bundle.putInt("fragment", 1);
-            } else if (currentFragment instanceof RuleBookFragment) {
-                bundle.putInt("fragment", 2);
-            }
-            settingsIntent.putExtras(bundle);
+            settingsIntent.putExtras(CurrentFragmentCheck());
             startActivity(settingsIntent);
             return true;
 
@@ -181,5 +170,20 @@ public class MainActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+    }
+
+    public Bundle CurrentFragmentCheck() {
+        Bundle bundle = new Bundle();
+
+        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.main_container);
+
+        if (currentFragment instanceof MatchFragment) {
+            bundle.putInt("fragment", 0);
+        } else if (currentFragment instanceof CardSearchFragment) {
+            bundle.putInt("fragment", 1);
+        } else if (currentFragment instanceof RuleBookFragment) {
+            bundle.putInt("fragment", 2);
+        }
+        return bundle;
     }
 }
