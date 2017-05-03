@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "168928969347",
+    "firebase_url": "https://judge-1b409.firebaseio.com",
+    "project_id": "judge-1b409",
+    "storage_bucket": "judge-1b409.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:168928969347:android:ef8bdc66721f6de9",
+        "android_client_info": {
+          "package_name": "com.example.android.judge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "168928969347-d46eu6fgaf5md600cvohb84hv1nsoit3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBbOVrjJUy6RScWn17f7is4eGp0ooehD4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
