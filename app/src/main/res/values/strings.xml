@@ -39,6 +39,10 @@
     <string name="player2_color_settings_title">Color</string>
     <string name="player2_color_default_value">#faaa8f</string>
 
+    <!--SearchFragment-->
+    <string name="noInternet">No internet connection</string>
+    <string name="empty">No cards found</string>
+
 
 
     <!--Search Settings-->

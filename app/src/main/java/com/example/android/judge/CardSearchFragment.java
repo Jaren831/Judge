@@ -1,9 +1,15 @@
 package com.example.android.judge;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
@@ -19,19 +25,29 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import com.example.android.judge.Search.Card;
-import com.example.android.judge.Search.RecyclerAdapter;
+import com.example.android.judge.Search.CardRecyclerAdapter;
+import com.example.android.judge.Search.CardSearchLoader;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class CardSearchFragment extends Fragment {
+public class CardSearchFragment extends Fragment
+        implements android.support.v4.app.LoaderManager.LoaderCallbacks<List<Card>>{
 
     RecyclerView cardRecyclerView;
-    RecyclerAdapter recyclerAdapter;
+    CardRecyclerAdapter cardRecyclerAdapter;
     RecyclerView.LayoutManager layoutManager;
     TextView emptyView;
     ProgressBar progressBar;
     private static final int CARD_LOADER_ID = 1;
     public static final String CARD_URL = "https://api.magicthegathering.io/v1/cards";
+
+    SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+        @Override
+        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+            settingsReload();
+        }
+    };
 
 
 
@@ -41,16 +57,39 @@ public class CardSearchFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_card_search, container, false);
         cardRecyclerView = (RecyclerView) rootView.findViewById(R.id.card_search_recycler);
-        recyclerAdapter = new RecyclerAdapter(this.getActivity(), new ArrayList<Card>());
+        cardRecyclerAdapter = new CardRecyclerAdapter(this.getActivity(), new ArrayList<Card>());
         emptyView = (TextView) rootView.findViewById(R.id.empty);
         progressBar = (ProgressBar) rootView.findViewById(R.id.progress_bar);
         layoutManager = new LinearLayoutManager(getContext());
         cardRecyclerView.setLayoutManager(layoutManager);
-        LoaderManager loaderManager = getLoaderManager();
+        cardRecyclerView.setAdapter(cardRecyclerAdapter);
 
-        cardRecyclerView.setAdapter(recyclerAdapter);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        preferences.registerOnSharedPreferenceChangeListener(listener);
+
+
+        android.support.v4.app.LoaderManager loaderManager = getLoaderManager();
+
 
         setHasOptionsMenu(true);
+        while (cardRecyclerView == null) {
+            progressBar.setVisibility(View.VISIBLE);
+        }
+        getActivity();
+        ConnectivityManager cm =
+                (ConnectivityManager)getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+
+        if (isConnected) {
+            loaderManager.initLoader(CARD_LOADER_ID, null, this);
+        } else {
+            progressBar.setVisibility(View.GONE);
+            emptyView.setText(com.example.android.judge.R.string.noInternet);
+        }
+
         return rootView;
     }
 
@@ -66,6 +105,7 @@ public class CardSearchFragment extends Fragment {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 Toast.makeText(getActivity(), "EEEEEE", Toast.LENGTH_SHORT).show();
+
                 return false;
             }
 
@@ -86,5 +126,36 @@ public class CardSearchFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+    }
+
+    @Override
+    public Loader<List<Card>> onCreateLoader(int id, Bundle bundle) {
+        Uri baseUri = Uri.parse(CARD_URL);
+        Uri.Builder uriBuilder = baseUri.buildUpon();
+        return new CardSearchLoader(this.getContext(), uriBuilder.toString());
+    }
+
+    @Override
+    public void onLoadFinished(Loader<List<Card>> loader, List<Card> cards) {
+        emptyView.setText(com.example.android.judge.R.string.empty);
+        cardRecyclerAdapter.clear();
+        progressBar.setVisibility(View.GONE);
+
+        if (cards != null && !cards.isEmpty()) {
+            cardRecyclerAdapter.addAll(cards);
+        }
+    }
+
+    @Override
+    public void onLoaderReset(Loader<List<Card>> loader) {
+        cardRecyclerAdapter.clear();
+    }
+
+    public void settingsReload() {
+        LoaderManager loaderManager = getLoaderManager();
+        loaderManager.restartLoader(CARD_LOADER_ID, null, this);
+        progressBar.setVisibility(View.VISIBLE);
+        Toast updateToast = Toast.makeText(getActivity(), "Settings Saved", Toast.LENGTH_SHORT);
+        updateToast.show();
     }
 }
