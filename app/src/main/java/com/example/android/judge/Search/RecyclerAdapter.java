@@ -1,6 +1,7 @@
 package com.example.android.judge.Search;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +18,7 @@ import java.util.ArrayList;
  * Created by jaren on 4/30/2017.
  */
 
-public class RecyclerAdapter extends ArrayAdapter<Card>{
+public class RecyclerAdapter extends RecyclerView.Adpater<RecyclerAdapter.ViewHolder>{
     public RecyclerAdapter(Context context, ArrayList<Card> cards) {
         super(context, 0, cards);
     }
