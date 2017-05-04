@@ -49,13 +49,15 @@ public class CardSearchFragment extends Fragment
         }
     };
 
+    ArrayList<Card> cardList = new ArrayList<Card>();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_card_search, container, false);
         cardRecyclerView = (RecyclerView) rootView.findViewById(R.id.card_search_recycler);
-        cardRecyclerAdapter = new CardRecyclerAdapter(this.getActivity(), new ArrayList<Card>());
+        cardRecyclerAdapter = new CardRecyclerAdapter(this.getActivity(), cardList);
         emptyView = (TextView) rootView.findViewById(R.id.empty);
         progressBar = (ProgressBar) rootView.findViewById(R.id.progress_bar);
         layoutManager = new LinearLayoutManager(getContext());
@@ -132,10 +134,8 @@ public class CardSearchFragment extends Fragment
     public void onLoadFinished(Loader<List<Card>> loader, List<Card> cards) {
         emptyView.setText(com.example.android.judge.R.string.empty);
         progressBar.setVisibility(View.GONE);
-
-//        if (cards != null && !cards.isEmpty()) {
-//            cardRecyclerAdapter.addAll(cards);
-//        }
+        cardList.addAll(cards);
+        cardRecyclerAdapter.notifyDataSetChanged();
     }
 
     @Override
