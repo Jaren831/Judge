@@ -2,6 +2,7 @@ package com.example.android.judge.Search;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 

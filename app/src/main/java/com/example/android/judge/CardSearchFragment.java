@@ -98,7 +98,7 @@ public class CardSearchFragment extends Fragment
             @Override
             public boolean onQueryTextSubmit(String query) {
                 Toast.makeText(getActivity(), "EEEEEE", Toast.LENGTH_SHORT).show();
-                loaderManager.initLoader(CARD_LOADER_ID, null, this);
+                loaderManager.initLoader(CARD_LOADER_ID, null, CardSearchFragment.this);
                 return false;
             }
 
@@ -140,7 +140,7 @@ public class CardSearchFragment extends Fragment
 
     @Override
     public void onLoaderReset(Loader<List<Card>> loader) {
-//        cardRecyclerAdapter.clear();
+        cardRecyclerAdapter.notifyDataSetChanged();
     }
 
     public void settingsReload() {
