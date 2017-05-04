@@ -100,7 +100,7 @@ public class CardSearchFragment extends Fragment
             @Override
             public boolean onQueryTextSubmit(String query) {
                 Toast.makeText(getActivity(), "EEEEEE", Toast.LENGTH_SHORT).show();
-                loaderManager.initLoader(CARD_LOADER_ID, null, CardSearchFragment.this);
+                loaderManager.initLoader(CARD_LOADER_ID, null, CardSearchFragment.this).forceLoad();
                 return false;
             }
 
@@ -135,6 +135,10 @@ public class CardSearchFragment extends Fragment
         emptyView.setText(com.example.android.judge.R.string.empty);
         progressBar.setVisibility(View.GONE);
         cardList.addAll(cards);
+
+        Toast.makeText(getActivity(), cardList.size(), Toast.LENGTH_LONG).show();
+
+
         cardRecyclerAdapter.notifyDataSetChanged();
     }
 
