@@ -1,13 +1,29 @@
 package com.example.android.judge;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.storage.FileDownloadTask;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.io.File;
+import java.io.IOException;
 
 
 public class RuleBookFragment extends Fragment {
@@ -15,6 +31,9 @@ public class RuleBookFragment extends Fragment {
     Button basicButton;
     Button comprehensiveButton;
     View rootView;
+    StorageReference basicStorageRef;
+    StorageReference comprehensiveStorageRef;
+    File localFile;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -26,10 +45,31 @@ public class RuleBookFragment extends Fragment {
         basicButton = (Button) rootView.findViewById(R.id.basic_button);
         comprehensiveButton = (Button) rootView.findViewById(R.id.comprehensive_button);
 
+
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        basicStorageRef = storage.getReferenceFromUrl("gs://judge-1b409.appspot.com/").child("MTG Basic Rules.pdf");
+        comprehensiveStorageRef = storage.getReferenceFromUrl("gs://judge-1b409.appspot.com/").child("MTG Comprehensive Rules.pdf");
+
+
         basicButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                basicStorageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                        intent.setType("application/pdf");
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                        startActivity(intent);
 
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getContext(), "FAIL", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
             }
         });
 

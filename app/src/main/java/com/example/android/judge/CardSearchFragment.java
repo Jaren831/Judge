@@ -139,6 +139,7 @@ public class CardSearchFragment extends Fragment
         emptyView.setText(com.example.android.judge.R.string.empty);
         progressBar.setVisibility(View.GONE);
         if (cards != null && !cards.isEmpty()) {
+            emptyView.setVisibility(View.GONE);
             cardList.addAll(cards);
         }
 
