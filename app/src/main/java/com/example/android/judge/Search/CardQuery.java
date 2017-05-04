@@ -111,6 +111,7 @@ public class CardQuery {
         try {
             JSONObject jsonRootObject = new JSONObject(cardJSON);
             JSONArray jsonArray = jsonRootObject.optJSONArray("cards");
+            cards.clear();
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject currentCard = jsonArray.getJSONObject(i);
                 String cardName = currentCard.optString("name");

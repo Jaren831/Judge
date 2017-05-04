@@ -2,16 +2,14 @@ package com.example.android.judge.Search;
 
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
-
 import java.util.List;
 
 /**
  * Created by jaren on 4/30/2017.
  */
 
-public class CardSearchLoader extends AsyncTaskLoader<List<Card>> {
+public class CardSearchLoader extends android.support.v4.content.AsyncTaskLoader<List<Card>> {
     private String mUrl;
-    private Boolean mFavorites;
     private Context mContext;
 
     public CardSearchLoader(Context context, String url) {
