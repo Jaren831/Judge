@@ -39,7 +39,7 @@ public class CardSearchFragment extends Fragment
     RecyclerView.LayoutManager layoutManager;
     TextView emptyView;
     ProgressBar progressBar;
-    LoaderManager loaderManager;
+    LoaderManager loaderManager = getLoaderManager();
     private static final int CARD_LOADER_ID = 1;
     public static final String CARD_URL = "https://api.magicthegathering.io/v1/cards";
     SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
