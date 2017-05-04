@@ -48,7 +48,7 @@ public class CardSearchFragment extends Fragment
             settingsReload();
         }
     };
-    
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

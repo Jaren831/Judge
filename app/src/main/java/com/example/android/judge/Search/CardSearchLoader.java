@@ -8,7 +8,7 @@ import java.util.List;
  * Created by jaren on 4/30/2017.
  */
 
-public class CardSearchLoader extends android.support.v4.content.AsyncTaskLoader<List<Card>> {
+public class CardSearchLoader extends AsyncTaskLoader<List<Card>> {
     private String mUrl;
     private Context mContext;
 
