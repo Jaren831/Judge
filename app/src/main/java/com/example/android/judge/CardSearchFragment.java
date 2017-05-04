@@ -85,6 +85,9 @@ public class CardSearchFragment extends Fragment
             emptyView.setText(com.example.android.judge.R.string.noInternet);
         }
 
+        loaderManager.initLoader(CARD_LOADER_ID, null, CardSearchFragment.this).forceLoad();
+
+
         return rootView;
     }
 
