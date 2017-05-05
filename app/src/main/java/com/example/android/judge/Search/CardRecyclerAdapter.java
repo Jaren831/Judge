@@ -99,37 +99,36 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
                         aSeparateMana = "B";
                         replaceMana = new SpannableString(aSeparateMana);
                         replaceMana.setSpan(new ForegroundColorSpan(Color.BLUE), 0, replaceMana.length(), 0);
-                        newMana.add(replaceMana);
+                        holder.cardMana.append(replaceMana);
                         break;
                     case "R":
                         replaceMana = new SpannableString(aSeparateMana);
                         replaceMana.setSpan(new ForegroundColorSpan(Color.RED), 0, replaceMana.length(), 0);
-                        newMana.add(replaceMana);
+                        holder.cardMana.append(replaceMana);
                         break;
                     case "B":
                         replaceMana = new SpannableString(aSeparateMana);
                         replaceMana.setSpan(new ForegroundColorSpan(Color.BLACK), 0, replaceMana.length(), 0);
-                        newMana.add(replaceMana);
+                        holder.cardMana.append(replaceMana);
                         break;
                     case "G":
                         replaceMana = new SpannableString(aSeparateMana);
                         replaceMana.setSpan(new ForegroundColorSpan(Color.GREEN), 0, replaceMana.length(), 0);
-                        newMana.add(replaceMana);
+                        holder.cardMana.append(replaceMana);
                         break;
                     case "W":
                         replaceMana = new SpannableString(aSeparateMana);
                         replaceMana.setSpan(new ForegroundColorSpan(Color.YELLOW), 0, replaceMana.length(), 0);
-                        newMana.add(replaceMana);
+                        holder.cardMana.append(replaceMana);
                         break;
                     default:
                         replaceMana = new SpannableString(aSeparateMana);
-                        newMana.add(replaceMana);
+                        holder.cardMana.append(replaceMana);
                         break;
                 }
             }
 
         }
-        holder.cardMana.setText(join("", newMana));
 
     }
 
