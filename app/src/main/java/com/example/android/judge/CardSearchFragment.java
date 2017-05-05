@@ -141,6 +141,8 @@ public class CardSearchFragment extends Fragment
             emptyView.setVisibility(View.GONE);
             cardList.clear();
             cardList.addAll(cards);
+        } else {
+            Toast.makeText(getContext(), "NO RESULTS", Toast.LENGTH_SHORT).show();
         }
         cardRecyclerAdapter.notifyDataSetChanged();
     }

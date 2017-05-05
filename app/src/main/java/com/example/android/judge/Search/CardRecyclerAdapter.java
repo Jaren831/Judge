@@ -148,7 +148,7 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
                         break;
                     case "W":
                         replaceMana = new SpannableString(aSeparateMana);
-                        replaceMana.setSpan(new ForegroundColorSpan(Color.YELLOW), 0, replaceMana.length(), 0);
+                        replaceMana.setSpan(new ForegroundColorSpan(Color.WHITE), 0, replaceMana.length(), 0);
                         holder.cardMana.append(replaceMana);
                         break;
                     default:
