@@ -34,8 +34,6 @@ public class RuleBookFragment extends Fragment {
     StorageReference basicStorageRef;
     StorageReference comprehensiveStorageRef;
     File localFile;
-    final long ONE_MEGABYTE = 1024 * 1024;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,17 +50,12 @@ public class RuleBookFragment extends Fragment {
         basicStorageRef = storage.getReferenceFromUrl("gs://judge-1b409.appspot.com/").child("MTG Basic Rules.pdf");
         comprehensiveStorageRef = storage.getReferenceFromUrl("gs://judge-1b409.appspot.com/").child("MTG Comprehensive Rules.pdf");
 
-
-
-
-
-
         basicButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                basicStorageRef.getBytes(ONE_MEGABYTE * 10).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                basicStorageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
-                    public void onSuccess(byte[] bytes) {
+                    public void onSuccess(Uri uri) {
                         Intent intent = new Intent(Intent.ACTION_VIEW);
                         intent.setType("application/pdf");
                         intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
@@ -71,11 +64,13 @@ public class RuleBookFragment extends Fragment {
                             startActivity(intent1);
                         } catch (ActivityNotFoundException e) {
                             // Instruct the user to install a PDF reader here, or something
-                        }            }
+                        }
+                    }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
-                    public void onFailure(@NonNull Exception exception) {
+                    public void onFailure(@NonNull Exception e) {
                         Toast.makeText(getContext(), "FAIL", Toast.LENGTH_SHORT).show();
+
                     }
                 });
             }

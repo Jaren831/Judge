@@ -27,6 +27,7 @@ import android.widget.Toast;
 import com.example.android.judge.Search.Card;
 import com.example.android.judge.Search.CardRecyclerAdapter;
 import com.example.android.judge.Search.CardSearchLoader;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.io.FileDescriptor;
 import java.io.PrintWriter;
@@ -42,9 +43,13 @@ public class CardSearchFragment extends Fragment
     TextView emptyView;
     ProgressBar progressBar;
     LoaderManager loadermanager;
+    Bundle bundle;
+
+
     String cardQuery;
     private static final int CARD_LOADER_ID = 1;
     public static final String CARD_URL = "https://api.magicthegathering.io/v1/cards";
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     ArrayList<Card> cardList = new ArrayList<Card>();
 
@@ -76,8 +81,8 @@ public class CardSearchFragment extends Fragment
         if (!isConnected) {
             emptyView.setText(com.example.android.judge.R.string.noInternet);
         }
-//        getActivity().getSupportLoaderManager().initLoader(CARD_LOADER_ID, null, CardSearchFragment.this).forceLoad();
 
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
 
         return rootView;
     }
@@ -87,16 +92,17 @@ public class CardSearchFragment extends Fragment
         menu.findItem(R.id.action_reset).setVisible(false);
         MenuItem item = menu.findItem(R.id.action_search);
 
-
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                bundle = new Bundle();
+                bundle.putString(FirebaseAnalytics.Param.SEARCH_TERM, query);
+                mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SEARCH, bundle);
                 cardQuery = query;
                 progressBar.setVisibility(View.VISIBLE);
                 emptyView.setVisibility(View.GONE);
-                Toast.makeText(getActivity(), "EEEEEE", Toast.LENGTH_SHORT).show();
                 getActivity().getSupportLoaderManager().restartLoader(CARD_LOADER_ID, null, CardSearchFragment.this).forceLoad();
                 return false;
             }
@@ -133,12 +139,9 @@ public class CardSearchFragment extends Fragment
         progressBar.setVisibility(View.GONE);
         if (cards != null && !cards.isEmpty()) {
             emptyView.setVisibility(View.GONE);
+            cardList.clear();
             cardList.addAll(cards);
         }
-
-//        Toast.makeText(getActivity(), cardList.size(), Toast.LENGTH_LONG).show();
-
-
         cardRecyclerAdapter.notifyDataSetChanged();
     }
 

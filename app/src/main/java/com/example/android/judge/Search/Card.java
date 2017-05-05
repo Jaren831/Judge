@@ -12,8 +12,9 @@ public class Card {
     public String mImage;
     public String mText;
     public String mColors;
+    public String mColorIdentity;
 
-    public Card(String name, String mana, String type, String rarity, String image, String text, String colors ) {
+    public Card(String name, String mana, String type, String rarity, String image, String text, String colors, String colorIdentity ) {
         mName = name;
         mMana = mana;
         mType = type;
@@ -21,6 +22,7 @@ public class Card {
         mImage = image;
         mText = text;
         mColors = colors;
+        mColorIdentity = colorIdentity;
     }
 
     public String getName() {
@@ -49,6 +51,10 @@ public class Card {
 
     public String getColors() {
         return mColors;
+    }
+
+    public String getIdentity() {
+        return mColorIdentity;
     }
 }
 

@@ -3,4 +3,9 @@
     <color name="colorPrimary">#000</color>
     <color name="colorPrimaryDark">#616161</color>
     <color name="colorAccent">#0288D1</color>
+    <color name="mtg_red">#faaa8f</color>
+    <color name="mtg_blue">#a9e0f9</color>
+    <color name="mtg_green">#9bd3ae</color>
+    <color name="mtg_white">#fffada</color>
+    <color name="mtg_black">#cbc2bf</color>
 </resources>

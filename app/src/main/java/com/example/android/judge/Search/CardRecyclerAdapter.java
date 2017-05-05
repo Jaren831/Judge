@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,12 +37,15 @@ import static android.text.TextUtils.join;
 
 public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapter.CardViewHolder>{
     SpannableString finalString;
+    SpannableString replaceMana;
+
 
     public class CardViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         CardView cardCard;
         TextView cardName;
         TextView cardMana;
         ImageView cardImage;
+
 
         CardViewHolder(View itemView) {
             super(itemView);
@@ -85,13 +89,39 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
     public void onBindViewHolder(CardViewHolder holder, int position) {
         Card currentCard = mCardArray.get(position);
 
-
         holder.cardName.setText(currentCard.getName());
-        Picasso.with(mContext).load(currentCard.getImage()).fit().into(holder.cardImage);
 
+        if (currentCard.getImage() != null && !currentCard.getImage().isEmpty()) {
+            Picasso.with(mContext).load(currentCard.getImage()).fit().into(holder.cardImage);
+        }
+
+//        switch (currentCard.getIdentity()) {
+//            case "W":
+//                holder.cardName.setBackgroundColor(Color.parseColor("#fffada"));
+//                holder.cardMana.setBackgroundColor(Color.parseColor("#faaa8f"));
+//                break;
+//            case "U":
+//                holder.cardName.setBackgroundResource(R.color.mtg_blue);
+//                holder.cardMana.setBackgroundColor(Color.parseColor("#a9e0f9"));
+//                break;
+//            case "B":
+//                holder.cardName.setBackgroundColor(Color.parseColor("#9bd3ae"));
+//                holder.cardMana.setBackgroundColor(Color.parseColor("#9bd3ae"));
+//                break;
+//            case "R":
+//                holder.cardName.setBackgroundColor(Color.parseColor("#fffada"));
+//                holder.cardMana.setBackgroundColor(Color.parseColor("#fffada"));
+//                break;
+//            case "G":
+//                holder.cardName.setBackgroundColor(Color.GREEN);
+//                holder.cardMana.setBackgroundColor(Color.parseColor("#cbc2bf"));
+//                break;
+//            default:
+//                break;
+//        }
+
+        holder.cardMana.setText("");
         String[] separateMana = currentCard.getMana().split("");
-        List<SpannableString> newMana = new ArrayList<SpannableString>();
-        SpannableString replaceMana;
         for (String aSeparateMana : separateMana) {
             if (!Objects.equals(aSeparateMana, "{") && !Objects.equals(aSeparateMana, "}")) {
                 switch (aSeparateMana) {
@@ -127,9 +157,7 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
                         break;
                 }
             }
-
         }
-
     }
 
     @Override

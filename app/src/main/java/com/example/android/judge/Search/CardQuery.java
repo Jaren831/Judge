@@ -122,8 +122,9 @@ public class CardQuery {
                 String cardImage = currentCard.optString("imageUrl");
                 String cardText = currentCard.optString("text");
                 String cardcolors = currentCard.optString("colors");
+                String colorIdentity = currentCard.optString("colorIdentity");
 
-                cards.add(new Card(cardName, cardManaCost, cardType, cardRarity, cardImage, cardText, cardcolors));
+                cards.add(new Card(cardName, cardManaCost, cardType, cardRarity, cardImage, cardText, cardcolors, colorIdentity));
 
 
             }
