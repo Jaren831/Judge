@@ -57,7 +57,7 @@ public class RuleBookFragment extends Fragment {
                     @Override
                     public void onSuccess(Uri uri) {
                         Intent intent = new Intent(Intent.ACTION_VIEW);
-                        intent.setType("application/pdf");
+                        intent.setDataAndType(uri, "application/pdf");
                         intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                         Intent intent1 = Intent.createChooser(intent, "Open With");
                         try {
@@ -83,7 +83,7 @@ public class RuleBookFragment extends Fragment {
                     @Override
                     public void onSuccess(Uri uri) {
                         Intent intent = new Intent(Intent.ACTION_VIEW);
-                        intent.setType("application/pdf");
+                        intent.setDataAndType(uri, "application/pdf");
                         intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                         Intent intent1 = Intent.createChooser(intent, "Open With");
                         try {
