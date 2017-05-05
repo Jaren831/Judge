@@ -28,8 +28,6 @@ import com.example.android.judge.Search.Card;
 import com.example.android.judge.Search.CardRecyclerAdapter;
 import com.example.android.judge.Search.CardSearchLoader;
 
-import java.io.FileDescriptor;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +39,7 @@ public class CardSearchFragment extends Fragment
     RecyclerView.LayoutManager layoutManager;
     TextView emptyView;
     ProgressBar progressBar;
-    LoaderManager loadermanager;
+    String cardQuery;
     private static final int CARD_LOADER_ID = 1;
     public static final String CARD_URL = "https://api.magicthegathering.io/v1/cards";
     SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
@@ -86,7 +84,7 @@ public class CardSearchFragment extends Fragment
             progressBar.setVisibility(View.GONE);
             emptyView.setText(com.example.android.judge.R.string.noInternet);
         }
-        getActivity().getSupportLoaderManager().initLoader(CARD_LOADER_ID, null, CardSearchFragment.this).forceLoad();
+//        getActivity().getSupportLoaderManager().initLoader(CARD_LOADER_ID, null, CardSearchFragment.this).forceLoad();
 
 
         return rootView;
@@ -103,8 +101,12 @@ public class CardSearchFragment extends Fragment
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Toast.makeText(getActivity(), "EEEEEE", Toast.LENGTH_SHORT).show();
+                cardList.clear();
+                cardQuery = query;
+                getLoaderManager().destroyLoader(CARD_LOADER_ID);
+                Toast.makeText(getActivity(), query, Toast.LENGTH_SHORT).show();
                 getActivity().getSupportLoaderManager().initLoader(CARD_LOADER_ID, null, CardSearchFragment.this).forceLoad();
+                cardRecyclerAdapter.notifyDataSetChanged();
                 return false;
             }
 
@@ -125,13 +127,15 @@ public class CardSearchFragment extends Fragment
     @Override
     public void onDetach() {
         super.onDetach();
+        getLoaderManager().destroyLoader(CARD_LOADER_ID);
+
     }
 
     @Override
     public Loader<List<Card>> onCreateLoader(int id, Bundle bundle) {
         Uri baseUri = Uri.parse(CARD_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
-        return new CardSearchLoader(this.getContext(), uriBuilder.toString());
+        return new CardSearchLoader(this.getContext(), uriBuilder.toString(), cardQuery);
     }
 
     @Override

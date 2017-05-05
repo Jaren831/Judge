@@ -11,11 +11,13 @@ import java.util.List;
 public class CardSearchLoader extends AsyncTaskLoader<List<Card>> {
     private String mUrl;
     private Context mContext;
+    private String mQuery;
 
-    public CardSearchLoader(Context context, String url) {
+    public CardSearchLoader(Context context, String url, String query) {
         super(context);
         mUrl = url;
         mContext = context;
+        mQuery = query;
     }
 
     @Override
@@ -28,7 +30,7 @@ public class CardSearchLoader extends AsyncTaskLoader<List<Card>> {
         if (mUrl == null) {
             return null;
         }
-        List<Card> cards = CardQuery.fetchCardData(mUrl, mContext);
+        List<Card> cards = CardQuery.fetchCardData(mUrl, mContext, mQuery);
         return cards;
 
     }

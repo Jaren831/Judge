@@ -11,14 +11,16 @@ public class Card {
     public String mRarity;
     public String mImage;
     public String mText;
+    public String mColors;
 
-    public Card(String name, String mana, String type, String rarity, String image, String text ) {
+    public Card(String name, String mana, String type, String rarity, String image, String text, String colors ) {
         mName = name;
         mMana = mana;
         mType = type;
         mRarity = rarity;
         mImage = image;
         mText = text;
+        mColors = colors;
     }
 
     public String getName() {
@@ -43,6 +45,10 @@ public class Card {
 
     public String getText() {
         return mText;
+    }
+
+    public String getColors() {
+        return mColors;
     }
 }
 

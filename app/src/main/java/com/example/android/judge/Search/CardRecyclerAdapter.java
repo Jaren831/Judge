@@ -1,28 +1,41 @@
 package com.example.android.judge.Search;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.media.Image;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.judge.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 import javax.security.auth.Subject;
+
+import static android.text.TextUtils.join;
 
 /**
  * Created by jaren on 4/30/2017.
  */
 
 public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapter.CardViewHolder>{
+    SpannableString finalString;
 
     public class CardViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         CardView cardCard;
@@ -74,8 +87,49 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
 
 
         holder.cardName.setText(currentCard.getName());
-        Picasso.with(mContext).load(currentCard.getImage()).into(holder.cardImage);
-        holder.cardMana.setText(currentCard.getMana());
+        Picasso.with(mContext).load(currentCard.getImage()).fit().into(holder.cardImage);
+
+        String[] separateMana = currentCard.getMana().split("");
+        List<SpannableString> newMana = new ArrayList<SpannableString>();
+        SpannableString replaceMana;
+        for (String aSeparateMana : separateMana) {
+            if (!Objects.equals(aSeparateMana, "{") && !Objects.equals(aSeparateMana, "}")) {
+                switch (aSeparateMana) {
+                    case "U":
+                        aSeparateMana = "B";
+                        replaceMana = new SpannableString(aSeparateMana);
+                        replaceMana.setSpan(new ForegroundColorSpan(Color.BLUE), 0, replaceMana.length(), 0);
+                        newMana.add(replaceMana);
+                        break;
+                    case "R":
+                        replaceMana = new SpannableString(aSeparateMana);
+                        replaceMana.setSpan(new ForegroundColorSpan(Color.RED), 0, replaceMana.length(), 0);
+                        newMana.add(replaceMana);
+                        break;
+                    case "B":
+                        replaceMana = new SpannableString(aSeparateMana);
+                        replaceMana.setSpan(new ForegroundColorSpan(Color.BLACK), 0, replaceMana.length(), 0);
+                        newMana.add(replaceMana);
+                        break;
+                    case "G":
+                        replaceMana = new SpannableString(aSeparateMana);
+                        replaceMana.setSpan(new ForegroundColorSpan(Color.GREEN), 0, replaceMana.length(), 0);
+                        newMana.add(replaceMana);
+                        break;
+                    case "W":
+                        replaceMana = new SpannableString(aSeparateMana);
+                        replaceMana.setSpan(new ForegroundColorSpan(Color.YELLOW), 0, replaceMana.length(), 0);
+                        newMana.add(replaceMana);
+                        break;
+                    default:
+                        replaceMana = new SpannableString(aSeparateMana);
+                        newMana.add(replaceMana);
+                        break;
+                }
+            }
+
+        }
+        holder.cardMana.setText(join("", newMana));
 
     }
 

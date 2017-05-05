@@ -32,8 +32,8 @@ public class CardQuery {
     private CardQuery() {}
 
 
-    public static List<Card> fetchCardData(String requestURL, Context context) {
-        URL url = createUrl(requestURL);
+    public static List<Card> fetchCardData(String requestURL, Context context, String query) {
+        URL url = createUrl(requestURL + "?name=" + query);
         String jsonResponse = null;
         try {
             jsonResponse = makeHttpRequest(url);
@@ -41,7 +41,7 @@ public class CardQuery {
             Log.e(LOG_TAG, "Error closing input stream", e);
         }
 
-        return extractCards(jsonResponse, context);
+        return extractCards(jsonResponse, context, query);
     }
 
     private static URL createUrl(String stringUrl) {
@@ -103,7 +103,7 @@ public class CardQuery {
         return output.toString();
     }
 
-    private static List<Card> extractCards(String cardJSON, Context context) {
+    private static List<Card> extractCards(String cardJSON, Context context, String query) {
         if (TextUtils.isEmpty(cardJSON)) {
             return null;
         }
@@ -121,8 +121,11 @@ public class CardQuery {
                 String cardRarity = currentCard.optString("rarity");
                 String cardImage = currentCard.optString("imageUrl");
                 String cardText = currentCard.optString("text");
+                String cardcolors = currentCard.optString("colors");
 
-                cards.add(new Card(cardName, cardManaCost, cardType, cardRarity, cardImage, cardText));
+                cards.add(new Card(cardName, cardManaCost, cardType, cardRarity, cardImage, cardText, cardcolors));
+
+
             }
         } catch (JSONException e) {
             Log.e("CardQuery", "Problem parsing the card json results", e);
