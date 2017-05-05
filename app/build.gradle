@@ -30,9 +30,9 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:25.3.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:support-v4:25.3.0'
+    compile 'com.android.support:support-v4:25.3.1'
 
-    compile 'com.android.support:design:25.3.0'
+    compile 'com.android.support:design:25.3.1'
 
     // Displaying images
     compile 'com.github.bumptech.glide:glide:3.7.0'
@@ -40,9 +40,7 @@ dependencies {
     // Firebase
     compile 'com.firebaseui:firebase-ui-auth:0.6.0'
     compile 'com.google.firebase:firebase-auth:10.2.4'
-    compile 'com.google.firebase:firebase-storage:9.6.0'
-    compile 'com.google.firebase:firebase-messaging:9.6.0'
-    compile 'com.google.firebase:firebase-config:9.6.0'
+    compile 'com.google.firebase:firebase-storage:10.2.4'
 
     //Picasso
     compile 'com.squareup.picasso:picasso:2.5.2'

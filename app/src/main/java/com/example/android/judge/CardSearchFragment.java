@@ -28,6 +28,8 @@ import com.example.android.judge.Search.Card;
 import com.example.android.judge.Search.CardRecyclerAdapter;
 import com.example.android.judge.Search.CardSearchLoader;
 
+import java.io.FileDescriptor;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,15 +41,10 @@ public class CardSearchFragment extends Fragment
     RecyclerView.LayoutManager layoutManager;
     TextView emptyView;
     ProgressBar progressBar;
+    LoaderManager loadermanager;
     String cardQuery;
     private static final int CARD_LOADER_ID = 1;
     public static final String CARD_URL = "https://api.magicthegathering.io/v1/cards";
-    SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
-        @Override
-        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            settingsReload();
-        }
-    };
 
     ArrayList<Card> cardList = new ArrayList<Card>();
 
@@ -64,13 +61,9 @@ public class CardSearchFragment extends Fragment
         cardRecyclerView.setLayoutManager(layoutManager);
         cardRecyclerView.setAdapter(cardRecyclerAdapter);
 
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        preferences.registerOnSharedPreferenceChangeListener(listener);
-
-
         setHasOptionsMenu(true);
         while (cardRecyclerView == null) {
-            progressBar.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.VISIBLE);
         }
         getActivity();
         ConnectivityManager cm =
@@ -81,7 +74,6 @@ public class CardSearchFragment extends Fragment
                 activeNetwork.isConnectedOrConnecting();
 
         if (!isConnected) {
-            progressBar.setVisibility(View.GONE);
             emptyView.setText(com.example.android.judge.R.string.noInternet);
         }
 //        getActivity().getSupportLoaderManager().initLoader(CARD_LOADER_ID, null, CardSearchFragment.this).forceLoad();
@@ -101,12 +93,11 @@ public class CardSearchFragment extends Fragment
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                cardList.clear();
                 cardQuery = query;
-                getLoaderManager().destroyLoader(CARD_LOADER_ID);
-                Toast.makeText(getActivity(), query, Toast.LENGTH_SHORT).show();
-                getActivity().getSupportLoaderManager().initLoader(CARD_LOADER_ID, null, CardSearchFragment.this).forceLoad();
-                cardRecyclerAdapter.notifyDataSetChanged();
+                progressBar.setVisibility(View.VISIBLE);
+                emptyView.setVisibility(View.GONE);
+                Toast.makeText(getActivity(), "EEEEEE", Toast.LENGTH_SHORT).show();
+                getActivity().getSupportLoaderManager().restartLoader(CARD_LOADER_ID, null, CardSearchFragment.this).forceLoad();
                 return false;
             }
 
@@ -127,8 +118,6 @@ public class CardSearchFragment extends Fragment
     @Override
     public void onDetach() {
         super.onDetach();
-        getLoaderManager().destroyLoader(CARD_LOADER_ID);
-
     }
 
     @Override
@@ -156,13 +145,5 @@ public class CardSearchFragment extends Fragment
     @Override
     public void onLoaderReset(Loader<List<Card>> loader) {
         cardRecyclerAdapter.notifyDataSetChanged();
-    }
-
-    public void settingsReload() {
-        LoaderManager loaderManager = getLoaderManager();
-        loaderManager.restartLoader(CARD_LOADER_ID, null, this);
-        progressBar.setVisibility(View.VISIBLE);
-        Toast updateToast = Toast.makeText(getActivity(), "Settings Saved", Toast.LENGTH_SHORT);
-        updateToast.show();
     }
 }

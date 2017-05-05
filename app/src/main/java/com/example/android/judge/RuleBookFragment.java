@@ -57,11 +57,15 @@ public class RuleBookFragment extends Fragment {
                 basicStorageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                        Intent intent = new Intent(Intent.ACTION_VIEW);
                         intent.setType("application/pdf");
                         intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                        startActivity(intent);
-
+                        Intent intent1 = Intent.createChooser(intent, "Open With");
+                        try {
+                            startActivity(intent1);
+                        } catch (ActivityNotFoundException e) {
+                            // Instruct the user to install a PDF reader here, or something
+                        }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
