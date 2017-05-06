@@ -42,9 +42,7 @@ public class CardSearchFragment extends Fragment
     RecyclerView.LayoutManager layoutManager;
     TextView emptyView;
     ProgressBar progressBar;
-    LoaderManager loadermanager;
     Bundle bundle;
-
 
     String cardQuery;
     private static final int CARD_LOADER_ID = 1;
@@ -56,7 +54,6 @@ public class CardSearchFragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_card_search, container, false);
         cardRecyclerView = (RecyclerView) rootView.findViewById(R.id.card_search_recycler);
         cardRecyclerAdapter = new CardRecyclerAdapter(this.getActivity(), cardList);
@@ -90,6 +87,7 @@ public class CardSearchFragment extends Fragment
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         menu.findItem(R.id.action_reset).setVisible(false);
+        menu.findItem(R.id.action_settings).setVisible(false);
         MenuItem item = menu.findItem(R.id.action_search);
 
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
@@ -109,7 +107,6 @@ public class CardSearchFragment extends Fragment
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                Log.i("well", " this worked");
                 return false;
             }
         });
@@ -142,7 +139,7 @@ public class CardSearchFragment extends Fragment
             cardList.clear();
             cardList.addAll(cards);
         } else {
-            Toast.makeText(getContext(), "NO RESULTS", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.no_results, Toast.LENGTH_SHORT).show();
         }
         cardRecyclerAdapter.notifyDataSetChanged();
     }

@@ -3,7 +3,15 @@
     package="com.example.android.judge">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <receiver android:name="MatchWidgetProvider" >
+        <intent-filter>
+            <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+        </intent-filter>
+        <meta-data android:name="android.appwidget.provider"
+            android:resource="@xml/match_widget_info" />
+    </receiver>
 
     <application
         android:allowBackup="true"
@@ -20,12 +28,22 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.android.judge.SettingsActivity"
+            android:name=".SettingsActivity"
             android:label="@string/settings">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.android.judge.MainActivity"/>
+                android:value="com.example.android.judge.MainActivity" />
         </activity>
+
+        <receiver android:name=".Widget.MatchWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/match_widget_info" />
+        </receiver>
     </application>
 
 </manifest>

@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:visibility="visible"
-        android:text="Search for cards"
+        android:text="@string/start_search"
         android:textAppearance="?android:textAppearanceMedium"
         android:layout_gravity="center"/>
     <ProgressBar

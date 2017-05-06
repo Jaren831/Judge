@@ -87,7 +87,8 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("My Title");
+        builder.setTitle(R.string.reset_title);
+        builder.setMessage(R.string.reset_message);
         builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 switch (currentFragmentInt) {

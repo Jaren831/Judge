@@ -17,6 +17,13 @@
     <string name="settings">Settings</string>
 
     <!--Match Settings-->
+    <string name="reset_title">Reset Settings</string>
+    <string name="reset_message">Are you sure you want to reset settings?</string>
+    <string name="player1_increment_desc">Player 1 increment button</string>
+    <string name="player1_decrement_desc">Player 1 decrement button</string>
+    <string name="player2_increment_desc">Player 2 increment button</string>
+    <string name="player2_decrement_desc">Player 2 decrement button</string>
+
     <string name="match_settings_title">Match Settings</string>
 
     <string name="player1_settings_title">Player 1</string>
@@ -42,7 +49,8 @@
     <!--SearchFragment-->
     <string name="noInternet">No internet connection</string>
     <string name="empty">No cards found</string>
-
+    <string name="start_search">Search for cards.</string>
+    <string name="no_results">NO RESULTS</string>
 
 
     <!--Search Settings-->
@@ -50,4 +58,6 @@
 
     <!--Rulebook Settings-->
     <string name="rulebook_settings_title">RuleBook Settings</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>

@@ -33,7 +33,6 @@ public class RuleBookFragment extends Fragment {
     View rootView;
     StorageReference basicStorageRef;
     StorageReference comprehensiveStorageRef;
-    File localFile;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,7 +43,6 @@ public class RuleBookFragment extends Fragment {
 
         basicButton = (Button) rootView.findViewById(R.id.basic_button);
         comprehensiveButton = (Button) rootView.findViewById(R.id.comprehensive_button);
-
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
         basicStorageRef = storage.getReferenceFromUrl("gs://judge-1b409.appspot.com/").child("MTG Basic Rules.pdf");
@@ -109,6 +107,7 @@ public class RuleBookFragment extends Fragment {
     public void onPrepareOptionsMenu(Menu menu) {
         menu.findItem(R.id.action_search).setVisible(false);
         menu.findItem(R.id.action_reset).setVisible(false);
+        menu.findItem(R.id.action_settings).setVisible(false);
         super.onPrepareOptionsMenu(menu);
     }
 
