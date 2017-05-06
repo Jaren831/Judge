@@ -1,5 +1,6 @@
 package com.example.android.judge.Widget;
 
+import android.annotation.TargetApi;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -7,6 +8,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
+import android.support.annotation.NonNull;
 import android.widget.RemoteViews;
 
 import com.example.android.judge.MainActivity;
@@ -19,33 +22,27 @@ import java.util.Random;
  */
 public class MatchWidgetProvider extends AppWidgetProvider {
 
+    static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
+                                int appWidgetId) {
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.match_widget);
+
+        // Set up the collection
+        setRemoteAdapter(context, views);
+        // Instruct the widget manager to update the widget
+        appWidgetManager.updateAppWidget(appWidgetId, views);
+    }
+
     @Override
-    public void onUpdate(Context context, AppWidgetManager appWidgetManager,
-                         int[] appWidgetIds) {
+    public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
+        // There may be multiple widgets active, so update all of them
         for (int appWidgetId : appWidgetIds) {
-            RemoteViews remoteViews = updateWidgetView(context,
-                    appWidgetId);
-            appWidgetManager.updateAppWidget(appWidgetId, remoteViews);
+            updateAppWidget(context, appWidgetManager, appWidgetId);
         }
         super.onUpdate(context, appWidgetManager, appWidgetIds);
     }
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        super.onReceive(context, intent);
-        context.startService(new Intent(context, MatchWidgetService.class));
+    @SuppressWarnings("deprecation")
+    private static void setRemoteAdapter(Context context, @NonNull final RemoteViews views) {
+        views.setRemoteAdapter(0, R.id.widget_list,
+                new Intent(context, MatchWidgetService.class));
     }
-
-    private RemoteViews updateWidgetView(Context context, int appWidgetId) {
-
-        RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
-                R.layout.match_widget);
-        Intent svcIntent = new Intent(context, MatchWidgetService.class);
-        svcIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
-        svcIntent.setData(Uri.parse(svcIntent.toUri(Intent.URI_INTENT_SCHEME)));
-        remoteViews.setTextViewText(R.id.player1_life_widget, "");
-        remoteViews.setTextViewText(R.id.player2_life_widget, "");
-        return remoteViews;
-    }
-
 }
-

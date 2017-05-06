@@ -11,11 +11,7 @@ import android.widget.RemoteViewsService;
 public class MatchWidgetService extends RemoteViewsService {
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
-        int appWidgetId = intent.getIntExtra(
-                AppWidgetManager.EXTRA_APPWIDGET_ID,
-                AppWidgetManager.INVALID_APPWIDGET_ID);
-
-        return (new LifeProvider(this.getApplicationContext(), intent));
+        return (new LifeProvider(this, intent));
     }
 }
 
