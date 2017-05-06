@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.judge.R;
 
@@ -77,6 +78,7 @@ public class Player1Fragment extends Fragment implements View.OnClickListener {
     @Override
     public void onPause() {
         super.onPause();
+        Toast.makeText(getContext(), "p1pause" + player1CurrentLife, Toast.LENGTH_SHORT).show();
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(getString(R.string.player1_life_key), player1LifeView.getText().toString());
         editor.apply();

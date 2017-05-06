@@ -1,15 +1,12 @@
 package com.example.android.judge.Match;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.TextView;
 import com.example.android.judge.R;
 
 public class MatchFragment extends Fragment {
@@ -53,7 +50,6 @@ public class MatchFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
     }
 
     @Override
@@ -64,9 +60,6 @@ public class MatchFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-
-        player1Fragment.onPause();
-        player2Fragment.onPause();
     }
 
 }
