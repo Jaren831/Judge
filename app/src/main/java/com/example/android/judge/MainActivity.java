@@ -19,11 +19,15 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.android.judge.Match.MatchFragment;
+import com.example.android.judge.Search.CardSearchFragment;
+import com.example.android.judge.Settings.SettingsActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import com.example.android.judge.RuleBook.RuleBookFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

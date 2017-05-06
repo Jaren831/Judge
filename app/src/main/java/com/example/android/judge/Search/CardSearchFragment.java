@@ -1,18 +1,15 @@
-package com.example.android.judge;
+package com.example.android.judge.Search;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,13 +21,9 @@ import android.widget.TextView;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
-import com.example.android.judge.Search.Card;
-import com.example.android.judge.Search.CardRecyclerAdapter;
-import com.example.android.judge.Search.CardSearchLoader;
+import com.example.android.judge.R;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
-import java.io.FileDescriptor;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 

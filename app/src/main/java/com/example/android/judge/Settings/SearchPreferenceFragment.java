@@ -1,4 +1,4 @@
-package com.example.android.judge.SettingsFragments;
+package com.example.android.judge.Settings;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -7,7 +7,6 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.view.Menu;
-import android.widget.Toast;
 
 import com.example.android.judge.R;
 
@@ -15,35 +14,19 @@ import com.example.android.judge.R;
  * Created by Jaren Lynch on 4/5/2017.
  */
 
-public class MatchPreferenceFragment extends PreferenceFragment
+public class SearchPreferenceFragment extends PreferenceFragment
         implements Preference.OnPreferenceChangeListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        addPreferencesFromResource(R.xml.match_preference);
-
-        Preference player1Life = findPreference(getString(R.string.player1_life_key));
-        Preference player1Color = findPreference(getString(R.string.player1_color_key));
-
-        Toast.makeText(getActivity(), player1Life.toString(), Toast.LENGTH_SHORT).show();
-
-        Preference player2Life = findPreference(getString(R.string.player2_life_key));
-        Preference player2Color = findPreference(getString(R.string.player2_color_key));
-
-        bindPreferenceSummaryToValue(player1Life);
-        bindPreferenceSummaryToValue(player1Color);
-
-        bindPreferenceSummaryToValue(player2Life);
-        bindPreferenceSummaryToValue(player2Color);
-
+        addPreferencesFromResource(R.xml.search_preference);
         setHasOptionsMenu(true);
     }
 
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
-        menu.findItem(R.id.action_search).setVisible(false);
         menu.findItem(R.id.action_settings).setVisible(false);
-
+        menu.findItem(R.id.action_search).setVisible(false);
         super.onPrepareOptionsMenu(menu);
     }
 

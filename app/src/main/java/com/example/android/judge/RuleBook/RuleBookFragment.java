@@ -1,10 +1,8 @@
-package com.example.android.judge;
+package com.example.android.judge.RuleBook;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,16 +12,14 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.android.judge.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-
-import java.io.File;
-import java.io.IOException;
 
 
 public class RuleBookFragment extends Fragment {
@@ -33,6 +29,7 @@ public class RuleBookFragment extends Fragment {
     View rootView;
     StorageReference basicStorageRef;
     StorageReference comprehensiveStorageRef;
+    ProgressBar progressBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,6 +37,8 @@ public class RuleBookFragment extends Fragment {
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_rule_book, container, false);
         setHasOptionsMenu(true);
+
+        progressBar = (ProgressBar) rootView.findViewById(R.id.rule_progress_bar);
 
         basicButton = (Button) rootView.findViewById(R.id.basic_button);
         comprehensiveButton = (Button) rootView.findViewById(R.id.comprehensive_button);
@@ -51,15 +50,15 @@ public class RuleBookFragment extends Fragment {
         basicButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
                 basicStorageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        Intent intent = new Intent(Intent.ACTION_VIEW);
-                        intent.setDataAndType(uri, "application/pdf");
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                        Intent intent1 = Intent.createChooser(intent, "Open With");
+                        progressBar.setVisibility(View.GONE);
+                        Toast.makeText(getContext(), uri.toString(), Toast.LENGTH_SHORT).show();
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri.toString()));
                         try {
-                            startActivity(intent1);
+                            startActivity(browserIntent);
                         } catch (ActivityNotFoundException e) {
                             // Instruct the user to install a PDF reader here, or something
                         }
@@ -80,12 +79,11 @@ public class RuleBookFragment extends Fragment {
                 comprehensiveStorageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        Intent intent = new Intent(Intent.ACTION_VIEW);
-                        intent.setDataAndType(uri, "application/pdf");
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                        Intent intent1 = Intent.createChooser(intent, "Open With");
+                        progressBar.setVisibility(View.GONE);
+                        Toast.makeText(getContext(), uri.toString(), Toast.LENGTH_SHORT).show();
+                        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri.toString()));
                         try {
-                            startActivity(intent1);
+                            startActivity(browserIntent);
                         } catch (ActivityNotFoundException e) {
                             // Instruct the user to install a PDF reader here, or something
                         }
