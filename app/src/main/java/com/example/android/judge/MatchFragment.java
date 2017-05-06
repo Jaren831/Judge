@@ -1,6 +1,7 @@
 package com.example.android.judge;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -13,6 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class MatchFragment extends Fragment implements View.OnClickListener {
 
@@ -102,6 +106,15 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
         player2Decrement.setImageDrawable(getResources().getDrawable(R.drawable.decrement_black));
         player2Decrement.setBackgroundColor(Color.parseColor(player2Color));
         player2Decrement.setOnClickListener(this);
+//        updateWidget();
+    }
+
+    private void updateWidget() {
+        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+        i.putExtra("player1", player1CurrentLife);
+        i.putExtra("player1", player1CurrentLife);
+
+        getActivity().sendBroadcast(i);
     }
 
     @Override
@@ -137,5 +150,6 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
                 player2CurrentLife -= 1;
                 player2LifeView.setText(player2CurrentLife.toString());
         }
+//        updateWidget();
     }
 }
