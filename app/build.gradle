@@ -5,12 +5,12 @@ android {
         config {
             keyAlias 'judge key'
             keyPassword '1onepower!'
-            storeFile file('C:/Users/jaren/Android Studio Projects/Judge/app/judge.jks')
+            storeFile file('keystore/judge.keystore')
             storePassword '1onepower!'
         }
     }
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion "25.0.3"
     defaultConfig {
         applicationId "com.example.android.judge"
         minSdkVersion 21
@@ -36,6 +36,13 @@ android {
     sourceSets { main { assets.srcDirs = ['src/main/assets', 'src/main/assets/'] } }
 }
 
+allprojects {
+    repositories {
+        // ...
+        maven { url 'https://maven.fabric.io/public' }
+    }
+}
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -48,7 +55,7 @@ dependencies {
     // Displaying images
     compile 'com.github.bumptech.glide:glide:3.7.0'
     // Firebase
-    compile 'com.firebaseui:firebase-ui-auth:0.6.0'
+    compile 'com.firebaseui:firebase-ui-auth:1.2.0'
     compile 'com.google.firebase:firebase-auth:10.2.4'
     compile 'com.google.firebase:firebase-storage:10.2.4'
     //Picasso

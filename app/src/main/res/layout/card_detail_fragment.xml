@@ -11,7 +11,8 @@
         android:layout_height="520dp"
         android:adjustViewBounds="true"
         android:scaleType="fitCenter"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:contentDescription="@string/card_detail_description"/>
 
 
 </FrameLayout>

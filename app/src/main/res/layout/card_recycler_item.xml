@@ -18,7 +18,8 @@
             android:id="@+id/card_image_item"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:contentDescription="@string/card_thumbnail_description"/>
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"

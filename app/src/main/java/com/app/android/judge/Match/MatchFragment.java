@@ -122,19 +122,19 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
         switch (view.getId()) {
             case R.id.player1_increment:
                 player1CurrentLife += 1;
-                player1LifeView.setText(player1CurrentLife.toString());
+                player1LifeView.setText(String.format(player1CurrentLife.toString()));
                 break;
             case R.id.player1_decrement:
                 player1CurrentLife -= 1;
-                player1LifeView.setText(player1CurrentLife.toString());
+                player1LifeView.setText(String.format(player1CurrentLife.toString()));
                 break;
             case R.id.player2_increment:
                 player2CurrentLife += 1;
-                player2LifeView.setText(player2CurrentLife.toString());
+                player1LifeView.setText(String.format(player2CurrentLife.toString()));
                 break;
             case R.id.player2_decrement:
                 player2CurrentLife -= 1;
-                player2LifeView.setText(player2CurrentLife.toString());
+                player1LifeView.setText(String.format(player2CurrentLife.toString()));
         }
     }
 }
