@@ -17,19 +17,19 @@ import com.app.android.judge.R;
 
 public class MatchFragment extends Fragment implements View.OnClickListener {
 
-    TextView player1LifeView;
-    TextView player2LifeView;
-    ImageButton player1Increment;
-    ImageButton player1Decrement;
-    ImageButton player2Increment;
-    ImageButton player2Decrement;
+    private TextView player1LifeView;
+    private TextView player2LifeView;
+    private ImageButton player1Increment;
+    private ImageButton player1Decrement;
+    private ImageButton player2Increment;
+    private ImageButton player2Decrement;
 
-    Integer player1CurrentLife;
-    Integer player2CurrentLife;
+    private Integer player1CurrentLife;
+    private Integer player2CurrentLife;
 
-    SharedPreferences sharedPreferences;
+    private SharedPreferences sharedPreferences;
 
-    View rootView;
+    private View rootView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

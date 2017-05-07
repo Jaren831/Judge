@@ -30,24 +30,24 @@ import java.util.List;
 public class CardSearchFragment extends Fragment
         implements LoaderManager.LoaderCallbacks<List<Card>>{
 
-    RecyclerView cardRecyclerView;
-    CardRecyclerAdapter cardRecyclerAdapter;
-    RecyclerView.LayoutManager layoutManager;
-    TextView emptyView;
-    ProgressBar progressBar;
-    Bundle bundle;
+    private RecyclerView cardRecyclerView;
+    private CardRecyclerAdapter cardRecyclerAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private TextView emptyView;
+    private ProgressBar progressBar;
+    private Bundle bundle;
 
-    String cardQuery;
+    private String cardQuery;
     private static final int CARD_LOADER_ID = 1;
     private static final int RANDOM_LOADER_ID = 2;
 
-    public static final String CARD_URL = "https://api.magicthegathering.io/v1/cards";
-    public static final String RANDOM_CARD_URL = "https://api.magicthegathering.io/v1/cards/?random";
+    private static final String CARD_URL = "https://api.magicthegathering.io/v1/cards";
+    private static final String RANDOM_CARD_URL = "https://api.magicthegathering.io/v1/cards/?random";
 
 
     private FirebaseAnalytics mFirebaseAnalytics;
 
-    ArrayList<Card> cardList = new ArrayList<Card>();
+    private final ArrayList<Card> cardList = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

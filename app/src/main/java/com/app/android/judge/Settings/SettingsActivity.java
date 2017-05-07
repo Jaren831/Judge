@@ -21,8 +21,8 @@ import com.app.android.judge.RuleBook.RuleBookFragment;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    int currentFragmentInt;
-    SharedPreferences sharedPreferences;
+    private int currentFragmentInt;
+    private SharedPreferences sharedPreferences;
 
 
     @Override
@@ -64,7 +64,7 @@ public class SettingsActivity extends AppCompatActivity {
         }
     }
 
-    public void CurrentFragmentReset() {
+    private void CurrentFragmentReset() {
         Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.main_container);
         if (currentFragment instanceof MatchFragment) {
             currentFragmentInt = 0;

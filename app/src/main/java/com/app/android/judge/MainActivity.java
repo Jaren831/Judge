@@ -132,14 +132,14 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                         selectDrawerItem(menuItem);
                         return true;
                     }
                 });
     }
 
-    public void selectDrawerItem(MenuItem menuItem) {
+    private void selectDrawerItem(MenuItem menuItem) {
         // Create a new fragment and specify the fragment to show based on nav item clicked
         Fragment fragment = null;
         Class fragmentClass;
@@ -200,7 +200,7 @@ public class MainActivity extends AppCompatActivity
 
     }
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         switch (id) {
@@ -226,7 +226,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    public Bundle CurrentFragmentCheck() {
+    private Bundle CurrentFragmentCheck() {
         Bundle bundle = new Bundle();
 
         Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.main_container);

@@ -2,7 +2,6 @@ package com.app.android.judge.Search;
 
 import android.content.Context;
 import android.text.TextUtils;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,12 +22,8 @@ import java.util.List;
  * Created by jaren on 5/2/2017.
  */
 
-public class CardQuery {
-
-    public static final String LOG_TAG = CardQuery.class.getSimpleName();
-
+class CardQuery {
     private CardQuery() {}
-
 
     public static List<Card> fetchCardData(String requestURL, Context context, String query) {
         URL url = createUrl(requestURL + "?name=" + query);
@@ -38,7 +33,7 @@ public class CardQuery {
         } catch (IOException ignored) {
         }
 
-        return extractCards(jsonResponse, context, query);
+        return extractCards(jsonResponse);
     }
 
     private static URL createUrl(String stringUrl) {
@@ -96,7 +91,7 @@ public class CardQuery {
         return output.toString();
     }
 
-    private static List<Card> extractCards(String cardJSON, Context context, String query) {
+    private static List<Card> extractCards(String cardJSON) {
         if (TextUtils.isEmpty(cardJSON)) {
             return null;
         }

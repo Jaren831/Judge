@@ -28,17 +28,17 @@ import java.util.Objects;
 
 public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapter.CardViewHolder>{
     SpannableString finalString;
-    SpannableString replaceMana;
-    Card currentCard;
+    private SpannableString replaceMana;
+    private Card currentCard;
     CardSearchFragment cardSearchFragment;
 
 
 
     public class CardViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        CardView cardCard;
-        TextView cardName;
-        TextView cardMana;
-        ImageView cardImage;
+        final CardView cardCard;
+        final TextView cardName;
+        final TextView cardMana;
+        final ImageView cardImage;
 
         CardViewHolder(View itemView) {
             super(itemView);
@@ -65,8 +65,8 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
         }
     }
 
-    private Context mContext;
-    private ArrayList<Card> mCardArray;
+    private final Context mContext;
+    private final ArrayList<Card> mCardArray;
 
     public CardRecyclerAdapter(Context context, ArrayList<Card> cardArray) {
         mContext = context;

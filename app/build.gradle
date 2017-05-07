@@ -5,7 +5,7 @@ android {
         config {
             keyAlias 'judge key'
             keyPassword '1onepower!'
-            storeFile file('C:/Users/jaren/Android Studio Projects/Judge/app/keystore/judge.jks')
+            storeFile file('keystore/judge.jks')
             storePassword '1onepower!'
         }
     }
@@ -52,12 +52,16 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:support-v4:25.3.1'
     compile 'com.android.support:design:25.3.1'
+    compile 'com.google.firebase:firebase-database:10.2.4'
+
     // Displaying images
     compile 'com.github.bumptech.glide:glide:3.7.0'
     // Firebase
     compile 'com.firebaseui:firebase-ui-auth:1.2.0'
     compile 'com.google.firebase:firebase-auth:10.2.4'
     compile 'com.google.firebase:firebase-storage:10.2.4'
+    compile 'com.google.firebase:firebase-database:10.2.4'
+
     //Picasso
     compile 'com.squareup.picasso:picasso:2.5.2'
     apply plugin: 'com.google.gms.google-services'

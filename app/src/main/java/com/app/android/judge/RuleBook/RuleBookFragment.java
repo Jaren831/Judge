@@ -26,13 +26,13 @@ import java.io.File;
 
 public class RuleBookFragment extends Fragment {
 
-    Button basicButton;
-    Button comprehensiveButton;
-    View rootView;
-    StorageReference basicStorageRef;
-    StorageReference comprehensiveStorageRef;
-    String basicRuleFile;
-    String comprehensiveRuleFile;
+    private Button basicButton;
+    private Button comprehensiveButton;
+    private View rootView;
+    private StorageReference basicStorageRef;
+    private StorageReference comprehensiveStorageRef;
+    private String basicRuleFile;
+    private String comprehensiveRuleFile;
     private final String LOG_TAG = MainActivity.class.getSimpleName();
 
     @Override
@@ -105,12 +105,12 @@ public class RuleBookFragment extends Fragment {
         super.onDetach();
     }
 
-    public boolean checksFileExistence(String fileName) {
+    private boolean checksFileExistence(String fileName) {
         File checkFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath() + "/" + fileName);
         return checkFile.exists();
     }
 
-    public void openPdfFile(String file) {
+    private void openPdfFile(String file) {
         File pdfFile = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath() + File.separator +
                 file);
         Uri path = Uri.fromFile(pdfFile);
@@ -125,7 +125,7 @@ public class RuleBookFragment extends Fragment {
         }
     }
 
-    public void downloadPdfFile(Uri uri) {
+    private void downloadPdfFile(Uri uri) {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri.toString()));
         try {
             startActivity(browserIntent);

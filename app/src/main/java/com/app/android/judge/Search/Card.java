@@ -4,15 +4,15 @@ package com.app.android.judge.Search;
  * Created by jaren on 4/30/2017.
  */
 
-public class Card {
-    public String mName;
-    public String mMana;
-    public String mType;
-    public String mRarity;
-    public String mImage;
-    public String mText;
-    public String mColors;
-    public String mColorIdentity;
+class Card {
+    private final String mName;
+    private final String mMana;
+    private final String mType;
+    private final String mRarity;
+    private final String mImage;
+    private final String mText;
+    private final String mColors;
+    private final String mColorIdentity;
 
     public Card(String name, String mana, String type, String rarity, String image, String text, String colors, String colorIdentity ) {
         mName = name;

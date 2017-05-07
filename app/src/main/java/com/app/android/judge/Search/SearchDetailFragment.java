@@ -21,9 +21,9 @@ import com.squareup.picasso.Picasso;
 public class SearchDetailFragment extends Fragment {
 
 
-    View rootView;
+    private View rootView;
     private final String LOG_TAG = MainActivity.class.getSimpleName();
-    ImageView cardDetailImage;
+    private ImageView cardDetailImage;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

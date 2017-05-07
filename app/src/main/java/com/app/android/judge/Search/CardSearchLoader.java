@@ -8,10 +8,10 @@ import java.util.List;
  * Created by jaren on 4/30/2017.
  */
 
-public class CardSearchLoader extends AsyncTaskLoader<List<Card>> {
-    private String mUrl;
-    private Context mContext;
-    private String mQuery;
+class CardSearchLoader extends AsyncTaskLoader<List<Card>> {
+    private final String mUrl;
+    private final Context mContext;
+    private final String mQuery;
 
     public CardSearchLoader(Context context, String url, String query) {
         super(context);
@@ -30,8 +30,7 @@ public class CardSearchLoader extends AsyncTaskLoader<List<Card>> {
         if (mUrl == null) {
             return null;
         }
-        List<Card> cards = CardQuery.fetchCardData(mUrl, mContext, mQuery);
-        return cards;
+        return CardQuery.fetchCardData(mUrl, mContext, mQuery);
 
     }
 }
