@@ -60,6 +60,7 @@
     <string name="rulebook_settings_title">RuleBook Settings</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
+    <string name="pdf_broke">No application to open pdf</string>
 
     <!--match widget-->
     <string name="match_widgeT_tittle">Judge Widget</string>
