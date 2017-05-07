@@ -1,7 +1,6 @@
-package com.example.android.judge.Match;
+package com.app.android.judge.Match;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -14,10 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.android.judge.MainActivity;
-import com.example.android.judge.R;
-
-import static com.facebook.FacebookSdk.getApplicationContext;
+import com.app.android.judge.R;
 
 public class MatchFragment extends Fragment implements View.OnClickListener {
 

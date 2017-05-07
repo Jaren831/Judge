@@ -1,4 +1,4 @@
-package com.example.android.judge.Search;
+package com.app.android.judge.Search;
 
 /**
  * Created by jaren on 4/30/2017.

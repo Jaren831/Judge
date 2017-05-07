@@ -1,4 +1,4 @@
-package com.example.android.judge.RuleBook;
+package com.app.android.judge.RuleBook;
 
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,12 +13,10 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.android.judge.MainActivity;
-import com.example.android.judge.R;
-import com.google.android.gms.tasks.OnFailureListener;
+import com.app.android.judge.MainActivity;
+import com.app.android.judge.R;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;

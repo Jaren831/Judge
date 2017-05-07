@@ -1,4 +1,4 @@
-package com.example.android.judge;
+package com.app.android.judge;
 
 import org.junit.Test;
 

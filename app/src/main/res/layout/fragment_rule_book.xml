@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:padding="4dp"
     android:id="@+id/rulebook_container"
-    tools:context="com.example.android.judge.RuleBook.RuleBookFragment">
+    tools:context="com.app.android.judge.RuleBook.RuleBookFragment">
     <Button
         android:id="@+id/basic_button"
         android:layout_width="match_parent"

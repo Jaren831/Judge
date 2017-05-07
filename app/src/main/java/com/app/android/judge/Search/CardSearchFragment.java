@@ -1,4 +1,4 @@
-package com.example.android.judge.Search;
+package com.app.android.judge.Search;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
@@ -21,7 +21,7 @@ import android.widget.TextView;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
-import com.example.android.judge.R;
+import com.app.android.judge.R;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.ArrayList;
@@ -74,7 +74,7 @@ public class CardSearchFragment extends Fragment
                 activeNetwork.isConnectedOrConnecting();
 
         if (!isConnected) {
-            emptyView.setText(com.example.android.judge.R.string.noInternet);
+            emptyView.setText(com.app.android.judge.R.string.noInternet);
         }
 
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
@@ -138,7 +138,7 @@ public class CardSearchFragment extends Fragment
 
     @Override
     public void onLoadFinished(Loader<List<Card>> loader, List<Card> cards) {
-        emptyView.setText(com.example.android.judge.R.string.empty);
+        emptyView.setText(com.app.android.judge.R.string.empty);
         progressBar.setVisibility(View.GONE);
         if (cards != null && !cards.isEmpty()) {
             emptyView.setVisibility(View.GONE);

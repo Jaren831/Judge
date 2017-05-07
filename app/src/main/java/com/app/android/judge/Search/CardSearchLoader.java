@@ -1,4 +1,4 @@
-package com.example.android.judge.Search;
+package com.app.android.judge.Search;
 
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;

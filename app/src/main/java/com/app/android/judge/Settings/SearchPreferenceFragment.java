@@ -1,4 +1,4 @@
-package com.example.android.judge.Settings;
+package com.app.android.judge.Settings;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,7 +8,7 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 
-import com.example.android.judge.R;
+import com.app.android.judge.R;
 
 /**
  * Created by Jaren Lynch on 4/5/2017.

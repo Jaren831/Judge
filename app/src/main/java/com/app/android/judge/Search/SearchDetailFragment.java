@@ -1,4 +1,4 @@
-package com.example.android.judge.Search;
+package com.app.android.judge.Search;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,11 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.android.judge.MainActivity;
-import com.example.android.judge.R;
+import com.app.android.judge.MainActivity;
+import com.app.android.judge.R;
 import com.squareup.picasso.Picasso;
-
-import static android.R.attr.defaultValue;
 
 /**
  * Created by jaren on 4/30/2017.

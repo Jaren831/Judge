@@ -1,12 +1,10 @@
-package com.example.android.judge.Search;
+package com.app.android.judge.Search;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -17,19 +15,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.android.judge.MainActivity;
-import com.example.android.judge.R;
+import com.app.android.judge.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-import static android.R.attr.fragment;
-import static android.R.attr.value;
 import static android.text.TextUtils.join;
-import static com.example.android.judge.R.id.parent;
 
 /**
  * Created by jaren on 4/30/2017.

@@ -1,4 +1,4 @@
-package com.example.android.judge.Settings;
+package com.app.android.judge.Settings;
 
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -12,11 +12,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.example.android.judge.Search.CardSearchFragment;
-import com.example.android.judge.Match.MatchFragment;
-import com.example.android.judge.R;
+import com.app.android.judge.Search.CardSearchFragment;
+import com.app.android.judge.Match.MatchFragment;
+import com.app.android.judge.R;
 
-import com.example.android.judge.RuleBook.RuleBookFragment;
+import com.app.android.judge.RuleBook.RuleBookFragment;
 
 
 public class SettingsActivity extends AppCompatActivity {

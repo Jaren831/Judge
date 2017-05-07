@@ -1,4 +1,4 @@
-package com.example.android.judge;
+package com.app.android.judge;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
