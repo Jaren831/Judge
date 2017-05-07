@@ -1,7 +1,13 @@
 package com.example.android.judge.Search;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
@@ -11,14 +17,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.android.judge.MainActivity;
 import com.example.android.judge.R;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
+import static android.R.attr.fragment;
+import static android.R.attr.value;
 import static android.text.TextUtils.join;
+import static com.example.android.judge.R.id.parent;
 
 /**
  * Created by jaren on 4/30/2017.
@@ -27,6 +38,9 @@ import static android.text.TextUtils.join;
 public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapter.CardViewHolder>{
     SpannableString finalString;
     SpannableString replaceMana;
+    Card currentCard;
+    CardSearchFragment cardSearchFragment;
+
 
 
     public class CardViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -34,7 +48,6 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
         TextView cardName;
         TextView cardMana;
         ImageView cardImage;
-
 
         CardViewHolder(View itemView) {
             super(itemView);
@@ -46,12 +59,18 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
         }
 
         @Override
-        public void onClick(View v) {
-            // The user may not set a click listener for list items, in which case our listener
-            // will be null, so we need to check for this
-            if (mOnEntryClickListener != null) {
-                mOnEntryClickListener.onEntryClick(v, getLayoutPosition());
-            }
+        public void onClick(View view) {
+
+            Fragment detailFragment = new SearchDetailFragment();
+            Bundle args = new Bundle();
+            args.putString("url", currentCard.getImage());
+            detailFragment.setArguments(args);
+            FragmentTransaction transaction = ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.main_container, detailFragment);
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+            transaction.addToBackStack(null);
+            transaction.commit();
+
         }
     }
 
@@ -76,38 +95,13 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
 
     @Override
     public void onBindViewHolder(CardViewHolder holder, int position) {
-        Card currentCard = mCardArray.get(position);
+        currentCard = mCardArray.get(position);
 
         holder.cardName.setText(currentCard.getName());
 
         if (currentCard.getImage() != null && !currentCard.getImage().isEmpty()) {
             Picasso.with(mContext).load(currentCard.getImage()).fit().into(holder.cardImage);
         }
-
-//        switch (currentCard.getIdentity()) {
-//            case "W":
-//                holder.cardName.setBackgroundColor(Color.parseColor("#fffada"));
-//                holder.cardMana.setBackgroundColor(Color.parseColor("#faaa8f"));
-//                break;
-//            case "U":
-//                holder.cardName.setBackgroundResource(R.color.mtg_blue);
-//                holder.cardMana.setBackgroundColor(Color.parseColor("#a9e0f9"));
-//                break;
-//            case "B":
-//                holder.cardName.setBackgroundColor(Color.parseColor("#9bd3ae"));
-//                holder.cardMana.setBackgroundColor(Color.parseColor("#9bd3ae"));
-//                break;
-//            case "R":
-//                holder.cardName.setBackgroundColor(Color.parseColor("#fffada"));
-//                holder.cardMana.setBackgroundColor(Color.parseColor("#fffada"));
-//                break;
-//            case "G":
-//                holder.cardName.setBackgroundColor(Color.GREEN);
-//                holder.cardMana.setBackgroundColor(Color.parseColor("#cbc2bf"));
-//                break;
-//            default:
-//                break;
-//        }
 
         holder.cardMana.setText("");
         String[] separateMana = currentCard.getMana().split("");
@@ -152,16 +146,5 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
-    }
-
-
-    private OnEntryClickListener mOnEntryClickListener;
-
-    public interface OnEntryClickListener {
-        void onEntryClick(View view, int position);
-    }
-
-    public void setOnEntryClickListener(OnEntryClickListener onEntryClickListener) {
-        mOnEntryClickListener = onEntryClickListener;
     }
 }

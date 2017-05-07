@@ -16,12 +16,11 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:visibility="visible"
-        android:text="@string/start_search"
         android:textAppearance="?android:textAppearanceMedium"
         android:layout_gravity="center"/>
     <ProgressBar
         android:id="@+id/progress_bar"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_gravity="center"/>

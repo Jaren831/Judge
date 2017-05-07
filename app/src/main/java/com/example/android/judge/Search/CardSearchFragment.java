@@ -39,7 +39,12 @@ public class CardSearchFragment extends Fragment
 
     String cardQuery;
     private static final int CARD_LOADER_ID = 1;
+    private static final int RANDOM_LOADER_ID = 2;
+
     public static final String CARD_URL = "https://api.magicthegathering.io/v1/cards";
+    public static final String RANDOM_CARD_URL = "https://api.magicthegathering.io/v1/cards/?random";
+
+
     private FirebaseAnalytics mFirebaseAnalytics;
 
     ArrayList<Card> cardList = new ArrayList<Card>();
@@ -73,6 +78,7 @@ public class CardSearchFragment extends Fragment
         }
 
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
+        getActivity().getSupportLoaderManager().restartLoader(RANDOM_LOADER_ID, null, CardSearchFragment.this).forceLoad();
 
         return rootView;
     }
@@ -118,9 +124,16 @@ public class CardSearchFragment extends Fragment
 
     @Override
     public Loader<List<Card>> onCreateLoader(int id, Bundle bundle) {
-        Uri baseUri = Uri.parse(CARD_URL);
-        Uri.Builder uriBuilder = baseUri.buildUpon();
-        return new CardSearchLoader(this.getContext(), uriBuilder.toString(), cardQuery);
+        if (id == 1) {
+            Uri baseUri = Uri.parse(CARD_URL);
+            Uri.Builder uriBuilder = baseUri.buildUpon();
+            return new CardSearchLoader(this.getContext(), uriBuilder.toString(), cardQuery);
+        } else {
+            Uri baseUri = Uri.parse(RANDOM_CARD_URL);
+            Uri.Builder uriBuilder = baseUri.buildUpon();
+            return new CardSearchLoader(this.getContext(), uriBuilder.toString(), cardQuery);
+        }
+
     }
 
     @Override

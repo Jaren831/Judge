@@ -2,16 +2,25 @@
     android:layout_width="match_parent"
     android:layout_height="192dp"
     android:background="?attr/colorPrimaryDark"
-    android:padding="16dp"
+    android:padding="4dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:gravity="bottom">
+    <ImageView
+        android:id="@+id/app_brand"
+        android:src="@mipmap/ic_launcher"
+        android:layout_width="48dp"
+        android:layout_height="48dp" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/textView2"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
         android:text="@string/app_name"
+        android:gravity="center_vertical|left"
+        android:layout_marginLeft="16dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@android:color/white"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+        android:textSize="24sp" />
 
 </LinearLayout>
