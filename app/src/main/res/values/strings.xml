@@ -58,4 +58,5 @@
 
     <!--Rulebook Settings-->
     <string name="rulebook_settings_title">RuleBook Settings</string>
+    <string name="pdf_broke">PDF file needs compatible viewer to open.</string>
 </resources>
