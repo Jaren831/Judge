@@ -22,8 +22,6 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import static android.text.TextUtils.join;
-
 /**
  * Created by jaren on 4/30/2017.
  */
