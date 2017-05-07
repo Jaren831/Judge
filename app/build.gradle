@@ -5,7 +5,7 @@ android {
         config {
             keyAlias 'judge key'
             keyPassword '1onepower!'
-            storeFile file('keystore/judge.keystore')
+            storeFile file('C:/Users/jaren/Android Studio Projects/Judge/app/keystore/judge.jks')
             storePassword '1onepower!'
         }
     }

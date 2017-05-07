@@ -116,12 +116,12 @@ public class RuleBookFragment extends Fragment {
         Uri path = Uri.fromFile(pdfFile);
         Intent pdfOpenintent = new Intent(Intent.ACTION_VIEW);
         pdfOpenintent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        pdfOpenintent.setDataAndType(path, "application/pdf");
-        Intent openWithIntent = Intent.createChooser(pdfOpenintent, "Open With");
+        pdfOpenintent.setDataAndType(path, getResources().getString(R.string.open_path));
+        Intent openWithIntent = Intent.createChooser(pdfOpenintent, getResources().getString(R.string.open_with));
         try {
             startActivity(openWithIntent);
         } catch (ActivityNotFoundException e) {
-            Log.i(LOG_TAG, pdfFile.toString() + "start activity failed");
+            Log.i(LOG_TAG, pdfFile.toString() + getResources().getString(R.string.start_failed));
         }
     }
 

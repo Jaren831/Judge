@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity
     private final String LOG_TAG = MainActivity.class.getSimpleName();
     private DrawerLayout mDrawer;
     private Toolbar toolbar;
-    private NavigationView nvDrawer;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private ActionBarDrawerToggle drawerToggle;
@@ -55,7 +54,7 @@ public class MainActivity extends AppCompatActivity
 
 
         // Find our drawer view
-        nvDrawer = (NavigationView) findViewById(R.id.nvView);
+        NavigationView nvDrawer = (NavigationView) findViewById(R.id.nvView);
         mDrawer.addDrawerListener(drawerToggle);
 
         mAuth = FirebaseAuth.getInstance();
@@ -168,6 +167,7 @@ public class MainActivity extends AppCompatActivity
 
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getSupportFragmentManager();
+
         fragmentManager.beginTransaction().replace(R.id.main_container, fragment).commit();
 
         // Highlight the selected item has been done by NavigationView

@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="4dp"
-    android:id="@+id/rulebook_container"
     tools:context="com.app.android.judge.RuleBook.RuleBookFragment">
     <Button
         android:id="@+id/basic_button"
@@ -18,7 +17,6 @@
         android:layout_height="72dp"
         android:text="@string/comprehensive_button" />
     <ProgressBar
-        android:id="@+id/rule_progress_bar"
         android:visibility="gone"
         android:layout_width="32dp"
         android:layout_height="32dp"

@@ -7,14 +7,12 @@
     android:orientation="horizontal"
     android:gravity="bottom">
     <ImageView
-        android:id="@+id/app_brand"
         android:src="@mipmap/ic_launcher_white"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:contentDescription="@string/app_icon_description"/>
 
     <TextView
-        android:id="@+id/textView2"
         android:layout_width="fill_parent"
         android:layout_height="48dp"
         android:text="@string/app_name"

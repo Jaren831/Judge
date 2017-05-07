@@ -35,8 +35,7 @@ public class CardQuery {
         String jsonResponse = null;
         try {
             jsonResponse = makeHttpRequest(url);
-        } catch (IOException e) {
-            Log.e(LOG_TAG, "Error closing input stream", e);
+        } catch (IOException ignored) {
         }
 
         return extractCards(jsonResponse, context, query);
@@ -46,8 +45,7 @@ public class CardQuery {
         URL url = null;
         try {
             url = new URL(stringUrl);
-        } catch (MalformedURLException e) {
-            Log.e(LOG_TAG, "Error with creating URL ", e);
+        } catch (MalformedURLException ignored) {
         }
         return url;
     }
@@ -71,11 +69,8 @@ public class CardQuery {
             if (urlConnection.getResponseCode() == 200) {
                 inputStream = urlConnection.getInputStream();
                 jsonResponse = readFromStream(inputStream);
-            } else {
-                Log.e(LOG_TAG, "Error return code: " + urlConnection.getResponseCode());
             }
-        } catch (IOException e) {
-            Log.e(LOG_TAG, "Problem retrieving the card search JSON results.", e);
+        } catch (IOException ignored) {
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
@@ -126,8 +121,7 @@ public class CardQuery {
 
 
             }
-        } catch (JSONException e) {
-            Log.e("CardQuery", "Problem parsing the card json results", e);
+        } catch (JSONException ignored) {
         }
         return cards;
     }

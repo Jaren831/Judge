@@ -28,7 +28,7 @@ public class SearchDetailFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        getActivity().setTitle("Card Details");
+        getActivity().setTitle(getResources().getString(R.string.detail_title));
         setHasOptionsMenu(true);
         rootView = inflater.inflate(R.layout.card_detail_fragment, container, false);
         cardDetailImage = (ImageView) rootView.findViewById(R.id.card_detail_image);
@@ -39,7 +39,7 @@ public class SearchDetailFragment extends Fragment {
             Picasso.with(getContext()).load(cardUrl).fit().into(cardDetailImage);
         } else {
             cardDetailImage.setImageResource(R.drawable.ic_help_outline_black_24dp);
-            Toast.makeText(getContext(), "Image not found", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), getResources().getString(R.string.image_not_found), Toast.LENGTH_SHORT).show();
 
         }
         return rootView;
