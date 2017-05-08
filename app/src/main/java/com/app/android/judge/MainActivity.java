@@ -18,6 +18,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.app.android.judge.History.HistoryFragment;
 import com.app.android.judge.Match.MatchFragment;
 import com.app.android.judge.Search.CardSearchFragment;
 import com.app.android.judge.Settings.SettingsActivity;
@@ -154,6 +155,9 @@ public class MainActivity extends AppCompatActivity
                 break;
             case R.id.nav_rulebook:
                 fragmentClass = RuleBookFragment.class;
+                break;
+            case R.id.nav_history:
+                fragmentClass = HistoryFragment.class;
                 break;
             default:
                 fragmentClass = MatchFragment.class;

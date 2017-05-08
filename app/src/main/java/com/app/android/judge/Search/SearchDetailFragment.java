@@ -30,7 +30,7 @@ public class SearchDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         getActivity().setTitle(getResources().getString(R.string.detail_title));
         setHasOptionsMenu(true);
-        rootView = inflater.inflate(R.layout.card_detail_fragment, container, false);
+        rootView = inflater.inflate(R.layout.fragment_card_detail, container, false);
         cardDetailImage = (ImageView) rootView.findViewById(R.id.card_detail_image);
 
         Bundle args = getArguments();

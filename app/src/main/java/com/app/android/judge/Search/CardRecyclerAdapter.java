@@ -27,10 +27,10 @@ import java.util.Objects;
  */
 
 public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapter.CardViewHolder>{
-    SpannableString finalString;
     private SpannableString replaceMana;
     private Card currentCard;
-    CardSearchFragment cardSearchFragment;
+    private final Context mContext;
+    private final ArrayList<Card> mCardArray;
 
 
 
@@ -64,9 +64,6 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
 
         }
     }
-
-    private final Context mContext;
-    private final ArrayList<Card> mCardArray;
 
     public CardRecyclerAdapter(Context context, ArrayList<Card> cardArray) {
         mContext = context;

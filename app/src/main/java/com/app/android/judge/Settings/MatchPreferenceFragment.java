@@ -10,6 +10,8 @@ import android.view.Menu;
 import android.widget.Toast;
 
 import com.app.android.judge.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * Created by Jaren Lynch on 4/5/2017.
@@ -17,6 +19,7 @@ import com.app.android.judge.R;
 
 public class MatchPreferenceFragment extends PreferenceFragment
         implements Preference.OnPreferenceChangeListener {
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

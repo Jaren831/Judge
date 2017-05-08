@@ -1,7 +1,12 @@
 package com.app.android.judge.Settings;
 
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -12,18 +17,27 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.app.android.judge.Data.MatchHistoryContract;
+import com.app.android.judge.Data.MatchHistoryDBHelper;
+import com.app.android.judge.MainActivity;
 import com.app.android.judge.Search.CardSearchFragment;
 import com.app.android.judge.Match.MatchFragment;
 import com.app.android.judge.R;
 
 import com.app.android.judge.RuleBook.RuleBookFragment;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.io.ByteArrayOutputStream;
 
 
 public class SettingsActivity extends AppCompatActivity {
 
     private int currentFragmentInt;
     private SharedPreferences sharedPreferences;
-
+    public static MatchHistoryDBHelper matchHistoryDBHelper;
+    public static Cursor cursor;
+    SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle saveInstanceState) {
@@ -81,6 +95,20 @@ public class SettingsActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int id) {
                 switch (currentFragmentInt) {
                     case 0:
+                        String player1Life = sharedPreferences.getString(
+                                getString(R.string.player1_life_key),
+                                getString(R.string.player1_life_default_value));
+                        String player2Life = sharedPreferences.getString(
+                                getString(R.string.player2_life_key),
+                                getString(R.string.player2_life_default_value));
+                        matchHistoryDBHelper = new MatchHistoryDBHelper(SettingsActivity.this);
+                        db = matchHistoryDBHelper.getWritableDatabase();
+                        ContentValues values = new ContentValues();
+                        values.put(MatchHistoryContract.MatchHistoryEntry.COLUMN_PLAYER1_LIFE, player1Life);
+                        values.put(MatchHistoryContract.MatchHistoryEntry.COLUMN_PLAYER2_LIFE, player2Life);
+                        long newRowId = db.insert(MatchHistoryContract.MatchHistoryEntry.TABLE_NAME, null, values);
+                        db.close();
+
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString(getString(R.string.player1_life_key), getString(R.string.player1_life_default_value));
                         editor.putString(getString(R.string.player2_life_key), getString(R.string.player2_life_default_value));
@@ -89,10 +117,6 @@ public class SettingsActivity extends AppCompatActivity {
                         editor.apply();
                         MatchPreferenceFragment matchPreferenceFragment = new MatchPreferenceFragment();
                         getFragmentManager().beginTransaction().replace(R.id.settings_container, matchPreferenceFragment).commit();
-                        break;
-                    case 1:
-                        break;
-                    case 2:
                         break;
                 }
                 dialog.dismiss();
