@@ -48,6 +48,7 @@
     <string name="player2_color_key">player2_color</string>
     <string name="player2_color_settings_title">Color</string>
     <string name="player2_color_default_value">#faaa8f</string>
+    <string name="authentication_failed">Authentication failed.</string>
 
     <!--SearchFragment-->
     <string name="noInternet">No internet connection</string>

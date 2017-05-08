@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity
                         Log.d(LOG_TAG, "OnComplete : " +task.isSuccessful());
                         if (!task.isSuccessful()) {
                             Log.w(LOG_TAG, "Failed : ", task.getException());
-                            Toast.makeText(MainActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, getString(R.string.authentication_failed), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
