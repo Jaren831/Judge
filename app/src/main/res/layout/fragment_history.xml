@@ -15,7 +15,8 @@
             android:src="@drawable/ic_colorize_black_24dp"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:contentDescription="@string/history_header_icon"/>
         <TextView
             android:id="@+id/player1_history_header"
             android:layout_width="0dp"

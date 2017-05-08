@@ -25,7 +25,7 @@ import java.util.List;
 class CardQuery {
     private CardQuery() {}
 
-    public static List<Card> fetchCardData(String requestURL, Context context, String query) {
+    public static List<Card> fetchCardData(String requestURL, String query) {
         URL url = createUrl(requestURL + "?name=" + query);
         String jsonResponse = null;
         try {

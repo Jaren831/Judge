@@ -7,11 +7,8 @@ import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.view.Menu;
-import android.widget.Toast;
 
 import com.app.android.judge.R;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * Created by Jaren Lynch on 4/5/2017.

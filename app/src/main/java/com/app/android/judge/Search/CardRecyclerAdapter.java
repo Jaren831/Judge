@@ -27,7 +27,6 @@ import java.util.Objects;
  */
 
 public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapter.CardViewHolder>{
-    private SpannableString replaceMana;
     private Card currentCard;
     private final Context mContext;
     private final ArrayList<Card> mCardArray;
@@ -98,7 +97,7 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
                 switch (aSeparateMana) {
                     case "U":
                         aSeparateMana = "B";
-                        replaceMana = new SpannableString(aSeparateMana);
+                        SpannableString replaceMana = new SpannableString(aSeparateMana);
                         replaceMana.setSpan(new ForegroundColorSpan(Color.BLUE), 0, replaceMana.length(), 0);
                         holder.cardMana.append(replaceMana);
                         break;
@@ -131,8 +130,4 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
         }
     }
 
-    @Override
-    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
-        super.onAttachedToRecyclerView(recyclerView);
-    }
 }

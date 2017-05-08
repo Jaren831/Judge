@@ -30,7 +30,7 @@ class CardSearchLoader extends AsyncTaskLoader<List<Card>> {
         if (mUrl == null) {
             return null;
         }
-        return CardQuery.fetchCardData(mUrl, mContext, mQuery);
+        return CardQuery.fetchCardData(mUrl, mQuery);
 
     }
 }

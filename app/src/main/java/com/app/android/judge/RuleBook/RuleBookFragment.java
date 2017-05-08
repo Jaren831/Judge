@@ -26,9 +26,6 @@ import java.io.File;
 
 public class RuleBookFragment extends Fragment {
 
-    private Button basicButton;
-    private Button comprehensiveButton;
-    private View rootView;
     private StorageReference basicStorageRef;
     private StorageReference comprehensiveStorageRef;
     private String basicRuleFile;
@@ -39,11 +36,11 @@ public class RuleBookFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        rootView = inflater.inflate(R.layout.fragment_rule_book, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_rule_book, container, false);
         setHasOptionsMenu(true);
 
-        basicButton = (Button) rootView.findViewById(R.id.basic_button);
-        comprehensiveButton = (Button) rootView.findViewById(R.id.comprehensive_button);
+        Button basicButton = (Button) rootView.findViewById(R.id.basic_button);
+        Button comprehensiveButton = (Button) rootView.findViewById(R.id.comprehensive_button);
 
         basicRuleFile = "MTG Basic Rules.pdf";
         comprehensiveRuleFile = "MTG Comprehensive Rules.pdf";
@@ -93,16 +90,6 @@ public class RuleBookFragment extends Fragment {
         menu.findItem(R.id.action_reset).setVisible(false);
         menu.findItem(R.id.action_settings).setVisible(false);
         super.onPrepareOptionsMenu(menu);
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
     }
 
     private boolean checksFileExistence(String fileName) {

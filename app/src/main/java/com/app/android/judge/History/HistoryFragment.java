@@ -5,22 +5,17 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.app.android.judge.Data.MatchHistoryContract;
 import com.app.android.judge.Data.MatchHistoryDBHelper;
-import com.app.android.judge.MainActivity;
 import com.app.android.judge.R;
-import com.squareup.picasso.Picasso;
 
 /**
  * Created by jaren on 5/7/2017.
@@ -30,13 +25,13 @@ public class HistoryFragment extends Fragment {
 
 
     private View rootView;
-    HistoryCursorAdapter historyCursorAdapter;
+    private HistoryCursorAdapter historyCursorAdapter;
     private Cursor cursor;
 
     private MatchHistoryDBHelper matchHistoryDBHelper;
     private ListView historyListView;
 
-    TextView emptyTextView;
+    private TextView emptyTextView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,16 +52,6 @@ public class HistoryFragment extends Fragment {
         menu.findItem(R.id.action_reset).setVisible(true);
         menu.findItem(R.id.action_settings).setVisible(false);
         super.onPrepareOptionsMenu(menu);
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
     }
 
     private void displayDatabaseInfo() {

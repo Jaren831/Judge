@@ -23,13 +23,7 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
 
     private TextView player1LifeView;
     private TextView player2LifeView;
-    private ImageButton player1Increment;
-    private ImageButton player1Decrement;
-    private ImageButton player2Increment;
-    private ImageButton player2Decrement;
 
-    private Integer player1CurrentLife;
-    private Integer player2CurrentLife;
     private RemoteViews widgetRemoteviews;
     private ComponentName matchWidget;
     private AppWidgetManager appWidgetManager;
@@ -53,16 +47,6 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
         menu.findItem(R.id.action_search).setVisible(false);
         menu.findItem(R.id.action_reset).setVisible(false);
         super.onPrepareOptionsMenu(menu);
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
     }
 
     @Override
@@ -91,13 +75,13 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
         widgetRemoteviews.setInt(R.id.player1_life_widget, "setBackgroundColor", Color.parseColor(player1Color));
 
 
-        player1Increment = (ImageButton) rootView.findViewById(R.id.player1_increment);
+        ImageButton player1Increment = (ImageButton) rootView.findViewById(R.id.player1_increment);
         player1Increment.setImageDrawable(getResources().getDrawable(R.drawable.increment_black));
         player1Increment.setBackgroundColor(Color.parseColor(player1Color));
         player1Increment.setOnClickListener(this);
 
 
-        player1Decrement = (ImageButton) rootView.findViewById(R.id.player1_decrement);
+        ImageButton player1Decrement = (ImageButton) rootView.findViewById(R.id.player1_decrement);
         player1Decrement.setImageDrawable(getResources().getDrawable(R.drawable.decrement_black));
         player1Decrement.setBackgroundColor(Color.parseColor(player1Color));
         player1Decrement.setOnClickListener(this);
@@ -110,12 +94,12 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
         widgetRemoteviews.setInt(R.id.player2_life_widget, "setBackgroundColor", Color.parseColor(player2Color));
 
 
-        player2Increment = (ImageButton) rootView.findViewById(R.id.player2_increment);
+        ImageButton player2Increment = (ImageButton) rootView.findViewById(R.id.player2_increment);
         player2Increment.setImageDrawable(getResources().getDrawable(R.drawable.increment_black));
         player2Increment.setBackgroundColor(Color.parseColor(player2Color));
         player2Increment.setOnClickListener(this);
 
-        player2Decrement = (ImageButton) rootView.findViewById(R.id.player2_decrement);
+        ImageButton player2Decrement = (ImageButton) rootView.findViewById(R.id.player2_decrement);
         player2Decrement.setImageDrawable(getResources().getDrawable(R.drawable.decrement_black));
         player2Decrement.setBackgroundColor(Color.parseColor(player2Color));
         player2Decrement.setOnClickListener(this);
@@ -136,8 +120,8 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
 
-        player1CurrentLife = Integer.parseInt(player1LifeView.getText().toString());
-        player2CurrentLife = Integer.parseInt(player2LifeView.getText().toString());
+        Integer player1CurrentLife = Integer.parseInt(player1LifeView.getText().toString());
+        Integer player2CurrentLife = Integer.parseInt(player2LifeView.getText().toString());
         switch (view.getId()) {
             case R.id.player1_increment:
                 player1CurrentLife += 1;
@@ -159,7 +143,7 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    public void updatePlayer1Widget() {
+    private void updatePlayer1Widget() {
         widgetRemoteviews.setTextViewText(R.id.player1_life_widget, String.format(player1LifeView.getText().toString()));
         widgetRemoteviews.setTextViewText(R.id.player2_life_widget, String.format(player2LifeView.getText().toString()));
     }

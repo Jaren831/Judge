@@ -21,17 +21,15 @@ import com.squareup.picasso.Picasso;
 public class SearchDetailFragment extends Fragment {
 
 
-    private View rootView;
     private final String LOG_TAG = MainActivity.class.getSimpleName();
-    private ImageView cardDetailImage;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         getActivity().setTitle(getResources().getString(R.string.detail_title));
         setHasOptionsMenu(true);
-        rootView = inflater.inflate(R.layout.fragment_card_detail, container, false);
-        cardDetailImage = (ImageView) rootView.findViewById(R.id.card_detail_image);
+        View rootView = inflater.inflate(R.layout.fragment_card_detail, container, false);
+        ImageView cardDetailImage = (ImageView) rootView.findViewById(R.id.card_detail_image);
 
         Bundle args = getArguments();
         String cardUrl = args.getString("url");
@@ -52,13 +50,4 @@ public class SearchDetailFragment extends Fragment {
         super.onPrepareOptionsMenu(menu);
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-    }
 }

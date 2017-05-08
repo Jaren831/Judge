@@ -30,9 +30,7 @@ import java.util.List;
 public class CardSearchFragment extends Fragment
         implements LoaderManager.LoaderCallbacks<List<Card>>{
 
-    private RecyclerView cardRecyclerView;
     private CardRecyclerAdapter cardRecyclerAdapter;
-    private RecyclerView.LayoutManager layoutManager;
     private TextView emptyView;
     private ProgressBar progressBar;
     private Bundle bundle;
@@ -53,11 +51,11 @@ public class CardSearchFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_card_search, container, false);
-        cardRecyclerView = (RecyclerView) rootView.findViewById(R.id.card_search_recycler);
+        RecyclerView cardRecyclerView = (RecyclerView) rootView.findViewById(R.id.card_search_recycler);
         cardRecyclerAdapter = new CardRecyclerAdapter(this.getActivity(), cardList);
         emptyView = (TextView) rootView.findViewById(R.id.empty);
         progressBar = (ProgressBar) rootView.findViewById(R.id.progress_bar);
-        layoutManager = new LinearLayoutManager(getContext());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         cardRecyclerView.setLayoutManager(layoutManager);
         cardRecyclerView.setAdapter(cardRecyclerAdapter);
 
@@ -110,16 +108,6 @@ public class CardSearchFragment extends Fragment
             }
         });
         super.onPrepareOptionsMenu(menu);
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
     }
 
     @Override

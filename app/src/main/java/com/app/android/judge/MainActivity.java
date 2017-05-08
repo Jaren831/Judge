@@ -1,9 +1,7 @@
 package com.app.android.judge;
 
-import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -29,7 +27,6 @@ import com.app.android.judge.History.HistoryCursorAdapter;
 import com.app.android.judge.History.HistoryFragment;
 import com.app.android.judge.Match.MatchFragment;
 import com.app.android.judge.Search.CardSearchFragment;
-import com.app.android.judge.Settings.MatchPreferenceFragment;
 import com.app.android.judge.Settings.SettingsActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

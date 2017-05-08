@@ -79,4 +79,5 @@
     <string name="player2_history_header_text">Player 2</string>
     <string name="history_reset_title">Delete Match History</string>
     <string name="history_reset_message">Are you sure you want to delete Match History?</string>
+    <string name="history_header_icon">Icon for history fragment header.</string>
 </resources>

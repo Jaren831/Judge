@@ -28,9 +28,9 @@ public class SettingsActivity extends AppCompatActivity {
 
     private int currentFragmentInt;
     private SharedPreferences sharedPreferences;
-    public static MatchHistoryDBHelper matchHistoryDBHelper;
+    private static MatchHistoryDBHelper matchHistoryDBHelper;
     public static Cursor cursor;
-    SQLiteDatabase db;
+    private SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle saveInstanceState) {

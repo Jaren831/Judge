@@ -1,21 +1,14 @@
 package com.app.android.judge.History;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.app.android.judge.Data.MatchHistoryContract;
-import com.app.android.judge.Data.MatchHistoryDBHelper;
 import com.app.android.judge.R;
 
 /**
@@ -24,7 +17,7 @@ import com.app.android.judge.R;
 
 public class HistoryCursorAdapter extends android.widget.CursorAdapter {
 
-    private LayoutInflater cursorInflater;
+    private final LayoutInflater cursorInflater;
 
     public HistoryCursorAdapter(Context context, Cursor cursor) {
         super(context, cursor);
@@ -50,7 +43,7 @@ public class HistoryCursorAdapter extends android.widget.CursorAdapter {
         String player2Life = cursor.getString(cursor.getColumnIndex(MatchHistoryContract.MatchHistoryEntry.COLUMN_PLAYER2_LIFE));
         String player1Color = cursor.getString(cursor.getColumnIndex(MatchHistoryContract.MatchHistoryEntry.COLUMN_PLAYER1_COLOR));
         String player2Color = cursor.getString(cursor.getColumnIndex(MatchHistoryContract.MatchHistoryEntry.COLUMN_PLAYER2_COLOR));
-        String historyId_text = cursor.getString(cursor.getColumnIndex(MatchHistoryContract.MatchHistoryEntry._ID)).toString();
+        String historyId_text = cursor.getString(cursor.getColumnIndex(MatchHistoryContract.MatchHistoryEntry._ID));
 
 
         player1.setText(player1Life);
