@@ -22,7 +22,9 @@ public class MatchHistoryDBHelper extends SQLiteOpenHelper {
         String SQL_CREATE_MATCH_HISTORY_TABLE = "CREATE TABLE " + MatchHistoryContract.MatchHistoryEntry.TABLE_NAME + " ("
                 + MatchHistoryContract.MatchHistoryEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + MatchHistoryContract.MatchHistoryEntry.COLUMN_PLAYER1_LIFE + " TEXT NOT NULL,"
-                + MatchHistoryContract.MatchHistoryEntry.COLUMN_PLAYER2_LIFE + " TEXT NOT NULL);";
+                + MatchHistoryContract.MatchHistoryEntry.COLUMN_PLAYER2_LIFE + " TEXT NOT NULL,"
+                + MatchHistoryContract.MatchHistoryEntry.COLUMN_PLAYER1_COLOR + " TEXT NOT NULL,"
+                + MatchHistoryContract.MatchHistoryEntry.COLUMN_PLAYER2_COLOR + " TEXT NOT NULL);";
         db.execSQL(SQL_CREATE_MATCH_HISTORY_TABLE);
     }
 

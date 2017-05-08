@@ -28,8 +28,6 @@ public class MatchPreferenceFragment extends PreferenceFragment
         Preference player1Life = findPreference(getString(R.string.player1_life_key));
         Preference player1Color = findPreference(getString(R.string.player1_color_key));
 
-        Toast.makeText(getActivity(), player1Life.toString(), Toast.LENGTH_SHORT).show();
-
         Preference player2Life = findPreference(getString(R.string.player2_life_key));
         Preference player2Color = findPreference(getString(R.string.player2_color_key));
 

@@ -20,8 +20,8 @@
 
 
     <!--Match Settings-->
-    <string name="reset_title">Reset Settings</string>
-    <string name="reset_message">Are you sure you want to reset settings?</string>
+    <string name="match_settings_reset_title">Reset Settings</string>
+    <string name="match_settings_reset_message">Are you sure you want to reset settings?</string>
     <string name="player1_increment_desc">Player 1 increment button</string>
     <string name="player1_decrement_desc">Player 1 decrement button</string>
     <string name="player2_increment_desc">Player 2 increment button</string>
@@ -74,4 +74,9 @@
 
     <!--History Fragment-->
     <string name="history_title">Match History</string>
+    <string name="history_empty">No match history.</string>
+    <string name="player1_history_header_text">Player 1</string>
+    <string name="player2_history_header_text">Player 2</string>
+    <string name="history_reset_title">Delete Match History</string>
+    <string name="history_reset_message">Are you sure you want to delete Match History?</string>
 </resources>

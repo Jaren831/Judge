@@ -1,7 +1,11 @@
 package com.app.android.judge;
 
+import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -10,6 +14,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -18,9 +23,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.app.android.judge.Data.MatchHistoryContract;
+import com.app.android.judge.Data.MatchHistoryDBHelper;
+import com.app.android.judge.History.HistoryCursorAdapter;
 import com.app.android.judge.History.HistoryFragment;
 import com.app.android.judge.Match.MatchFragment;
 import com.app.android.judge.Search.CardSearchFragment;
+import com.app.android.judge.Settings.MatchPreferenceFragment;
 import com.app.android.judge.Settings.SettingsActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -39,6 +48,7 @@ public class MainActivity extends AppCompatActivity
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private ActionBarDrawerToggle drawerToggle;
+    private int currentFragmentInt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +104,6 @@ public class MainActivity extends AppCompatActivity
                 });
     }
 
-    // Add Auth state listener in onStart method.
     @Override
     public void onStart() {
         super.onStart();
@@ -172,7 +181,10 @@ public class MainActivity extends AppCompatActivity
         // Insert the fragment by replacing any existing fragment
         FragmentManager fragmentManager = getSupportFragmentManager();
 
-        fragmentManager.beginTransaction().replace(R.id.main_container, fragment).commit();
+        fragmentManager.beginTransaction()
+                .replace(R.id.main_container, fragment)
+                .addToBackStack(null)
+                .commit();
 
         // Highlight the selected item has been done by NavigationView
         menuItem.setChecked(true);
@@ -197,15 +209,15 @@ public class MainActivity extends AppCompatActivity
             settingsIntent.putExtras(CurrentFragmentCheck());
             startActivity(settingsIntent);
             return true;
-
+        } else if (id == R.id.action_reset) {
+            MatchHistoryReset();
+            return true;
         } else {
             return drawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
         }
-
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
         switch (id) {
             case R.id.nav_match:
@@ -223,8 +235,11 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
         if (this.mDrawer.isDrawerOpen(GravityCompat.START)) {
             this.mDrawer.closeDrawer(GravityCompat.START);
+        } else if (fragmentManager.getBackStackEntryCount() > 0) {
+            fragmentManager.popBackStack();
         } else {
             super.onBackPressed();
         }
@@ -243,5 +258,33 @@ public class MainActivity extends AppCompatActivity
             bundle.putInt("fragment", 2);
         }
         return bundle;
+    }
+
+    private void MatchHistoryReset() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.history_reset_title);
+        builder.setMessage(R.string.history_reset_message);
+        builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                MatchHistoryDBHelper matchHistoryDBHelper = new MatchHistoryDBHelper(MainActivity.this);
+                SQLiteDatabase db = matchHistoryDBHelper.getReadableDatabase();
+                db.delete(MatchHistoryContract.MatchHistoryEntry.TABLE_NAME, null, null);
+                db.execSQL("DELETE FROM SQLITE_SEQUENCE WHERE NAME = '" + MatchHistoryContract.MatchHistoryEntry.TABLE_NAME + "'");
+                db.close();
+                HistoryCursorAdapter historyCursorAdapter = new HistoryCursorAdapter(MainActivity.this, null);
+                historyCursorAdapter.notifyDataSetChanged();
+                Fragment historyFragment = new HistoryFragment();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.main_container, historyFragment).commit();
+                dialog.dismiss();
+            }
+        });
+        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }

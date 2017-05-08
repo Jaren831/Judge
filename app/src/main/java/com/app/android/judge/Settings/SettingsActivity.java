@@ -5,8 +5,6 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -19,16 +17,11 @@ import android.view.MenuItem;
 
 import com.app.android.judge.Data.MatchHistoryContract;
 import com.app.android.judge.Data.MatchHistoryDBHelper;
-import com.app.android.judge.MainActivity;
 import com.app.android.judge.Search.CardSearchFragment;
 import com.app.android.judge.Match.MatchFragment;
 import com.app.android.judge.R;
 
 import com.app.android.judge.RuleBook.RuleBookFragment;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.io.ByteArrayOutputStream;
 
 
 public class SettingsActivity extends AppCompatActivity {
@@ -89,8 +82,8 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.reset_title);
-        builder.setMessage(R.string.reset_message);
+        builder.setTitle(R.string.match_settings_reset_title);
+        builder.setMessage(R.string.match_settings_reset_message);
         builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 switch (currentFragmentInt) {
@@ -101,11 +94,19 @@ public class SettingsActivity extends AppCompatActivity {
                         String player2Life = sharedPreferences.getString(
                                 getString(R.string.player2_life_key),
                                 getString(R.string.player2_life_default_value));
+                        String player1Color = sharedPreferences.getString(
+                                getString(R.string.player1_color_key),
+                                getString(R.string.player1_color_default_value));
+                        String player2Color = sharedPreferences.getString(
+                                getString(R.string.player2_color_key),
+                                getString(R.string.player2_color_default_value));
                         matchHistoryDBHelper = new MatchHistoryDBHelper(SettingsActivity.this);
                         db = matchHistoryDBHelper.getWritableDatabase();
                         ContentValues values = new ContentValues();
                         values.put(MatchHistoryContract.MatchHistoryEntry.COLUMN_PLAYER1_LIFE, player1Life);
                         values.put(MatchHistoryContract.MatchHistoryEntry.COLUMN_PLAYER2_LIFE, player2Life);
+                        values.put(MatchHistoryContract.MatchHistoryEntry.COLUMN_PLAYER1_COLOR, player1Color);
+                        values.put(MatchHistoryContract.MatchHistoryEntry.COLUMN_PLAYER2_COLOR, player2Color);
                         long newRowId = db.insert(MatchHistoryContract.MatchHistoryEntry.TABLE_NAME, null, values);
                         db.close();
 

@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,11 +26,6 @@ public class HistoryCursorAdapter extends android.widget.CursorAdapter {
 
     private LayoutInflater cursorInflater;
 
-    MatchHistoryDBHelper matchHistoryDBHelper;
-
-    HistoryCursorAdapter historyCursorAdapter;
-
-
     public HistoryCursorAdapter(Context context, Cursor cursor) {
         super(context, cursor);
         cursorInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -48,12 +44,20 @@ public class HistoryCursorAdapter extends android.widget.CursorAdapter {
         // Find fields to populate in inflated template
         TextView player1 = (TextView) view.findViewById(R.id.history_player1);
         TextView player2 = (TextView) view.findViewById(R.id.history_player2);
+        TextView historyId  = (TextView) view.findViewById(R.id.history_item_id);
 
         String player1Life = cursor.getString(cursor.getColumnIndex(MatchHistoryContract.MatchHistoryEntry.COLUMN_PLAYER1_LIFE));
         String player2Life = cursor.getString(cursor.getColumnIndex(MatchHistoryContract.MatchHistoryEntry.COLUMN_PLAYER2_LIFE));
+        String player1Color = cursor.getString(cursor.getColumnIndex(MatchHistoryContract.MatchHistoryEntry.COLUMN_PLAYER1_COLOR));
+        String player2Color = cursor.getString(cursor.getColumnIndex(MatchHistoryContract.MatchHistoryEntry.COLUMN_PLAYER2_COLOR));
+        String historyId_text = cursor.getString(cursor.getColumnIndex(MatchHistoryContract.MatchHistoryEntry._ID)).toString();
+
 
         player1.setText(player1Life);
         player2.setText(player2Life);
+        player1.setBackgroundColor(Color.parseColor(player1Color));
+        player2.setBackgroundColor(Color.parseColor(player2Color));
+        historyId.setText(historyId_text);
     }
 
 }

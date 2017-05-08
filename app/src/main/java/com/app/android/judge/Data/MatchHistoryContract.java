@@ -15,5 +15,7 @@ public class MatchHistoryContract {
         public final static String _ID = BaseColumns._ID;
         public final static String COLUMN_PLAYER1_LIFE = "player1";
         public final static String COLUMN_PLAYER2_LIFE = "player2";
+        public final static String COLUMN_PLAYER1_COLOR = "player1_color";
+        public final static String COLUMN_PLAYER2_COLOR = "player2_color";
     }
 }

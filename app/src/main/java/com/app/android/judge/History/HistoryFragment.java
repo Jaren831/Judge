@@ -42,18 +42,19 @@ public class HistoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         getActivity().setTitle(getResources().getString(R.string.history_title));
-        setHasOptionsMenu(false);
+        setHasOptionsMenu(true);
         rootView = inflater.inflate(R.layout.fragment_history, container, false);
         emptyTextView = (TextView) rootView.findViewById(R.id.history_empty);
         matchHistoryDBHelper = new MatchHistoryDBHelper(getContext());
         historyListView = (ListView) rootView.findViewById(R.id.history_listView);
+        historyListView.setEmptyView(emptyTextView);
         displayDatabaseInfo();
         return rootView;
     }
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         menu.findItem(R.id.action_search).setVisible(false);
-        menu.findItem(R.id.action_reset).setVisible(false);
+        menu.findItem(R.id.action_reset).setVisible(true);
         menu.findItem(R.id.action_settings).setVisible(false);
         super.onPrepareOptionsMenu(menu);
     }
@@ -76,7 +77,9 @@ public class HistoryFragment extends Fragment {
         String[] project = {
                 MatchHistoryContract.MatchHistoryEntry._ID,
                 MatchHistoryContract.MatchHistoryEntry.COLUMN_PLAYER1_LIFE,
-                MatchHistoryContract.MatchHistoryEntry.COLUMN_PLAYER2_LIFE
+                MatchHistoryContract.MatchHistoryEntry.COLUMN_PLAYER2_LIFE,
+                MatchHistoryContract.MatchHistoryEntry.COLUMN_PLAYER1_COLOR,
+                MatchHistoryContract.MatchHistoryEntry.COLUMN_PLAYER2_COLOR
         };
 
         cursor = db.query(
