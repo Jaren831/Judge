@@ -1,6 +1,5 @@
 package com.app.android.judge.Search;
 
-import android.content.Context;
 import android.text.TextUtils;
 
 import org.json.JSONArray;

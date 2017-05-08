@@ -1,6 +1,5 @@
 package com.app.android.judge.History;
 
-import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
