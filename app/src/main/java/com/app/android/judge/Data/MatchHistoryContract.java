@@ -43,7 +43,7 @@ public class MatchHistoryContract {
             return URI.buildUpon().appendPath(symbol).build();
         }
 
-        public static String getMatchromUri(Uri queryUri) {
+        public static String getMatchFromUri(Uri queryUri) {
             return queryUri.getLastPathSegment();
         }
 

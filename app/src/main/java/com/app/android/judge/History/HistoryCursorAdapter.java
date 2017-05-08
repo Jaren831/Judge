@@ -39,11 +39,11 @@ public class HistoryCursorAdapter extends android.widget.CursorAdapter {
         TextView player2 = (TextView) view.findViewById(R.id.history_player2);
         TextView historyId  = (TextView) view.findViewById(R.id.history_item_id);
 
-        String player1Life = cursor.getString(cursor.getColumnIndex(MatchHistoryContract.MatchHistoryEntry.COLUMN_PLAYER1_LIFE));
-        String player2Life = cursor.getString(cursor.getColumnIndex(MatchHistoryContract.MatchHistoryEntry.COLUMN_PLAYER2_LIFE));
-        String player1Color = cursor.getString(cursor.getColumnIndex(MatchHistoryContract.MatchHistoryEntry.COLUMN_PLAYER1_COLOR));
-        String player2Color = cursor.getString(cursor.getColumnIndex(MatchHistoryContract.MatchHistoryEntry.COLUMN_PLAYER2_COLOR));
-        String historyId_text = cursor.getString(cursor.getColumnIndex(MatchHistoryContract.MatchHistoryEntry._ID));
+        String player1Life = cursor.getString(MatchHistoryContract.MatchHistoryEntry.POSITION_PLAYER1_LIFE);
+        String player2Life = cursor.getString(MatchHistoryContract.MatchHistoryEntry.POSITION_PLAYER2_LIFE);
+        String player1Color = cursor.getString(MatchHistoryContract.MatchHistoryEntry.POSITION_PLAYER1_COLOR);
+        String player2Color = cursor.getString(MatchHistoryContract.MatchHistoryEntry.POSITION_PLAYER2_COLOR);
+        String historyId_text = cursor.getString(MatchHistoryContract.MatchHistoryEntry.POSITION_ID);
 
 
         player1.setText(player1Life);

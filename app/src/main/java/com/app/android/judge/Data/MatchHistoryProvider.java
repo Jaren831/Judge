@@ -2,7 +2,6 @@ package com.app.android.judge.Data;
 
 import android.content.ContentProvider;
 import android.content.ContentValues;
-import android.content.Intent;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -62,7 +61,7 @@ public class MatchHistoryProvider extends ContentProvider {
                         MatchHistoryContract.MatchHistoryEntry.TABLE_NAME,
                         projection,
                         MatchHistoryContract.MatchHistoryEntry._ID + " = ?",
-                        new String[]{MatchHistoryContract.MatchHistoryEntry.getMatchromUri(uri)},
+                        new String[]{MatchHistoryContract.MatchHistoryEntry.getMatchFromUri(uri)},
                         null,
                         null,
                         sortOrder
@@ -127,7 +126,7 @@ public class MatchHistoryProvider extends ContentProvider {
                 break;
 
             case MATCH_ID:
-                String symbol = MatchHistoryContract.MatchHistoryEntry.getMatchromUri(uri);
+                String symbol = MatchHistoryContract.MatchHistoryEntry.getMatchFromUri(uri);
                 rowsDeleted = db.delete(
                         MatchHistoryContract.MatchHistoryEntry.TABLE_NAME,
                         '"' + symbol + '"' + " =" + MatchHistoryContract.MatchHistoryEntry._ID,

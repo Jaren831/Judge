@@ -23,6 +23,8 @@ import com.app.android.judge.R;
 
 import com.app.android.judge.RuleBook.RuleBookFragment;
 
+import java.util.ArrayList;
+
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -85,6 +87,7 @@ public class SettingsActivity extends AppCompatActivity {
         builder.setTitle(R.string.match_settings_reset_title);
         builder.setMessage(R.string.match_settings_reset_message);
         builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+            ArrayList<ContentValues> historyCVs = new ArrayList<>();
             public void onClick(DialogInterface dialog, int id) {
                 switch (currentFragmentInt) {
                     case 0:
@@ -100,15 +103,19 @@ public class SettingsActivity extends AppCompatActivity {
                         String player2Color = sharedPreferences.getString(
                                 getString(R.string.player2_color_key),
                                 getString(R.string.player2_color_default_value));
-                        matchHistoryDBHelper = new MatchHistoryDBHelper(SettingsActivity.this);
-                        db = matchHistoryDBHelper.getWritableDatabase();
-                        ContentValues values = new ContentValues();
-                        values.put(MatchHistoryContract.MatchHistoryEntry.COLUMN_PLAYER1_LIFE, player1Life);
-                        values.put(MatchHistoryContract.MatchHistoryEntry.COLUMN_PLAYER2_LIFE, player2Life);
-                        values.put(MatchHistoryContract.MatchHistoryEntry.COLUMN_PLAYER1_COLOR, player1Color);
-                        values.put(MatchHistoryContract.MatchHistoryEntry.COLUMN_PLAYER2_COLOR, player2Color);
-                        long newRowId = db.insert(MatchHistoryContract.MatchHistoryEntry.TABLE_NAME, null, values);
-                        db.close();
+                        ContentValues historyCV = new ContentValues();
+                        historyCV.put(MatchHistoryContract.MatchHistoryEntry.COLUMN_PLAYER1_LIFE, player1Life);
+                        historyCV.put(MatchHistoryContract.MatchHistoryEntry.COLUMN_PLAYER2_LIFE, player2Life);
+                        historyCV.put(MatchHistoryContract.MatchHistoryEntry.COLUMN_PLAYER1_COLOR, player1Color);
+                        historyCV.put(MatchHistoryContract.MatchHistoryEntry.COLUMN_PLAYER2_COLOR, player2Color);
+
+                        historyCVs.add(historyCV);
+
+                        getContentResolver()
+                                .bulkInsert(
+                                        MatchHistoryContract.MatchHistoryEntry.URI,
+                                        historyCVs.toArray(new ContentValues[historyCVs.size()]));
+
 
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString(getString(R.string.player1_life_key), getString(R.string.player1_life_default_value));

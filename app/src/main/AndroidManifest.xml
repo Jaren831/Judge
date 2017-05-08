@@ -14,6 +14,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:fullBackupContent="@xml/backup_descriptor">
+        <provider
+            android:name=".Data.MatchHistoryProvider"
+            android:authorities="com.app.android.judge"
+            android:exported="true">
+        </provider>
 
         <receiver android:name=".Widget.MatchWidgetProvider" >
             <intent-filter >
