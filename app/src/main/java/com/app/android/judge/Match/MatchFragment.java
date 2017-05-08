@@ -1,5 +1,7 @@
 package com.app.android.judge.Match;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -11,9 +13,11 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.RemoteViews;
 import android.widget.TextView;
 
 import com.app.android.judge.R;
+import com.app.android.judge.Widget.MatchWidgetProvider;
 
 public class MatchFragment extends Fragment implements View.OnClickListener {
 
@@ -26,6 +30,9 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
 
     private Integer player1CurrentLife;
     private Integer player2CurrentLife;
+    private RemoteViews widgetRemoteviews;
+    private ComponentName matchWidget;
+    private AppWidgetManager appWidgetManager;
 
     private SharedPreferences sharedPreferences;
 
@@ -35,6 +42,9 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         rootView = inflater.inflate(R.layout.fragment_match, container, false);
+        appWidgetManager = AppWidgetManager.getInstance(getContext());
+        widgetRemoteviews = new RemoteViews(getContext().getPackageName(), R.layout.match_widget);
+        matchWidget = new ComponentName(getContext(), MatchWidgetProvider.class);
         return rootView;
     }
 
@@ -76,7 +86,10 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
 
         player1LifeView = (TextView) rootView.findViewById(R.id.player1_life);
         player1LifeView.setText(player1Life);
+        widgetRemoteviews.setTextViewText(R.id.player1_life_widget, player1Life);
         player1LifeView.setBackgroundColor(Color.parseColor(player1Color));
+        widgetRemoteviews.setInt(R.id.player1_life_widget, "setBackgroundColor", Color.parseColor(player1Color));
+
 
         player1Increment = (ImageButton) rootView.findViewById(R.id.player1_increment);
         player1Increment.setImageDrawable(getResources().getDrawable(R.drawable.increment_black));
@@ -92,7 +105,10 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
 
         player2LifeView = (TextView) rootView.findViewById(R.id.player2_life);
         player2LifeView.setText(player2Life);
+        widgetRemoteviews.setTextViewText(R.id.player2_life_widget, player2Life);
         player2LifeView.setBackgroundColor(Color.parseColor(player2Color));
+        widgetRemoteviews.setInt(R.id.player2_life_widget, "setBackgroundColor", Color.parseColor(player2Color));
+
 
         player2Increment = (ImageButton) rootView.findViewById(R.id.player2_increment);
         player2Increment.setImageDrawable(getResources().getDrawable(R.drawable.increment_black));
@@ -103,6 +119,7 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
         player2Decrement.setImageDrawable(getResources().getDrawable(R.drawable.decrement_black));
         player2Decrement.setBackgroundColor(Color.parseColor(player2Color));
         player2Decrement.setOnClickListener(this);
+
     }
 
     @Override
@@ -112,6 +129,8 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
         editor.putString(getString(R.string.player1_life_key), player1LifeView.getText().toString());
         editor.putString(getString(R.string.player2_life_key), player2LifeView.getText().toString());
         editor.apply();
+        updatePlayer1Widget();
+        appWidgetManager.updateAppWidget(matchWidget, widgetRemoteviews);
     }
 
     @Override
@@ -123,6 +142,7 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
             case R.id.player1_increment:
                 player1CurrentLife += 1;
                 player1LifeView.setText(String.format(player1CurrentLife.toString()));
+
                 break;
             case R.id.player1_decrement:
                 player1CurrentLife -= 1;
@@ -130,11 +150,17 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
                 break;
             case R.id.player2_increment:
                 player2CurrentLife += 1;
-                player1LifeView.setText(String.format(player2CurrentLife.toString()));
+                player2LifeView.setText(String.format(player2CurrentLife.toString()));
                 break;
             case R.id.player2_decrement:
                 player2CurrentLife -= 1;
-                player1LifeView.setText(String.format(player2CurrentLife.toString()));
+                player2LifeView.setText(String.format(player2CurrentLife.toString()));
+                break;
         }
+    }
+
+    public void updatePlayer1Widget() {
+        widgetRemoteviews.setTextViewText(R.id.player1_life_widget, String.format(player1LifeView.getText().toString()));
+        widgetRemoteviews.setTextViewText(R.id.player2_life_widget, String.format(player2LifeView.getText().toString()));
     }
 }
