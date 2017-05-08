@@ -1,17 +1,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.example.android.judge.MainActivity">
+    tools:context="com.app.android.judge.MainActivity">
     <item
         android:id="@+id/action_search"
         android:icon="@drawable/ic_search_white_24dp"
         app:showAsAction="always|collapseActionView"
         app:actionViewClass="android.support.v7.widget.SearchView"
-        android:title="Search"/>
+        android:title="@string/search_settings_title"/>
     <item
         android:id="@+id/action_reset"
         android:icon="@drawable/ic_replay_white_24dp"
-        android:title="Replay"
+        android:title="@string/match_settings_reset_title"
         android:orderInCategory="1"
         app:showAsAction="always" />
     <item

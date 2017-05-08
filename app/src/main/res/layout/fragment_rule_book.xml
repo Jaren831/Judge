@@ -3,18 +3,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:id="@+id/rulebook_container"
-    tools:context="com.example.android.judge.RuleBookFragment">
+    android:padding="4dp"
+    tools:context="com.app.android.judge.RuleBook.RuleBookFragment">
     <Button
         android:id="@+id/basic_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Basic Rules"/>
+        android:layout_height="72dp"
+        android:text="@string/basic_button"/>
 
     <Button
         android:id="@+id/comprehensive_button"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Comprehensive Rules" />
+        android:layout_height="72dp"
+        android:text="@string/comprehensive_button" />
+    <ProgressBar
+        android:visibility="gone"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_gravity="center"/>
 
 </LinearLayout>

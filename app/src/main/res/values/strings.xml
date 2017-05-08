@@ -2,7 +2,6 @@
     <string name="app_name">Judge!</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
 
@@ -10,15 +9,19 @@
     <string name="nav_match_string">Match</string>
     <string name="nav_card_search_string">Card Search</string>
     <string name="nav_rulebook_string">Rulebook</string>
-    <string name="title_activity_settings">Settings</string>
+    <string name="nav_history_string">Match History</string>
+    <string name="app_icon_description">Image of app icon</string>
 
     <!-- Strings related to Settings -->
     <string name="settings_menu_item">Settings</string>
     <string name="settings">Settings</string>
 
+    <!--Card Query Logs-->
+
+
     <!--Match Settings-->
-    <string name="reset_title">Reset Settings</string>
-    <string name="reset_message">Are you sure you want to reset settings?</string>
+    <string name="match_settings_reset_title">Reset Settings</string>
+    <string name="match_settings_reset_message">Are you sure you want to reset settings?</string>
     <string name="player1_increment_desc">Player 1 increment button</string>
     <string name="player1_decrement_desc">Player 1 decrement button</string>
     <string name="player2_increment_desc">Player 2 increment button</string>
@@ -49,8 +52,13 @@
     <!--SearchFragment-->
     <string name="noInternet">No internet connection</string>
     <string name="empty">No cards found</string>
-    <string name="start_search">Search for cards.</string>
     <string name="no_results">NO RESULTS</string>
+    <string name="card_detail_description">Large image of card</string>
+    <string name="card_thumbnail_description">Thumbnail image of card</string>
+
+    <!--DetailFragment-->
+    <string name="detail_title">Card Details</string>
+    <string name="image_not_found">Image not found.</string>
 
 
     <!--Search Settings-->
@@ -60,8 +68,19 @@
     <string name="rulebook_settings_title">RuleBook Settings</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
-    <string name="pdf_broke">No application to open pdf</string>
+    <string name="pdf_broke">PDF file needs compatible viewer to open.</string>
+    <string name="basic_button">Basic Rules</string>
+    <string name="comprehensive_button">Comprehensive Rules</string>
+    <string name="open_with">Open with:</string>
+    <string name="open_path">application/pdf</string>
+    <string name="start_failed">start activity failed.</string>
 
-    <!--match widget-->
-    <string name="match_widgeT_tittle">Judge Widget</string>
+    <!--History Fragment-->
+    <string name="history_title">Match History</string>
+    <string name="history_empty">No match history.</string>
+    <string name="player1_history_header_text">Player 1</string>
+    <string name="player2_history_header_text">Player 2</string>
+    <string name="history_reset_title">Delete Match History</string>
+    <string name="history_reset_message">Are you sure you want to delete Match History?</string>
+    <string name="history_header_icon">Icon for history fragment header.</string>
 </resources>
