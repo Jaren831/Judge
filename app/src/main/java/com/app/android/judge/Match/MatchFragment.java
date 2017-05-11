@@ -1,7 +1,5 @@
 package com.app.android.judge.Match;
 
-import android.appwidget.AppWidgetManager;
-import android.content.ComponentName;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -12,21 +10,14 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.RemoteViews;
 import android.widget.TextView;
 
 import com.app.android.judge.R;
-import com.app.android.judge.Widget.MatchWidgetProvider;
 
 public class MatchFragment extends Fragment implements View.OnClickListener {
 
     private TextView player1LifeView;
     private TextView player2LifeView;
-
-    private RemoteViews widgetRemoteviews;
-    private ComponentName matchWidget;
-    private AppWidgetManager appWidgetManager;
-
     private SharedPreferences sharedPreferences;
 
     private View rootView;
@@ -35,9 +26,6 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         rootView = inflater.inflate(R.layout.fragment_match, container, false);
-        appWidgetManager = AppWidgetManager.getInstance(getContext());
-        widgetRemoteviews = new RemoteViews(getContext().getPackageName(), R.layout.match_widget);
-        matchWidget = new ComponentName(getContext(), MatchWidgetProvider.class);
         return rootView;
     }
 
@@ -69,9 +57,7 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
 
         player1LifeView = (TextView) rootView.findViewById(R.id.player1_life);
         player1LifeView.setText(player1Life);
-        widgetRemoteviews.setTextViewText(R.id.player1_life_widget, player1Life);
         player1LifeView.setBackgroundColor(Color.parseColor(player1Color));
-        widgetRemoteviews.setInt(R.id.player1_life_widget, "setBackgroundColor", Color.parseColor(player1Color));
 
 
         ImageButton player1Increment = (ImageButton) rootView.findViewById(R.id.player1_increment);
@@ -88,9 +74,7 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
 
         player2LifeView = (TextView) rootView.findViewById(R.id.player2_life);
         player2LifeView.setText(player2Life);
-        widgetRemoteviews.setTextViewText(R.id.player2_life_widget, player2Life);
         player2LifeView.setBackgroundColor(Color.parseColor(player2Color));
-        widgetRemoteviews.setInt(R.id.player2_life_widget, "setBackgroundColor", Color.parseColor(player2Color));
 
 
         ImageButton player2Increment = (ImageButton) rootView.findViewById(R.id.player2_increment);
@@ -112,8 +96,6 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
         editor.putString(getString(R.string.player1_life_key), player1LifeView.getText().toString());
         editor.putString(getString(R.string.player2_life_key), player2LifeView.getText().toString());
         editor.apply();
-        updatePlayer1Widget();
-        appWidgetManager.updateAppWidget(matchWidget, widgetRemoteviews);
     }
 
     @Override
@@ -140,10 +122,5 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
                 player2LifeView.setText(String.format(player2CurrentLife.toString()));
                 break;
         }
-    }
-
-    private void updatePlayer1Widget() {
-        widgetRemoteviews.setTextViewText(R.id.player1_life_widget, String.format(player1LifeView.getText().toString()));
-        widgetRemoteviews.setTextViewText(R.id.player2_life_widget, String.format(player2LifeView.getText().toString()));
     }
 }

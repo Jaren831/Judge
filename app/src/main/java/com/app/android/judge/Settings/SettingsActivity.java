@@ -22,6 +22,8 @@ import com.app.android.judge.Match.MatchFragment;
 import com.app.android.judge.R;
 
 import com.app.android.judge.RuleBook.RuleBookFragment;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -33,6 +35,9 @@ public class SettingsActivity extends AppCompatActivity {
     private static MatchHistoryDBHelper matchHistoryDBHelper;
     public static Cursor cursor;
     private SQLiteDatabase db;
+
+    FirebaseDatabase firebaseDatabase= FirebaseDatabase.getInstance();
+    DatabaseReference databaseReference = firebaseDatabase.getReference("message");
 
     @Override
     protected void onCreate(Bundle saveInstanceState) {

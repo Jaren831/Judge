@@ -11,10 +11,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.app.android.judge.Data.MatchHistoryContract;
 import com.app.android.judge.Data.MatchHistoryDBHelper;
 import com.app.android.judge.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * Created by jaren on 5/7/2017.
@@ -32,9 +37,17 @@ public class HistoryFragment extends Fragment {
 
     private TextView emptyTextView;
 
+    FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
+    FirebaseUser user = firebaseAuth.getCurrentUser();
+
+    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+    DatabaseReference databaseReference = firebaseDatabase.getReference(user.toString());
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+//        Toast.makeText(getContext(), databaseReference.toString(), Toast.LENGTH_SHORT).show();
         getActivity().setTitle(getResources().getString(R.string.history_title));
         setHasOptionsMenu(true);
         rootView = inflater.inflate(R.layout.fragment_history, container, false);
