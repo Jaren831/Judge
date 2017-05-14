@@ -1,10 +1,7 @@
 package com.app.android.judge.Settings;
 
-import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -14,30 +11,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-
-import com.app.android.judge.Data.MatchHistoryContract;
-import com.app.android.judge.Data.MatchHistoryDBHelper;
 import com.app.android.judge.Search.CardSearchFragment;
 import com.app.android.judge.Match.MatchFragment;
 import com.app.android.judge.R;
 
 import com.app.android.judge.RuleBook.RuleBookFragment;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.ArrayList;
-
 
 public class SettingsActivity extends AppCompatActivity {
 
     private int currentFragmentInt;
     private SharedPreferences sharedPreferences;
-    private static MatchHistoryDBHelper matchHistoryDBHelper;
-    public static Cursor cursor;
-    private SQLiteDatabase db;
-
-    FirebaseDatabase firebaseDatabase= FirebaseDatabase.getInstance();
-    DatabaseReference databaseReference = firebaseDatabase.getReference("message");
 
     @Override
     protected void onCreate(Bundle saveInstanceState) {
@@ -92,36 +75,9 @@ public class SettingsActivity extends AppCompatActivity {
         builder.setTitle(R.string.match_settings_reset_title);
         builder.setMessage(R.string.match_settings_reset_message);
         builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-            ArrayList<ContentValues> historyCVs = new ArrayList<>();
             public void onClick(DialogInterface dialog, int id) {
                 switch (currentFragmentInt) {
                     case 0:
-                        String player1Life = sharedPreferences.getString(
-                                getString(R.string.player1_life_key),
-                                getString(R.string.player1_life_default_value));
-                        String player2Life = sharedPreferences.getString(
-                                getString(R.string.player2_life_key),
-                                getString(R.string.player2_life_default_value));
-                        String player1Color = sharedPreferences.getString(
-                                getString(R.string.player1_color_key),
-                                getString(R.string.player1_color_default_value));
-                        String player2Color = sharedPreferences.getString(
-                                getString(R.string.player2_color_key),
-                                getString(R.string.player2_color_default_value));
-                        ContentValues historyCV = new ContentValues();
-                        historyCV.put(MatchHistoryContract.MatchHistoryEntry.COLUMN_PLAYER1_LIFE, player1Life);
-                        historyCV.put(MatchHistoryContract.MatchHistoryEntry.COLUMN_PLAYER2_LIFE, player2Life);
-                        historyCV.put(MatchHistoryContract.MatchHistoryEntry.COLUMN_PLAYER1_COLOR, player1Color);
-                        historyCV.put(MatchHistoryContract.MatchHistoryEntry.COLUMN_PLAYER2_COLOR, player2Color);
-
-                        historyCVs.add(historyCV);
-
-                        getContentResolver()
-                                .bulkInsert(
-                                        MatchHistoryContract.MatchHistoryEntry.URI,
-                                        historyCVs.toArray(new ContentValues[historyCVs.size()]));
-
-
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString(getString(R.string.player1_life_key), getString(R.string.player1_life_default_value));
                         editor.putString(getString(R.string.player2_life_key), getString(R.string.player2_life_default_value));

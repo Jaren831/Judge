@@ -1,9 +1,7 @@
 package com.app.android.judge;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -12,7 +10,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -20,11 +17,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
-
-import com.app.android.judge.Data.MatchHistoryContract;
-import com.app.android.judge.Data.MatchHistoryDBHelper;
-import com.app.android.judge.History.HistoryCursorAdapter;
-import com.app.android.judge.History.HistoryFragment;
 import com.app.android.judge.Match.MatchFragment;
 import com.app.android.judge.Search.CardSearchFragment;
 import com.app.android.judge.Settings.SettingsActivity;
@@ -35,6 +27,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import com.app.android.judge.RuleBook.RuleBookFragment;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -45,12 +38,14 @@ public class MainActivity extends AppCompatActivity
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private ActionBarDrawerToggle drawerToggle;
-    private int currentFragmentInt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+
 
         // Set a Toolbar to replace the ActionBar.
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -162,9 +157,6 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_rulebook:
                 fragmentClass = RuleBookFragment.class;
                 break;
-            case R.id.nav_history:
-                fragmentClass = HistoryFragment.class;
-                break;
             default:
                 fragmentClass = MatchFragment.class;
         }
@@ -205,9 +197,6 @@ public class MainActivity extends AppCompatActivity
             Intent settingsIntent = new Intent(this, SettingsActivity.class);
             settingsIntent.putExtras(CurrentFragmentCheck());
             startActivity(settingsIntent);
-            return true;
-        } else if (id == R.id.action_reset) {
-            MatchHistoryReset();
             return true;
         } else {
             return drawerToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
@@ -255,33 +244,5 @@ public class MainActivity extends AppCompatActivity
             bundle.putInt("fragment", 2);
         }
         return bundle;
-    }
-
-    private void MatchHistoryReset() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.history_reset_title);
-        builder.setMessage(R.string.history_reset_message);
-        builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                MatchHistoryDBHelper matchHistoryDBHelper = new MatchHistoryDBHelper(MainActivity.this);
-                SQLiteDatabase db = matchHistoryDBHelper.getReadableDatabase();
-                db.delete(MatchHistoryContract.MatchHistoryEntry.TABLE_NAME, null, null);
-                db.execSQL("DELETE FROM SQLITE_SEQUENCE WHERE NAME = '" + MatchHistoryContract.MatchHistoryEntry.TABLE_NAME + "'");
-                db.close();
-                HistoryCursorAdapter historyCursorAdapter = new HistoryCursorAdapter(MainActivity.this, null);
-                historyCursorAdapter.notifyDataSetChanged();
-                Fragment historyFragment = new HistoryFragment();
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.main_container, historyFragment).commit();
-                dialog.dismiss();
-            }
-        });
-        builder.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.dismiss();
-            }
-        });
-        AlertDialog dialog = builder.create();
-        dialog.show();
     }
 }

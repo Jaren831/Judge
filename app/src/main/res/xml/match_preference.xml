@@ -17,8 +17,14 @@
             android:entries="@array/colorEntries"
             android:entryValues="@array/colorValues"
             android:defaultValue="@string/player1_color_default_value">
-
         </ListPreference>
+        <MultiSelectListPreference
+            android:key="@string/player1_counters_key"
+            android:title="@string/player1_counters_title"
+            android:entries="@array/counterEntries"
+            android:entryValues="@array/counterValues"
+            android:dialogTitle="Select Counters"
+            android:defaultValue="@array/empty_array"/>
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -36,8 +42,14 @@
             android:entries="@array/colorEntries"
             android:entryValues="@array/colorValues"
             android:defaultValue="@string/player2_color_default_value">
-
         </ListPreference>
+        <MultiSelectListPreference
+            android:key="@string/player2_counters_key"
+            android:title="@string/player2_counters_title"
+            android:dialogTitle="Select Counters"
+            android:entries="@array/counterEntries"
+            android:entryValues="@array/counterValues"
+            android:defaultValue="@array/empty_array"/>
     </PreferenceCategory>
 
 </PreferenceScreen>

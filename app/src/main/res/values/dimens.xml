@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!--
-Refer to App Widget Documentation for margin information
-http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
-    -->
+    <dimen name="nav_drawer_width">320dp</dimen>
+    <dimen name="navDrawer_header_height">170dp</dimen>
 
 </resources>

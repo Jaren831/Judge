@@ -50,6 +50,24 @@
     <string name="player2_color_default_value">#faaa8f</string>
     <string name="authentication_failed">Authentication failed.</string>
 
+    <string name="player1_energy">player1_energy</string>
+    <string name="player1_clue">player1_clue</string>
+    <string name="player1_poison">player1_poison</string>
+
+    <string name="player1_counters_key">player1_counters</string>
+    <string name="player1_counters_title">Counters</string>
+
+    <string name="player2_counters_key">player2_counters</string>
+    <string name="player2_counters_title">Counters</string>
+
+    <string name="player2_energy">player1_energy</string>
+    <string name="player2_clue">player1_clue</string>
+    <string name="player2_poison">player1_poison</string>
+    <string name="energy_title">Energy</string>
+    <string name="poison_title">Poison</string>
+    <string name="clue_title">Clue</string>
+
+
     <!--SearchFragment-->
     <string name="noInternet">No internet connection</string>
     <string name="empty">No cards found</string>
