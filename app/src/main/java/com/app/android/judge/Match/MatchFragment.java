@@ -164,25 +164,6 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
         Set<String> player1Counters = preferences.getStringSet("player1_counters", null);
         String[] player1SelectedCounters = player1Counters.toArray(new String[] {});
 
-        if (player1SelectedCounters != null && player1SelectedCounters.length > 0) {
-            for (String aSelected : player1SelectedCounters) {
-                if (aSelected != null) {
-                    switch (aSelected) {
-                        case "0":
-                            player1EnergyView.setVisibility(View.VISIBLE);
-                            break;
-                        case "1":
-                            player1ClueView.setVisibility(View.VISIBLE);
-                            break;
-                        case "2":
-                            player1PoisonView.setVisibility(View.VISIBLE);
-                    }
-                }
-            }
-        } else {
-            player1CountersLayout.setVisibility(View.GONE);
-        }
-
         player1CountersLayout = (LinearLayout) rootView.findViewById(R.id.player1_counters_view);
         player1EnergyView = (LinearLayout) rootView.findViewById(R.id.player1_energy_view);
         player1ClueView = (LinearLayout) rootView.findViewById(R.id.player1_clue_view);
@@ -203,36 +184,36 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
         player1ClueDecrement.setOnClickListener(this);
         player1ClueView.setBackgroundColor(Color.parseColor(player1Color));
 
-
         player1PoisonText = (TextView) rootView.findViewById(R.id.player1_poison_text);
         player1PoisonIncrement = (ImageButton) rootView.findViewById(R.id.player1_poison_increment);
         player1PoisonIncrement.setOnClickListener(this);
         player1PoisonDecrement =  (ImageButton) rootView.findViewById(R.id.player1_poison_decrement);
         player1PoisonDecrement.setOnClickListener(this);
         player1PoisonView.setBackgroundColor(Color.parseColor(player1Color));
+
+        if (player1SelectedCounters != null && player1SelectedCounters.length > 0) {
+            for (String aSelected : player1SelectedCounters) {
+                if (aSelected != null) {
+                    switch (aSelected) {
+                        case "0":
+                            player1EnergyView.setVisibility(View.VISIBLE);
+                            break;
+                        case "1":
+                            player1ClueView.setVisibility(View.VISIBLE);
+                            break;
+                        case "2":
+                            player1PoisonView.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+        } else {
+            player1CountersLayout.setVisibility(View.GONE);
+        }
     }
 
     private void setPlayer2Counters(SharedPreferences preferences) {
         Set<String> player2Counters = preferences.getStringSet("player2_counters", null);
         String[] player2SelectedCounter = player2Counters.toArray(new String[] {});
-
-
-        if (player2SelectedCounter != null && player2SelectedCounter.length > 0) {
-            for (String aSelected : player2SelectedCounter) {
-                switch (aSelected) {
-                    case "0":
-                        player2EnergyView.setVisibility(View.VISIBLE);
-                        break;
-                    case "1":
-                        player2ClueView.setVisibility(View.VISIBLE);
-                        break;
-                    case "2":
-                        player2PoisonView.setVisibility(View.VISIBLE);
-                }
-            }
-        } else {
-            player2CountersLayout.setVisibility(View.GONE);
-        }
 
         player2CountersLayout = (LinearLayout) rootView.findViewById(R.id.player2_counters_view);
         player2EnergyView = (LinearLayout) rootView.findViewById(R.id.player2_energy_view);
@@ -259,15 +240,29 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
         player2PoisonDecrement =  (ImageButton) rootView.findViewById(R.id.player2_poison_decrement);
         player2PoisonIncrement.setOnClickListener(this);
         player2PoisonView.setBackgroundColor(Color.parseColor(player2Color));
+
+        if (player2SelectedCounter != null && player2SelectedCounter.length > 0) {
+            for (String aSelected : player2SelectedCounter) {
+                switch (aSelected) {
+                    case "0":
+                        player2EnergyView.setVisibility(View.VISIBLE);
+                        break;
+                    case "1":
+                        player2ClueView.setVisibility(View.VISIBLE);
+                        break;
+                    case "2":
+                        player2PoisonView.setVisibility(View.VISIBLE);
+                }
+            }
+        } else {
+            player2CountersLayout.setVisibility(View.GONE);
+        }
     }
 
     private void savePlayerValues() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         Set<String> player1CounterSet = new HashSet<>();
         Set<String> player2CounterSet = new HashSet<>();
-
-
-
 
         editor.putString(getString(R.string.player1_life_key), player1LifeView.getText().toString());
         player1CounterSet.add(player1EnergyText.getText().toString());
