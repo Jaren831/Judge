@@ -1,8 +1,10 @@
 package com.app.android.judge.Settings;
 
 import android.content.SharedPreferences;
+import android.content.res.ObbInfo;
 import android.os.Bundle;
 import android.preference.ListPreference;
+import android.preference.MultiSelectListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
@@ -15,29 +17,37 @@ import com.app.android.judge.R;
  */
 
 public class MatchPreferenceFragment extends PreferenceFragment
-        implements SharedPreferences.OnSharedPreferenceChangeListener {
+        implements Preference.OnPreferenceChangeListener {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.match_preference);
 
-//        Preference player1Life = findPreference(getString(R.string.player1_life_key));
-//        Preference player1Color = findPreference(getString(R.string.player1_color_key));
-//
-//        Preference player2Life = findPreference(getString(R.string.player2_life_key));
-//        Preference player2Color = findPreference(getString(R.string.player2_color_key));
-//
-//        Preference player1Counters = findPreference(getString(R.string.player1_counters_key));
-//        Preference player2Counters = findPreference(getString(R.string.player2_counters_key));
-//
-//        bindPreferenceSummaryToValue(player1Life);
-//        bindPreferenceSummaryToValue(player1Color);
-//        bindPreferenceSummaryToValue(player1Counters);
-//
-//        bindPreferenceSummaryToValue(player2Life);
-//        bindPreferenceSummaryToValue(player2Color);
-//        bindPreferenceSummaryToValue(player2Counters);
+        Preference player1Life = findPreference(getString(R.string.player1_life_key));
+        Preference player1Color = findPreference(getString(R.string.player1_color_key));
+        Preference player1Energy = findPreference(getString(R.string.player1_energy_key));
+        Preference player1Clues = findPreference(getString(R.string.player1_clue_key));
+        Preference player1Poison = findPreference(getString(R.string.player1_poison_key));
+
+
+        Preference player2Life = findPreference(getString(R.string.player2_life_key));
+        Preference player2Color = findPreference(getString(R.string.player2_color_key));
+        Preference player2Energy = findPreference(getString(R.string.player2_energy_key));
+        Preference player2Clues = findPreference(getString(R.string.player2_clue_key));
+        Preference player2Poison = findPreference(getString(R.string.player2_poison_key));
+
+        bindPreferenceSummaryToValue(player1Life);
+        bindPreferenceSummaryToValue(player1Color);
+        bindPreferenceSummaryToValue(player1Energy);
+        bindPreferenceSummaryToValue(player1Clues);
+        bindPreferenceSummaryToValue(player1Poison);
+
+        bindPreferenceSummaryToValue(player2Life);
+        bindPreferenceSummaryToValue(player2Color);
+        bindPreferenceSummaryToValue(player2Energy);
+        bindPreferenceSummaryToValue(player2Clues);
+        bindPreferenceSummaryToValue(player2Poison);
 
         setHasOptionsMenu(true);
     }
@@ -51,67 +61,28 @@ public class MatchPreferenceFragment extends PreferenceFragment
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        getPreferenceScreen().getSharedPreferences()
-                .registerOnSharedPreferenceChangeListener(this);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        getPreferenceScreen().getSharedPreferences()
-                .unregisterOnSharedPreferenceChangeListener(this);
-    }
-
-    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-//        if ( instanceof ListPreference) {
-//            ListPreference listPreference = (ListPreference) sharedPreferences;
-//            int prefIndex = listPreference.findIndexOfValue(key);
-//            if (prefIndex >= 0) {
-//                CharSequence[] labels = listPreference.getEntries();
-//                ((ListPreference) sharedPreferences).setSummary(labels[prefIndex]);
-//            }
-//        } else {
-//            ((ListPreference) sharedPreferences).setSummary(key);
-//        }
-        switch (key) {
-            case "player1_life_key":
-                Preference player1LifePref = findPreference(key);
-                player1LifePref.setSummary(sharedPreferences.getString(key, ""));
-                break;
-            case "player1_color_key":
-                Preference player1ColorPref = findPreference(key);
-                player1ColorPref.setSummary(sharedPreferences.getString(key, ""));
-                break;
-            case "player1_counter_key":
-                Preference player1CounterPref = findPreference(key);
-                player1CounterPref.setSummary(sharedPreferences.getString(key, ""));
-                break;
-            case "player2_life_key":
-                Preference player2LifePref = findPreference(key);
-                player2LifePref.setSummary(sharedPreferences.getString(key, ""));
-                break;
-            case "player2_color_key":
-                Preference player2ColorPref = findPreference(key);
-                player2ColorPref.setSummary(sharedPreferences.getString(key, ""));
-                break;
-            case "player2_counter_key":
-                Preference player2CounterPref = findPreference(key);
-                player2CounterPref.setSummary(sharedPreferences.getString(key, ""));
-                break;
+    public boolean onPreferenceChange(Preference preferences, Object key) {
+        String stringValue = key.toString();
+        if (preferences instanceof ListPreference) {
+            ListPreference listPreference = (ListPreference) preferences;
+            int prefIndex = listPreference.findIndexOfValue(stringValue);
+            if (prefIndex >= 0) {
+                CharSequence[] labels = listPreference.getEntries();
+                preferences.setSummary(labels[prefIndex]);
+            }
+        } else if (preferences instanceof MultiSelectListPreference) {
+            MultiSelectListPreference multiSelectListPreference = (MultiSelectListPreference) preferences;
+            multiSelectListPreference.setSummary(key.toString());
+        } else {
+            preferences.setSummary(stringValue);
         }
+        return true;
     }
-//
-//    private void bindPreferenceSummaryToValue(SharedPreferences sharedPreferences) {
-//        sharedPreferences.registerOnSharedPreferenceChangeListener(this);
-//        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-//        String preferenceString = sharedPreferences.getString(sharedPreferences.get(), "");
-//        onSharedPreferenceChanged(shouldShowRequestPermissionRationale(), preferenceString);
-//    }
 
-//    sharedPreferences.();
-//    SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(preference.getContext());
-//    String preferenceString = sharedPreferences.getString(preference.getKey(), "");
-//    onSharedPreferenceChanged(shouldShowRequestPermissionRationale(), preferenceString);
+    private void bindPreferenceSummaryToValue(Preference preference) {
+        preference.setOnPreferenceChangeListener(this);
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(preference.getContext());
+        String preferenceString = preferences.getString(preference.getKey(), "");
+        onPreferenceChange(preference, preferenceString);
+    }
 }

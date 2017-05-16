@@ -55,10 +55,10 @@
     <string name="player1_poison">player1_poison</string>
 
     <string name="player1_counters_key">player1_counters</string>
-    <string name="player1_counters_title">Counters</string>
+    <string name="player1_counters_title">Display Counters:</string>
 
     <string name="player2_counters_key">player2_counters</string>
-    <string name="player2_counters_title">Counters</string>
+    <string name="player2_counters_title">Display Counters:</string>
 
     <string name="player2_energy">player1_energy</string>
     <string name="player2_clue">player1_clue</string>
@@ -66,6 +66,24 @@
     <string name="energy_title">Energy</string>
     <string name="poison_title">Poison</string>
     <string name="clue_title">Clue</string>
+
+    <string name="counter_default_value">0</string>
+    <string name="energy_settings_title">Energy</string>
+    <string name="energy_dialog_title">Set Energy</string>
+    <string name="clue_settings_title">Clues</string>
+    <string name="clue_dialog_title">Set Clues</string>
+    <string name="poison_settings_title">Poison</string>
+    <string name="poison_dialog_title">Set Poison</string>
+
+
+    <string name="player1_energy_key">player1_energy_key</string>
+    <string name="player1_poison_key">player1_poison_key</string>
+    <string name="player1_clue_key">player1_clue_key</string>
+
+    <string name="player2_energy_key">player2_energy_key</string>
+    <string name="player2_poison_key">player2_poison_key</string>
+    <string name="player2_clue_key">player2_clue_key</string>
+
 
 
     <!--SearchFragment-->

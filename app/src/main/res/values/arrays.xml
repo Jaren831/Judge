@@ -20,10 +20,10 @@
         <item>Clues</item>
     </string-array>
     <string-array name="counterValues">
-        <item>energy</item>
-        <item>poison</item>
-        <item>clues</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
     </string-array>
 
-    <string-array name="empty_array"/>
+    <string-array name="default_array"/>
 </resources>
