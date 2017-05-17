@@ -14,16 +14,4 @@
         <item>#fffada</item>
         <item>#cbc2bf</item>
     </string-array>
-    <string-array name="counterEntries">
-        <item>Energy</item>
-        <item>Poison</item>
-        <item>Clues</item>
-    </string-array>
-    <string-array name="counterValues">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-    </string-array>
-
-    <string-array name="default_array"/>
 </resources>

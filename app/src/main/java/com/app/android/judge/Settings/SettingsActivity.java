@@ -81,15 +81,15 @@ public class SettingsActivity extends AppCompatActivity {
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString(getString(R.string.player1_life_key), getString(R.string.player1_life_default_value));
                         editor.putString(getString(R.string.player1_color_key), getString(R.string.player1_color_default_value));
-                        editor.putString(getString(R.string.player1_energy_key), getString(R.string.counter_default_value));
-                        editor.putString(getString(R.string.player1_clue_key), getString(R.string.counter_default_value));
-                        editor.putString(getString(R.string.player1_poison_key), getString(R.string.counter_default_value));
+                        editor.putString(getString(R.string.player1_energy_key), getString(R.string.player1_energy_default_value));
+                        editor.putString(getString(R.string.player1_clue_key), getString(R.string.player1_clue_default_value));
+                        editor.putString(getString(R.string.player1_poison_key), getString(R.string.player1_poison_default_value));
 
                         editor.putString(getString(R.string.player2_life_key), getString(R.string.player2_life_default_value));
                         editor.putString(getString(R.string.player2_color_key), getString(R.string.player2_color_default_value));
-                        editor.putString(getString(R.string.player2_energy_key), getString(R.string.counter_default_value));
-                        editor.putString(getString(R.string.player2_energy_key), getString(R.string.counter_default_value));
-                        editor.putString(getString(R.string.player2_energy_key), getString(R.string.counter_default_value));
+                        editor.putString(getString(R.string.player2_energy_key), getString(R.string.player2_energy_default_value));
+                        editor.putString(getString(R.string.player2_clue_key), getString(R.string.player2_clue_default_value));
+                        editor.putString(getString(R.string.player2_poison_key), getString(R.string.player2_poison_default_value));
 
                         editor.apply();
                         MatchPreferenceFragment matchPreferenceFragment = new MatchPreferenceFragment();

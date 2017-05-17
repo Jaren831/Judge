@@ -51,13 +51,13 @@
             android:background="@color/mtg_red">
             <LinearLayout
                 android:id="@+id/player1_energy_view"
-                android:visibility="gone"
+                android:background="@null"
                 android:layout_width="0dp"
                 android:orientation="horizontal"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
                 <ImageButton
-                    android:id="@+id/player1_poison_decrement"
+                    android:id="@+id/player1_energy_decrement"
                     android:background="@null"
                     android:gravity="center"
                     android:layout_width="0dp"
@@ -65,16 +65,15 @@
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_navigate_before_black_24dp"/>
                 <TextView
-                    android:id="@+id/player1_poison_text"
+                    android:id="@+id/player1_energy_text"
                     android:background="@null"
-                    android:text="1"
                     android:gravity="center"
                     android:layout_height="match_parent"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:drawableStart="@drawable/ic_help_outline_black_24dp"/>
+                    android:drawableStart="@drawable/ic_flash_on_black_24dp"/>
                 <ImageButton
-                    android:id="@+id/player1_poison_increment"
+                    android:id="@+id/player1_energy_increment"
                     android:background="@null"
                     android:layout_width="0dp"
                     android:layout_weight="1"
@@ -84,8 +83,8 @@
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/player1_clue_view"
-                android:visibility="gone"
                 android:layout_width="0dp"
+                android:background="@null"
                 android:orientation="horizontal"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
@@ -100,7 +99,6 @@
                 <TextView
                     android:id="@+id/player1_clue_text"
                     android:background="@null"
-                    android:text="1"
                     android:gravity="center"
                     android:layout_height="match_parent"
                     android:layout_width="0dp"
@@ -117,14 +115,13 @@
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/player1_poison_view"
-                android:visibility="gone"
-
                 android:layout_width="0dp"
+                android:background="@null"
                 android:orientation="horizontal"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
                 <ImageButton
-                    android:id="@+id/player1_energy_decrement"
+                    android:id="@+id/player1_poison_decrement"
                     android:background="@null"
                     android:gravity="center"
                     android:layout_width="0dp"
@@ -132,16 +129,15 @@
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_navigate_before_black_24dp"/>
                 <TextView
-                    android:id="@+id/player1_energy_text"
+                    android:id="@+id/player1_poison_text"
                     android:background="@null"
-                    android:text="1"
                     android:gravity="center"
                     android:layout_height="match_parent"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:drawableStart="@drawable/ic_flash_on_black_24dp"/>
+                    android:drawableStart="@drawable/ic_colorize_black_24dp"/>
                 <ImageButton
-                    android:id="@+id/player1_energy_increment"
+                    android:id="@+id/player1_poison_increment"
                     android:background="@null"
                     android:layout_width="0dp"
                     android:layout_weight="1"
@@ -195,13 +191,13 @@
             android:background="@color/mtg_red">
             <LinearLayout
                 android:id="@+id/player2_energy_view"
-                android:visibility="gone"
                 android:layout_width="0dp"
+                android:background="@null"
                 android:orientation="horizontal"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
                 <ImageButton
-                    android:id="@+id/player2_poison_decrement"
+                    android:id="@+id/player2_energy_decrement"
                     android:background="@null"
                     android:gravity="center"
                     android:layout_width="0dp"
@@ -209,16 +205,15 @@
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_navigate_before_black_24dp"/>
                 <TextView
-                    android:id="@+id/player2_poison_text"
+                    android:id="@+id/player2_energy_text"
                     android:background="@null"
-                    android:text="1"
                     android:gravity="center"
                     android:layout_height="match_parent"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:drawableStart="@drawable/ic_help_outline_black_24dp"/>
+                    android:drawableStart="@drawable/ic_flash_on_black_24dp"/>
                 <ImageButton
-                    android:id="@+id/player2_poison_increment"
+                    android:id="@+id/player2_energy_increment"
                     android:background="@null"
                     android:layout_width="0dp"
                     android:layout_weight="1"
@@ -228,8 +223,8 @@
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/player2_clue_view"
-                android:visibility="gone"
                 android:layout_width="0dp"
+                android:background="@null"
                 android:orientation="horizontal"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
@@ -244,7 +239,6 @@
                 <TextView
                     android:id="@+id/player2_clue_text"
                     android:background="@null"
-                    android:text="1"
                     android:gravity="center"
                     android:layout_height="match_parent"
                     android:layout_width="0dp"
@@ -261,13 +255,13 @@
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/player2_poison_view"
-                android:visibility="gone"
                 android:layout_width="0dp"
+                android:background="@null"
                 android:orientation="horizontal"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
                 <ImageButton
-                    android:id="@+id/player2_energy_decrement"
+                    android:id="@+id/player2_poison_decrement"
                     android:background="@null"
                     android:gravity="center"
                     android:layout_width="0dp"
@@ -275,16 +269,15 @@
                     android:layout_height="match_parent"
                     android:src="@drawable/ic_navigate_before_black_24dp"/>
                 <TextView
-                    android:id="@+id/player2_energy_text"
+                    android:id="@+id/player2_poison_text"
                     android:background="@null"
-                    android:text="1"
                     android:gravity="center"
                     android:layout_height="match_parent"
                     android:layout_width="0dp"
                     android:layout_weight="1"
-                    android:drawableStart="@drawable/ic_flash_on_black_24dp"/>
+                    android:drawableStart="@drawable/ic_colorize_black_24dp"/>
                 <ImageButton
-                    android:id="@+id/player2_energy_increment"
+                    android:id="@+id/player2_poison_increment"
                     android:background="@null"
                     android:layout_width="0dp"
                     android:layout_weight="1"

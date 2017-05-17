@@ -3,6 +3,8 @@ package com.app.android.judge.Settings;
 import android.content.SharedPreferences;
 import android.content.res.ObbInfo;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
+import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.MultiSelectListPreference;
 import android.preference.Preference;
@@ -70,10 +72,7 @@ public class MatchPreferenceFragment extends PreferenceFragment
                 CharSequence[] labels = listPreference.getEntries();
                 preferences.setSummary(labels[prefIndex]);
             }
-        } else if (preferences instanceof MultiSelectListPreference) {
-            MultiSelectListPreference multiSelectListPreference = (MultiSelectListPreference) preferences;
-            multiSelectListPreference.setSummary(key.toString());
-        } else {
+        } else if (preferences instanceof EditTextPreference) {
             preferences.setSummary(stringValue);
         }
         return true;

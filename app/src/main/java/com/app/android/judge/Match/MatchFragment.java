@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
-import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -13,13 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.app.android.judge.R;
-import com.bumptech.glide.load.engine.Resource;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class MatchFragment extends Fragment implements View.OnClickListener {
 
@@ -59,22 +52,18 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
 
     private String player1Life;
     private String player1Color;
+    private String player1Energy;
+    private String player1Clue;
+    private String player1Poison;
 
     private String player2Life;
     private String player2Color;
+    private String player2Energy;
+    private String player2Clue;
+    private String player2Poison;
 
     private LinearLayout player1CountersLayout;
     private LinearLayout player2CountersLayout;
-
-    private LinearLayout player1EnergyView;
-    private LinearLayout player1ClueView;
-    private LinearLayout player1PoisonView;
-
-    private LinearLayout player2EnergyView;
-    private LinearLayout player2ClueView;
-    private LinearLayout player2PoisonView;
-
-
 
     private View rootView;
     @Override
@@ -82,6 +71,9 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         rootView = inflater.inflate(R.layout.fragment_match, container, false);
+        player1CountersLayout = (LinearLayout) rootView.findViewById(R.id.player1_counters_view);
+        player2CountersLayout = (LinearLayout) rootView.findViewById(R.id.player2_counters_view);
+
         return rootView;
     }
 
@@ -98,8 +90,12 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         setPlayer1Life(sharedPreferences);
         setPlayer2Life(sharedPreferences);
-        setPlayer1Counters(sharedPreferences);
-        setPlayer2Counters(sharedPreferences);
+        if (sharedPreferences.getBoolean("player1_counters_key", true)) {
+            setPlayer1Counters(sharedPreferences);
+        }
+        if (sharedPreferences.getBoolean("player2_counters_key", true)) {
+            setPlayer2Counters(sharedPreferences);
+        }
     }
 
     @Override
@@ -114,6 +110,7 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
         updatePlayer1(view);
         updatePlayer2(view);
     }
+
     private void setPlayer1Life(SharedPreferences preferences) {
         player1Life = preferences.getString(
                 getString(R.string.player1_life_key),
@@ -145,6 +142,8 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
                 getString(R.string.player2_color_key),
                 getString(R.string.player2_color_default_value));
 
+        player1CountersLayout.setVisibility(View.VISIBLE);
+
         player2LifeView = (TextView) rootView.findViewById(R.id.player2_life);
         player2LifeView.setText(player2Life);
         player2LifeView.setBackgroundColor(Color.parseColor(player2Color));
@@ -161,121 +160,94 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
     }
 
     private void setPlayer1Counters(SharedPreferences preferences) {
-        Set<String> player1Counters = preferences.getStringSet("player1_counters", null);
-        String[] player1SelectedCounters = player1Counters.toArray(new String[] {});
+        player1Energy = preferences.getString(
+                getString(R.string.player1_energy_key),
+                getString(R.string.player1_energy_default_value));
+        player1Clue = preferences.getString(
+                getString(R.string.player1_clue_key),
+                getString(R.string.player1_clue_default_value));
+        player1Poison = preferences.getString(
+                getString(R.string.player1_poison_key),
+                getString(R.string.player1_poison_default_value));
 
-        player1CountersLayout = (LinearLayout) rootView.findViewById(R.id.player1_counters_view);
-        player1EnergyView = (LinearLayout) rootView.findViewById(R.id.player1_energy_view);
-        player1ClueView = (LinearLayout) rootView.findViewById(R.id.player1_clue_view);
-        player1PoisonView = (LinearLayout) rootView.findViewById(R.id.player1_poison_view);
+        player2CountersLayout.setVisibility(View.VISIBLE);
+        player1CountersLayout.setBackgroundColor(Color.parseColor(player1Color));
 
         player1EnergyText = (TextView) rootView.findViewById(R.id.player1_energy_text);
+        player1EnergyText.setText(player1Energy);
         player1EnergyIncrement = (ImageButton) rootView.findViewById(R.id.player1_energy_increment);
         player1EnergyIncrement.setOnClickListener(this);
         player1EnergyDecrement =  (ImageButton) rootView.findViewById(R.id.player1_energy_decrement);
         player1EnergyDecrement.setOnClickListener(this);
-        player1EnergyView.setBackgroundColor(Color.parseColor(player1Color));
-
 
         player1ClueText = (TextView) rootView.findViewById(R.id.player1_clue_text);
+        player1ClueText.setText(player1Clue);
         player1ClueIncrement = (ImageButton) rootView.findViewById(R.id.player1_clue_increment);
         player1ClueIncrement.setOnClickListener(this);
         player1ClueDecrement =  (ImageButton) rootView.findViewById(R.id.player1_clue_decrement);
         player1ClueDecrement.setOnClickListener(this);
-        player1ClueView.setBackgroundColor(Color.parseColor(player1Color));
 
         player1PoisonText = (TextView) rootView.findViewById(R.id.player1_poison_text);
+        player1PoisonText.setText(player1Poison);
         player1PoisonIncrement = (ImageButton) rootView.findViewById(R.id.player1_poison_increment);
         player1PoisonIncrement.setOnClickListener(this);
         player1PoisonDecrement =  (ImageButton) rootView.findViewById(R.id.player1_poison_decrement);
         player1PoisonDecrement.setOnClickListener(this);
-        player1PoisonView.setBackgroundColor(Color.parseColor(player1Color));
-
-        if (player1SelectedCounters != null && player1SelectedCounters.length > 0) {
-            for (String aSelected : player1SelectedCounters) {
-                if (aSelected != null) {
-                    switch (aSelected) {
-                        case "0":
-                            player1EnergyView.setVisibility(View.VISIBLE);
-                            break;
-                        case "1":
-                            player1ClueView.setVisibility(View.VISIBLE);
-                            break;
-                        case "2":
-                            player1PoisonView.setVisibility(View.VISIBLE);
-                    }
-                }
-            }
-        } else {
-            player1CountersLayout.setVisibility(View.GONE);
-        }
     }
 
     private void setPlayer2Counters(SharedPreferences preferences) {
-        Set<String> player2Counters = preferences.getStringSet("player2_counters", null);
-        String[] player2SelectedCounter = player2Counters.toArray(new String[] {});
+        player2Energy = preferences.getString(
+                getString(R.string.player2_energy_key),
+                getString(R.string.player2_energy_default_value));
+        player2Clue = preferences.getString(
+                getString(R.string.player2_clue_key),
+                getString(R.string.player2_clue_default_value));
+        player2Poison = preferences.getString(
+                getString(R.string.player2_poison_key),
+                getString(R.string.player2_poison_default_value));
 
-        player2CountersLayout = (LinearLayout) rootView.findViewById(R.id.player2_counters_view);
-        player2EnergyView = (LinearLayout) rootView.findViewById(R.id.player2_energy_view);
-        player2ClueView = (LinearLayout) rootView.findViewById(R.id.player2_clue_view);
-        player2PoisonView = (LinearLayout) rootView.findViewById(R.id.player2_poison_view);
+        player2CountersLayout.setBackgroundColor(Color.parseColor(player2Color));
 
         player2EnergyText = (TextView) rootView.findViewById(R.id.player2_energy_text);
+        player2EnergyText.setText(player2Energy);
         player2EnergyIncrement = (ImageButton) rootView.findViewById(R.id.player2_energy_increment);
         player2EnergyIncrement.setOnClickListener(this);
         player2EnergyDecrement =  (ImageButton) rootView.findViewById(R.id.player2_energy_decrement);
         player2EnergyDecrement.setOnClickListener(this);
-        player2EnergyView.setBackgroundColor(Color.parseColor(player2Color));
 
         player2ClueText = (TextView) rootView.findViewById(R.id.player2_clue_text);
+        player2ClueText.setText(player2Clue);
         player2ClueIncrement = (ImageButton) rootView.findViewById(R.id.player2_clue_increment);
         player2ClueIncrement.setOnClickListener(this);
         player2ClueDecrement =  (ImageButton) rootView.findViewById(R.id.player2_clue_decrement);
         player2ClueIncrement.setOnClickListener(this);
-        player2ClueView.setBackgroundColor(Color.parseColor(player2Color));
 
         player2PoisonText = (TextView) rootView.findViewById(R.id.player2_poison_text);
+        player2PoisonText.setText(player2Poison);
         player2PoisonIncrement = (ImageButton) rootView.findViewById(R.id.player2_poison_increment);
         player2PoisonIncrement.setOnClickListener(this);
         player2PoisonDecrement =  (ImageButton) rootView.findViewById(R.id.player2_poison_decrement);
         player2PoisonIncrement.setOnClickListener(this);
-        player2PoisonView.setBackgroundColor(Color.parseColor(player2Color));
-
-        if (player2SelectedCounter != null && player2SelectedCounter.length > 0) {
-            for (String aSelected : player2SelectedCounter) {
-                switch (aSelected) {
-                    case "0":
-                        player2EnergyView.setVisibility(View.VISIBLE);
-                        break;
-                    case "1":
-                        player2ClueView.setVisibility(View.VISIBLE);
-                        break;
-                    case "2":
-                        player2PoisonView.setVisibility(View.VISIBLE);
-                }
-            }
-        } else {
-            player2CountersLayout.setVisibility(View.GONE);
-        }
     }
 
     private void savePlayerValues() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        Set<String> player1CounterSet = new HashSet<>();
-        Set<String> player2CounterSet = new HashSet<>();
 
+        //player 1
         editor.putString(getString(R.string.player1_life_key), player1LifeView.getText().toString());
-        player1CounterSet.add(player1EnergyText.getText().toString());
-        player1CounterSet.add(player1ClueText.getText().toString());
-        player1CounterSet.add(player1PoisonText.getText().toString());
-        editor.putStringSet(getString(R.string.player1_counters_key), player1CounterSet);
+        editor.putString(getString(R.string.player1_energy_key), player1EnergyText.getText().toString());
+        editor.putString(getString(R.string.player1_clue_key), player1ClueText.getText().toString());
+        editor.putString(getString(R.string.player1_poison_key), player1PoisonText.getText().toString());
 
+        // player 2
         editor.putString(getString(R.string.player2_life_key), player2LifeView.getText().toString());
-        player1CounterSet.add(player2EnergyText.getText().toString());
-        player1CounterSet.add(player2ClueText.getText().toString());
-        player1CounterSet.add(player2PoisonText.getText().toString());
-        editor.putStringSet(getString(R.string.player2_counters_key), player2CounterSet);
+        editor.putString(getString(R.string.player2_energy_key), player2EnergyText.getText().toString());
+        editor.putString(getString(R.string.player2_clue_key), player2ClueText.getText().toString());
+        editor.putString(getString(R.string.player2_poison_key), player2PoisonText.getText().toString());
         editor.apply();
+
+        player1CountersLayout.setVisibility(View.GONE);
+        player2CountersLayout.setVisibility(View.GONE);
     }
 
     private void updatePlayer1(View view) {
