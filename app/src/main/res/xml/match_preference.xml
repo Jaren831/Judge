@@ -14,7 +14,7 @@
         <CheckBoxPreference
             android:key="@string/player1_counters_key"
             android:title="@string/player1_counters_title"
-            android:summary="Toggle Counters" />
+            android:summary="Toggle Counters"/>
         <EditTextPreference
             android:key="@string/player1_energy_key"
             android:inputType="number"

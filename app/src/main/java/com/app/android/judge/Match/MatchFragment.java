@@ -3,6 +3,7 @@ package com.app.android.judge.Match;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -231,19 +232,24 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
     }
 
     private void savePlayerValues() {
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         //player 1
-        editor.putString(getString(R.string.player1_life_key), player1LifeView.getText().toString());
-        editor.putString(getString(R.string.player1_energy_key), player1EnergyText.getText().toString());
-        editor.putString(getString(R.string.player1_clue_key), player1ClueText.getText().toString());
-        editor.putString(getString(R.string.player1_poison_key), player1PoisonText.getText().toString());
-
+        if (sharedPreferences.getBoolean("player1_counters_key", true)) {
+            editor.putString(getString(R.string.player1_life_key), player1LifeView.getText().toString());
+            editor.putString(getString(R.string.player1_energy_key), player1EnergyText.getText().toString());
+            editor.putString(getString(R.string.player1_clue_key), player1ClueText.getText().toString());
+            editor.putString(getString(R.string.player1_poison_key), player1PoisonText.getText().toString());
+        }
         // player 2
-        editor.putString(getString(R.string.player2_life_key), player2LifeView.getText().toString());
-        editor.putString(getString(R.string.player2_energy_key), player2EnergyText.getText().toString());
-        editor.putString(getString(R.string.player2_clue_key), player2ClueText.getText().toString());
-        editor.putString(getString(R.string.player2_poison_key), player2PoisonText.getText().toString());
+        if (sharedPreferences.getBoolean("player2_counters_key", true)) {
+            editor.putString(getString(R.string.player2_life_key), player2LifeView.getText().toString());
+            editor.putString(getString(R.string.player2_energy_key), player2EnergyText.getText().toString());
+            editor.putString(getString(R.string.player2_clue_key), player2ClueText.getText().toString());
+            editor.putString(getString(R.string.player2_poison_key), player2PoisonText.getText().toString());
+        }
+
         editor.apply();
 
         player1CountersLayout.setVisibility(View.GONE);

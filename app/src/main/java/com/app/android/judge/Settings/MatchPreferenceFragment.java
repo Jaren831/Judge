@@ -35,6 +35,7 @@ public class MatchPreferenceFragment extends PreferenceFragment
         Preference player2Clues = findPreference(getString(R.string.player2_clue_key));
         Preference player2Poison = findPreference(getString(R.string.player2_poison_key));
 
+
         bindPreferenceSummaryToValue(player1Life);
         bindPreferenceSummaryToValue(player1Color);
         bindPreferenceSummaryToValue(player1Energy);

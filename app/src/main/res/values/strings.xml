@@ -55,10 +55,10 @@
     <string name="player1_poison">player1_poison</string>
 
     <string name="player1_counters_key">player1_counters</string>
-    <string name="player1_counters_title">Counters:</string>
+    <string name="player1_counters_title">Counters</string>
 
     <string name="player2_counters_key">player2_counters</string>
-    <string name="player2_counters_title">Counters:</string>
+    <string name="player2_counters_title">Counters</string>
 
     <string name="player2_energy">player1_energy</string>
     <string name="player2_clue">player1_clue</string>
