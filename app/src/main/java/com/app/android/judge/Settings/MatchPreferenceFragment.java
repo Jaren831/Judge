@@ -1,12 +1,9 @@
 package com.app.android.judge.Settings;
 
 import android.content.SharedPreferences;
-import android.content.res.ObbInfo;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
-import android.preference.MultiSelectListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
@@ -31,7 +28,6 @@ public class MatchPreferenceFragment extends PreferenceFragment
         Preference player1Energy = findPreference(getString(R.string.player1_energy_key));
         Preference player1Clues = findPreference(getString(R.string.player1_clue_key));
         Preference player1Poison = findPreference(getString(R.string.player1_poison_key));
-
 
         Preference player2Life = findPreference(getString(R.string.player2_life_key));
         Preference player2Color = findPreference(getString(R.string.player2_color_key));

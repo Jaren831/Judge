@@ -31,8 +31,6 @@ public class SettingsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
 
         switch (bundle.getInt("fragment")) {
             case 0:
