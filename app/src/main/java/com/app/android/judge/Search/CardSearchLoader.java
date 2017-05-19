@@ -10,13 +10,12 @@ import java.util.List;
 
 class CardSearchLoader extends AsyncTaskLoader<List<Card>> {
     private final String mUrl;
-    private final Context mContext;
     private final String mQuery;
 
     public CardSearchLoader(Context context, String url, String query) {
         super(context);
         mUrl = url;
-        mContext = context;
+        Context mContext = context;
         mQuery = query;
     }
 

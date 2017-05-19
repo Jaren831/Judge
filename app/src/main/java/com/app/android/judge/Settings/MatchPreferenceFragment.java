@@ -21,6 +21,7 @@ public class MatchPreferenceFragment extends PreferenceFragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         addPreferencesFromResource(R.xml.match_preference);
 
         Preference player1Life = findPreference(getString(R.string.player1_life_key));

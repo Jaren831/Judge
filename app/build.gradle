@@ -13,7 +13,7 @@ android {
     buildToolsVersion "25.0.3"
     defaultConfig {
         applicationId "com.app.android.judge"
-        minSdkVersion 23
+        minSdkVersion 16
         targetSdkVersion 25
         versionCode 2
         versionName "2.0"
@@ -45,11 +45,17 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.3.0'
+    compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:support-v4:25.3.1'
     compile 'com.android.support:design:25.3.1'
     compile 'com.google.firebase:firebase-database:10.2.4'
+    compile 'com.facebook.stetho:stetho:1.5.0'
+    compile 'com.android.support:customtabs:25.3.1'
+    compile 'com.android.support:cardview-v7:25.3.1'
+
+
+
 
     // Displaying images
     compile 'com.github.bumptech.glide:glide:3.7.0'

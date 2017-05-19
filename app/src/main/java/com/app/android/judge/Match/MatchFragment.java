@@ -3,7 +3,6 @@ package com.app.android.judge.Match;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.preference.CheckBoxPreference;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -21,56 +20,35 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
     private TextView player2LifeView;
     private SharedPreferences sharedPreferences;
 
-    private ImageButton player1Increment;
-    private ImageButton player1Decrement;
-    private ImageButton player2Increment;
-    private ImageButton player2Decrement;
-
 
     private TextView player1EnergyText;
-    private ImageButton player1EnergyDecrement;
-    private ImageButton player1EnergyIncrement;
 
     private TextView player1ClueText;
-    private ImageButton player1ClueDecrement;
-    private ImageButton player1ClueIncrement;
 
     private TextView player1PoisonText;
-    private ImageButton player1PoisonDecrement;
-    private ImageButton player1PoisonIncrement;
 
     private TextView player2EnergyText;
-    private ImageButton player2EnergyDecrement;
-    private ImageButton player2EnergyIncrement;
 
     private TextView player2ClueText;
-    private ImageButton player2ClueDecrement;
-    private ImageButton player2ClueIncrement;
 
     private TextView player2PoisonText;
-    private ImageButton player2PoisonDecrement;
-    private ImageButton player2PoisonIncrement;
 
-    private String player1Life;
     private String player1Color;
-    private String player1Energy;
-    private String player1Clue;
-    private String player1Poison;
 
-    private String player2Life;
     private String player2Color;
-    private String player2Energy;
-    private String player2Clue;
-    private String player2Poison;
 
     private LinearLayout player1CountersLayout;
     private LinearLayout player2CountersLayout;
+
+    private boolean p1Checked;
+    private boolean p2Checked;
 
     private View rootView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         setHasOptionsMenu(true);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         rootView = inflater.inflate(R.layout.fragment_match, container, false);
         player1CountersLayout = (LinearLayout) rootView.findViewById(R.id.player1_counters_view);
         player2CountersLayout = (LinearLayout) rootView.findViewById(R.id.player2_counters_view);
@@ -88,14 +66,17 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
-        setPlayer1Life(sharedPreferences);
-        setPlayer2Life(sharedPreferences);
-        if (sharedPreferences.getBoolean("player1_counters_key", true)) {
-            setPlayer1Counters(sharedPreferences);
+        setPlayer1Life();
+        setPlayer2Life();
+
+        p1Checked = sharedPreferences.getBoolean("player1_counters_key", true);
+        p2Checked = sharedPreferences.getBoolean("player2_counters_key", true);
+
+        if (p1Checked) {
+            setPlayer1Counters();
         }
-        if (sharedPreferences.getBoolean("player2_counters_key", true)) {
-            setPlayer2Counters(sharedPreferences);
+        if (p2Checked) {
+            setPlayer2Counters();
         }
     }
 
@@ -112,11 +93,11 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
         updatePlayer2(view);
     }
 
-    private void setPlayer1Life(SharedPreferences preferences) {
-        player1Life = preferences.getString(
+    private void setPlayer1Life() {
+        String player1Life = sharedPreferences.getString(
                 getString(R.string.player1_life_key),
                 getString(R.string.player1_life_default_value));
-        player1Color = preferences.getString(
+        player1Color = sharedPreferences.getString(
                 getString(R.string.player1_color_key),
                 getString(R.string.player1_color_default_value));
 
@@ -124,22 +105,22 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
         player1LifeView.setText(player1Life);
         player1LifeView.setBackgroundColor(Color.parseColor(player1Color));
 
-        player1Increment = (ImageButton) rootView.findViewById(R.id.player1_increment);
+        ImageButton player1Increment = (ImageButton) rootView.findViewById(R.id.player1_increment);
         player1Increment.setImageDrawable(getResources().getDrawable(R.drawable.increment_black));
         player1Increment.setBackgroundColor(Color.parseColor(player1Color));
         player1Increment.setOnClickListener(this);
 
-        player1Decrement = (ImageButton) rootView.findViewById(R.id.player1_decrement);
+        ImageButton player1Decrement = (ImageButton) rootView.findViewById(R.id.player1_decrement);
         player1Decrement.setImageDrawable(getResources().getDrawable(R.drawable.decrement_black));
         player1Decrement.setBackgroundColor(Color.parseColor(player1Color));
         player1Decrement.setOnClickListener(this);
     }
 
-    private void setPlayer2Life(SharedPreferences preferences) {
-        player2Life = preferences.getString(
+    private void setPlayer2Life() {
+        String player2Life = sharedPreferences.getString(
                 getString(R.string.player2_life_key),
                 getString(R.string.player2_life_default_value));
-        player2Color = preferences.getString(
+        player2Color = sharedPreferences.getString(
                 getString(R.string.player2_color_key),
                 getString(R.string.player2_color_default_value));
 
@@ -149,25 +130,25 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
         player2LifeView.setText(player2Life);
         player2LifeView.setBackgroundColor(Color.parseColor(player2Color));
 
-        player2Increment = (ImageButton) rootView.findViewById(R.id.player2_increment);
+        ImageButton player2Increment = (ImageButton) rootView.findViewById(R.id.player2_increment);
         player2Increment.setImageDrawable(getResources().getDrawable(R.drawable.increment_black));
         player2Increment.setBackgroundColor(Color.parseColor(player2Color));
         player2Increment.setOnClickListener(this);
 
-        player2Decrement = (ImageButton) rootView.findViewById(R.id.player2_decrement);
+        ImageButton player2Decrement = (ImageButton) rootView.findViewById(R.id.player2_decrement);
         player2Decrement.setImageDrawable(getResources().getDrawable(R.drawable.decrement_black));
         player2Decrement.setBackgroundColor(Color.parseColor(player2Color));
         player2Decrement.setOnClickListener(this);
     }
 
-    private void setPlayer1Counters(SharedPreferences preferences) {
-        player1Energy = preferences.getString(
+    private void setPlayer1Counters() {
+        String player1Energy = sharedPreferences.getString(
                 getString(R.string.player1_energy_key),
                 getString(R.string.player1_energy_default_value));
-        player1Clue = preferences.getString(
+        String player1Clue = sharedPreferences.getString(
                 getString(R.string.player1_clue_key),
                 getString(R.string.player1_clue_default_value));
-        player1Poison = preferences.getString(
+        String player1Poison = sharedPreferences.getString(
                 getString(R.string.player1_poison_key),
                 getString(R.string.player1_poison_default_value));
 
@@ -176,34 +157,34 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
 
         player1EnergyText = (TextView) rootView.findViewById(R.id.player1_energy_text);
         player1EnergyText.setText(player1Energy);
-        player1EnergyIncrement = (ImageButton) rootView.findViewById(R.id.player1_energy_increment);
+        ImageButton player1EnergyIncrement = (ImageButton) rootView.findViewById(R.id.player1_energy_increment);
         player1EnergyIncrement.setOnClickListener(this);
-        player1EnergyDecrement =  (ImageButton) rootView.findViewById(R.id.player1_energy_decrement);
+        ImageButton player1EnergyDecrement = (ImageButton) rootView.findViewById(R.id.player1_energy_decrement);
         player1EnergyDecrement.setOnClickListener(this);
 
         player1ClueText = (TextView) rootView.findViewById(R.id.player1_clue_text);
         player1ClueText.setText(player1Clue);
-        player1ClueIncrement = (ImageButton) rootView.findViewById(R.id.player1_clue_increment);
+        ImageButton player1ClueIncrement = (ImageButton) rootView.findViewById(R.id.player1_clue_increment);
         player1ClueIncrement.setOnClickListener(this);
-        player1ClueDecrement =  (ImageButton) rootView.findViewById(R.id.player1_clue_decrement);
+        ImageButton player1ClueDecrement = (ImageButton) rootView.findViewById(R.id.player1_clue_decrement);
         player1ClueDecrement.setOnClickListener(this);
 
         player1PoisonText = (TextView) rootView.findViewById(R.id.player1_poison_text);
         player1PoisonText.setText(player1Poison);
-        player1PoisonIncrement = (ImageButton) rootView.findViewById(R.id.player1_poison_increment);
+        ImageButton player1PoisonIncrement = (ImageButton) rootView.findViewById(R.id.player1_poison_increment);
         player1PoisonIncrement.setOnClickListener(this);
-        player1PoisonDecrement =  (ImageButton) rootView.findViewById(R.id.player1_poison_decrement);
+        ImageButton player1PoisonDecrement = (ImageButton) rootView.findViewById(R.id.player1_poison_decrement);
         player1PoisonDecrement.setOnClickListener(this);
     }
 
-    private void setPlayer2Counters(SharedPreferences preferences) {
-        player2Energy = preferences.getString(
+    private void setPlayer2Counters() {
+        String player2Energy = sharedPreferences.getString(
                 getString(R.string.player2_energy_key),
                 getString(R.string.player2_energy_default_value));
-        player2Clue = preferences.getString(
+        String player2Clue = sharedPreferences.getString(
                 getString(R.string.player2_clue_key),
                 getString(R.string.player2_clue_default_value));
-        player2Poison = preferences.getString(
+        String player2Poison = sharedPreferences.getString(
                 getString(R.string.player2_poison_key),
                 getString(R.string.player2_poison_default_value));
 
@@ -211,39 +192,38 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
 
         player2EnergyText = (TextView) rootView.findViewById(R.id.player2_energy_text);
         player2EnergyText.setText(player2Energy);
-        player2EnergyIncrement = (ImageButton) rootView.findViewById(R.id.player2_energy_increment);
+        ImageButton player2EnergyIncrement = (ImageButton) rootView.findViewById(R.id.player2_energy_increment);
         player2EnergyIncrement.setOnClickListener(this);
-        player2EnergyDecrement =  (ImageButton) rootView.findViewById(R.id.player2_energy_decrement);
+        ImageButton player2EnergyDecrement = (ImageButton) rootView.findViewById(R.id.player2_energy_decrement);
         player2EnergyDecrement.setOnClickListener(this);
 
         player2ClueText = (TextView) rootView.findViewById(R.id.player2_clue_text);
         player2ClueText.setText(player2Clue);
-        player2ClueIncrement = (ImageButton) rootView.findViewById(R.id.player2_clue_increment);
+        ImageButton player2ClueIncrement = (ImageButton) rootView.findViewById(R.id.player2_clue_increment);
         player2ClueIncrement.setOnClickListener(this);
-        player2ClueDecrement =  (ImageButton) rootView.findViewById(R.id.player2_clue_decrement);
+        ImageButton player2ClueDecrement = (ImageButton) rootView.findViewById(R.id.player2_clue_decrement);
         player2ClueIncrement.setOnClickListener(this);
 
         player2PoisonText = (TextView) rootView.findViewById(R.id.player2_poison_text);
         player2PoisonText.setText(player2Poison);
-        player2PoisonIncrement = (ImageButton) rootView.findViewById(R.id.player2_poison_increment);
+        ImageButton player2PoisonIncrement = (ImageButton) rootView.findViewById(R.id.player2_poison_increment);
         player2PoisonIncrement.setOnClickListener(this);
-        player2PoisonDecrement =  (ImageButton) rootView.findViewById(R.id.player2_poison_decrement);
+        ImageButton player2PoisonDecrement = (ImageButton) rootView.findViewById(R.id.player2_poison_decrement);
         player2PoisonIncrement.setOnClickListener(this);
     }
 
     private void savePlayerValues() {
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity());
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         //player 1
-        if (sharedPreferences.getBoolean("player1_counters_key", true)) {
+        if (p1Checked) {
             editor.putString(getString(R.string.player1_life_key), player1LifeView.getText().toString());
             editor.putString(getString(R.string.player1_energy_key), player1EnergyText.getText().toString());
             editor.putString(getString(R.string.player1_clue_key), player1ClueText.getText().toString());
             editor.putString(getString(R.string.player1_poison_key), player1PoisonText.getText().toString());
         }
         // player 2
-        if (sharedPreferences.getBoolean("player2_counters_key", true)) {
+        if (p2Checked) {
             editor.putString(getString(R.string.player2_life_key), player2LifeView.getText().toString());
             editor.putString(getString(R.string.player2_energy_key), player2EnergyText.getText().toString());
             editor.putString(getString(R.string.player2_clue_key), player2ClueText.getText().toString());
