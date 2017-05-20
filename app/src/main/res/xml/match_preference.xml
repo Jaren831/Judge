@@ -11,7 +11,7 @@
             android:title="@string/player1_life_settings_title"
             android:dialogTitle="@string/player1_life_dialog_title"
             android:defaultValue="@string/player1_life_default_value"/>
-        <SwitchPreference
+        <CheckBoxPreference
             android:key="@string/player1_counters_key"
             android:title="@string/player1_counters_title"
             android:summary="Toggle Counters"/>
@@ -52,7 +52,7 @@
             android:title="@string/player2_life_settings_title"
             android:dialogTitle="@string/player2_life_dialog_title"
             android:defaultValue="@string/player2_life_default_value"/>
-        <SwitchPreference
+        <CheckBoxPreference
             android:key="@string/player2_counters_key"
             android:title="@string/player2_counters_title"
             android:summary="Toggle Counters"/>

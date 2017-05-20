@@ -34,14 +34,13 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
     private TextView player2PoisonText;
 
     private String player1Color;
-
     private String player2Color;
+
+    private String player1Life;
+    private String player2Life;
 
     private LinearLayout player1CountersLayout;
     private LinearLayout player2CountersLayout;
-
-    private boolean p1Checked;
-    private boolean p2Checked;
 
     private View rootView;
     @Override
@@ -69,13 +68,11 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
         setPlayer1Life();
         setPlayer2Life();
 
-        p1Checked = sharedPreferences.getBoolean("player1_counters_key", true);
-        p2Checked = sharedPreferences.getBoolean("player2_counters_key", true);
-
-        if (p1Checked) {
+        if (player1CounterCheck()) {
             setPlayer1Counters();
         }
-        if (p2Checked) {
+
+        if (player2CounterCheck()) {
             setPlayer2Counters();
         }
     }
@@ -94,7 +91,7 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
     }
 
     private void setPlayer1Life() {
-        String player1Life = sharedPreferences.getString(
+        player1Life = sharedPreferences.getString(
                 getString(R.string.player1_life_key),
                 getString(R.string.player1_life_default_value));
         player1Color = sharedPreferences.getString(
@@ -117,7 +114,7 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
     }
 
     private void setPlayer2Life() {
-        String player2Life = sharedPreferences.getString(
+        player2Life = sharedPreferences.getString(
                 getString(R.string.player2_life_key),
                 getString(R.string.player2_life_default_value));
         player2Color = sharedPreferences.getString(
@@ -202,29 +199,29 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
         ImageButton player2ClueIncrement = (ImageButton) rootView.findViewById(R.id.player2_clue_increment);
         player2ClueIncrement.setOnClickListener(this);
         ImageButton player2ClueDecrement = (ImageButton) rootView.findViewById(R.id.player2_clue_decrement);
-        player2ClueIncrement.setOnClickListener(this);
+        player2ClueDecrement.setOnClickListener(this);
 
         player2PoisonText = (TextView) rootView.findViewById(R.id.player2_poison_text);
         player2PoisonText.setText(player2Poison);
         ImageButton player2PoisonIncrement = (ImageButton) rootView.findViewById(R.id.player2_poison_increment);
         player2PoisonIncrement.setOnClickListener(this);
         ImageButton player2PoisonDecrement = (ImageButton) rootView.findViewById(R.id.player2_poison_decrement);
-        player2PoisonIncrement.setOnClickListener(this);
+        player2PoisonDecrement.setOnClickListener(this);
     }
 
     private void savePlayerValues() {
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         //player 1
-        if (p1Checked) {
-            editor.putString(getString(R.string.player1_life_key), player1LifeView.getText().toString());
+        editor.putString(getString(R.string.player1_life_key), player1LifeView.getText().toString());
+        if (player1CounterCheck()) {
             editor.putString(getString(R.string.player1_energy_key), player1EnergyText.getText().toString());
             editor.putString(getString(R.string.player1_clue_key), player1ClueText.getText().toString());
             editor.putString(getString(R.string.player1_poison_key), player1PoisonText.getText().toString());
         }
         // player 2
-        if (p2Checked) {
-            editor.putString(getString(R.string.player2_life_key), player2LifeView.getText().toString());
+        editor.putString(getString(R.string.player2_life_key), player2LifeView.getText().toString());
+        if (player2CounterCheck()) {
             editor.putString(getString(R.string.player2_energy_key), player2EnergyText.getText().toString());
             editor.putString(getString(R.string.player2_clue_key), player2ClueText.getText().toString());
             editor.putString(getString(R.string.player2_poison_key), player2PoisonText.getText().toString());
@@ -317,5 +314,14 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
                 player2PoisonText.setText(String.format(player2CurrentPoison.toString()));
                 break;
         }
+    }
+
+    public boolean player1CounterCheck(){
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        return sharedPreferences.getBoolean("player1_counters",true);
+    }
+    public boolean player2CounterCheck(){
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        return sharedPreferences.getBoolean("player2_counters",true);
     }
 }

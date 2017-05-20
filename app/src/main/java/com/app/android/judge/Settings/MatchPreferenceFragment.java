@@ -1,5 +1,6 @@
 package com.app.android.judge.Settings;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.EditTextPreference;
@@ -11,6 +12,8 @@ import android.view.Menu;
 
 import com.app.android.judge.R;
 
+import java.io.File;
+
 /**
  * Created by Jaren Lynch on 4/5/2017.
  */
@@ -21,6 +24,8 @@ public class MatchPreferenceFragment extends PreferenceFragment
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+//        clearSharedPreferences(getActivity());
 
         addPreferencesFromResource(R.xml.match_preference);
 
@@ -81,5 +86,20 @@ public class MatchPreferenceFragment extends PreferenceFragment
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(preference.getContext());
         String preferenceString = preferences.getString(preference.getKey(), "");
         onPreferenceChange(preference, preferenceString);
+    }
+
+    public static void clearSharedPreferences(Context ctx){
+        File dir = new File(ctx.getFilesDir().getParent() + "/shared_prefs/");
+        String[] children = dir.list();
+        for (int i = 0; i < children.length; i++) {
+            // clear each of the prefrances
+            ctx.getSharedPreferences(children[i].replace(".xml", ""), Context.MODE_PRIVATE).edit().clear().apply();
+        }
+        // Make sure it has enough time to save all the commited changes
+        try { Thread.sleep(1000); } catch (InterruptedException e) {}
+        for (int i = 0; i < children.length; i++) {
+            // delete the files
+            new File(dir, children[i]).delete();
+        }
     }
 }

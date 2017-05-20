@@ -195,7 +195,6 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             Intent settingsIntent = new Intent(this, SettingsActivity.class);
-            settingsIntent.putExtras(CurrentFragmentCheck());
             startActivity(settingsIntent);
             return true;
         } else {
@@ -229,20 +228,5 @@ public class MainActivity extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
-    }
-
-    private Bundle CurrentFragmentCheck() {
-        Bundle bundle = new Bundle();
-
-        Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.main_container);
-
-        if (currentFragment instanceof MatchFragment) {
-            bundle.putInt("fragment", 0);
-        } else if (currentFragment instanceof CardSearchFragment) {
-            bundle.putInt("fragment", 1);
-        } else if (currentFragment instanceof RuleBookFragment) {
-            bundle.putInt("fragment", 2);
-        }
-        return bundle;
     }
 }
