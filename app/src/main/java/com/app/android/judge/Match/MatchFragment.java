@@ -51,7 +51,6 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
         rootView = inflater.inflate(R.layout.fragment_match, container, false);
         player1CountersLayout = (LinearLayout) rootView.findViewById(R.id.player1_counters_view);
         player2CountersLayout = (LinearLayout) rootView.findViewById(R.id.player2_counters_view);
-
         return rootView;
     }
 
@@ -63,25 +62,30 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
+    public void onStart() {
+        super.onStart();
         setPlayer1Life();
         setPlayer2Life();
-
         if (player1CounterCheck()) {
+            player1CountersLayout.setVisibility(View.VISIBLE);
             setPlayer1Counters();
+        } else {
+            player1CountersLayout.setVisibility(View.GONE);
         }
 
         if (player2CounterCheck()) {
+            player2CountersLayout.setVisibility(View.VISIBLE);
             setPlayer2Counters();
+        } else {
+            player2CountersLayout.setVisibility(View.GONE);
         }
+
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
+    public void onStop() {
+        super.onStop();
         savePlayerValues();
-
     }
 
     @Override
@@ -149,7 +153,7 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
                 getString(R.string.player1_poison_key),
                 getString(R.string.player1_poison_default_value));
 
-        player2CountersLayout.setVisibility(View.VISIBLE);
+        player1CountersLayout.setVisibility(View.VISIBLE);
         player1CountersLayout.setBackgroundColor(Color.parseColor(player1Color));
 
         player1EnergyText = (TextView) rootView.findViewById(R.id.player1_energy_text);
@@ -233,12 +237,30 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
         player2CountersLayout.setVisibility(View.GONE);
     }
 
-    private void updatePlayer1(View view) {
-        Integer player1CurrentLife = Integer.parseInt(player1LifeView.getText().toString());
-        Integer player1CurrentEnergy = Integer.parseInt(player1EnergyText.getText().toString());
-        Integer player1CurrentClue = Integer.parseInt(player1ClueText.getText().toString());
-        Integer player1CurrentPoison = Integer.parseInt(player1PoisonText.getText().toString());
+    public boolean player1CounterCheck(){
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        return sharedPreferences.getBoolean("player1_counters",true);
+    }
+    public boolean player2CounterCheck(){
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
+        return sharedPreferences.getBoolean("player2_counters",true);
+    }
 
+    private void updatePlayer1(View view) {
+        updatePlayer1Life(view);
+        if (player1CounterCheck()) {
+            updatePlayer1Counter(view);
+        }
+    }
+    private void updatePlayer2(View view) {
+        updatePlayer2Life(view);
+        if (player2CounterCheck()) {
+            updatePlayer2Counter(view);
+        }
+    }
+
+    public void updatePlayer1Life(View view) {
+        Integer player1CurrentLife = Integer.parseInt(player1LifeView.getText().toString());
         switch (view.getId()) {
             case R.id.player1_increment:
                 player1CurrentLife += 1;
@@ -248,6 +270,14 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
                 player1CurrentLife -= 1;
                 player1LifeView.setText(String.format(player1CurrentLife.toString()));
                 break;
+        }
+    }
+
+    public void updatePlayer1Counter(View view) {
+        Integer player1CurrentEnergy = Integer.parseInt(player1EnergyText.getText().toString());
+        Integer player1CurrentClue = Integer.parseInt(player1ClueText.getText().toString());
+        Integer player1CurrentPoison = Integer.parseInt(player1PoisonText.getText().toString());
+        switch (view.getId()) {
             case R.id.player1_energy_increment:
                 player1CurrentEnergy += 1;
                 player1EnergyText.setText(String.format(player1CurrentEnergy.toString()));
@@ -274,12 +304,9 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
                 break;
         }
     }
-    private void updatePlayer2(View view) {
-        Integer player2CurrentLife = Integer.parseInt(player2LifeView.getText().toString());
-        Integer player2CurrentEnergy = Integer.parseInt(player2EnergyText.getText().toString());
-        Integer player2CurrentClue = Integer.parseInt(player2ClueText.getText().toString());
-        Integer player2CurrentPoison = Integer.parseInt(player2PoisonText.getText().toString());
 
+    public void updatePlayer2Life(View view) {
+        Integer player2CurrentLife = Integer.parseInt(player2LifeView.getText().toString());
         switch (view.getId()) {
             case R.id.player2_increment:
                 player2CurrentLife += 1;
@@ -289,6 +316,14 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
                 player2CurrentLife -= 1;
                 player2LifeView.setText(String.format(player2CurrentLife.toString()));
                 break;
+        }
+    }
+
+    public void updatePlayer2Counter(View view) {
+        Integer player2CurrentEnergy = Integer.parseInt(player2EnergyText.getText().toString());
+        Integer player2CurrentClue = Integer.parseInt(player2ClueText.getText().toString());
+        Integer player2CurrentPoison = Integer.parseInt(player2PoisonText.getText().toString());
+        switch (view.getId()) {
             case R.id.player2_energy_increment:
                 player2CurrentEnergy += 1;
                 player2EnergyText.setText(String.format(player2CurrentEnergy.toString()));
@@ -314,14 +349,6 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
                 player2PoisonText.setText(String.format(player2CurrentPoison.toString()));
                 break;
         }
-    }
 
-    public boolean player1CounterCheck(){
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        return sharedPreferences.getBoolean("player1_counters",true);
-    }
-    public boolean player2CounterCheck(){
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
-        return sharedPreferences.getBoolean("player2_counters",true);
     }
 }

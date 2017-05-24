@@ -35,7 +35,7 @@ public class RuleBookFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_rule_book, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_rulebook, container, false);
         setHasOptionsMenu(true);
 
         Button basicButton = (Button) rootView.findViewById(R.id.basic_button);
