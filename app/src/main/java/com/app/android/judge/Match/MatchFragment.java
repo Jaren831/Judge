@@ -36,9 +36,6 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
     private String player1Color;
     private String player2Color;
 
-    private String player1Life;
-    private String player2Life;
-
     private LinearLayout player1CountersLayout;
     private LinearLayout player2CountersLayout;
 
@@ -95,7 +92,7 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
     }
 
     private void setPlayer1Life() {
-        player1Life = sharedPreferences.getString(
+        String player1Life = sharedPreferences.getString(
                 getString(R.string.player1_life_key),
                 getString(R.string.player1_life_default_value));
         player1Color = sharedPreferences.getString(
@@ -118,7 +115,7 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
     }
 
     private void setPlayer2Life() {
-        player2Life = sharedPreferences.getString(
+        String player2Life = sharedPreferences.getString(
                 getString(R.string.player2_life_key),
                 getString(R.string.player2_life_default_value));
         player2Color = sharedPreferences.getString(
@@ -237,11 +234,11 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
         player2CountersLayout.setVisibility(View.GONE);
     }
 
-    public boolean player1CounterCheck(){
+    private boolean player1CounterCheck(){
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         return sharedPreferences.getBoolean("player1_counters",true);
     }
-    public boolean player2CounterCheck(){
+    private boolean player2CounterCheck(){
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         return sharedPreferences.getBoolean("player2_counters",true);
     }
@@ -259,94 +256,94 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    public void updatePlayer1Life(View view) {
+    private void updatePlayer1Life(View view) {
         Integer player1CurrentLife = Integer.parseInt(player1LifeView.getText().toString());
         switch (view.getId()) {
             case R.id.player1_increment:
                 player1CurrentLife += 1;
-                player1LifeView.setText(String.format(player1CurrentLife.toString()));
+                player1LifeView.setText(player1CurrentLife.toString());
                 break;
             case R.id.player1_decrement:
                 player1CurrentLife -= 1;
-                player1LifeView.setText(String.format(player1CurrentLife.toString()));
+                player1LifeView.setText(player1CurrentLife.toString());
                 break;
         }
     }
 
-    public void updatePlayer1Counter(View view) {
+    private void updatePlayer1Counter(View view) {
         Integer player1CurrentEnergy = Integer.parseInt(player1EnergyText.getText().toString());
         Integer player1CurrentClue = Integer.parseInt(player1ClueText.getText().toString());
         Integer player1CurrentPoison = Integer.parseInt(player1PoisonText.getText().toString());
         switch (view.getId()) {
             case R.id.player1_energy_increment:
                 player1CurrentEnergy += 1;
-                player1EnergyText.setText(String.format(player1CurrentEnergy.toString()));
+                player1EnergyText.setText(player1CurrentEnergy.toString());
                 break;
             case R.id.player1_energy_decrement:
                 player1CurrentEnergy -= 1;
-                player1EnergyText.setText(String.format(player1CurrentEnergy.toString()));
+                player1EnergyText.setText(player1CurrentEnergy.toString());
                 break;
             case R.id.player1_clue_increment:
                 player1CurrentClue += 1;
-                player1ClueText.setText(String.format(player1CurrentClue.toString()));
+                player1ClueText.setText(player1CurrentClue.toString());
                 break;
             case R.id.player1_clue_decrement:
                 player1CurrentClue -= 1;
-                player1ClueText.setText(String.format(player1CurrentClue.toString()));
+                player1ClueText.setText(player1CurrentClue.toString());
                 break;
             case R.id.player1_poison_increment:
                 player1CurrentPoison += 1;
-                player1PoisonText.setText(String.format(player1CurrentPoison.toString()));
+                player1PoisonText.setText(player1CurrentPoison.toString());
                 break;
             case R.id.player1_poison_decrement:
                 player1CurrentPoison -= 1;
-                player1PoisonText.setText(String.format(player1CurrentPoison.toString()));
+                player1PoisonText.setText(player1CurrentPoison.toString());
                 break;
         }
     }
 
-    public void updatePlayer2Life(View view) {
+    private void updatePlayer2Life(View view) {
         Integer player2CurrentLife = Integer.parseInt(player2LifeView.getText().toString());
         switch (view.getId()) {
             case R.id.player2_increment:
                 player2CurrentLife += 1;
-                player2LifeView.setText(String.format(player2CurrentLife.toString()));
+                player2LifeView.setText(player2CurrentLife.toString());
                 break;
             case R.id.player2_decrement:
                 player2CurrentLife -= 1;
-                player2LifeView.setText(String.format(player2CurrentLife.toString()));
+                player2LifeView.setText(player2CurrentLife.toString());
                 break;
         }
     }
 
-    public void updatePlayer2Counter(View view) {
+    private void updatePlayer2Counter(View view) {
         Integer player2CurrentEnergy = Integer.parseInt(player2EnergyText.getText().toString());
         Integer player2CurrentClue = Integer.parseInt(player2ClueText.getText().toString());
         Integer player2CurrentPoison = Integer.parseInt(player2PoisonText.getText().toString());
         switch (view.getId()) {
             case R.id.player2_energy_increment:
                 player2CurrentEnergy += 1;
-                player2EnergyText.setText(String.format(player2CurrentEnergy.toString()));
+                player2EnergyText.setText(player2CurrentEnergy.toString());
                 break;
             case R.id.player2_energy_decrement:
                 player2CurrentEnergy -= 1;
-                player2EnergyText.setText(String.format(player2CurrentEnergy.toString()));
+                player2EnergyText.setText(player2CurrentEnergy.toString());
                 break;
             case R.id.player2_clue_increment:
                 player2CurrentClue += 1;
-                player2ClueText.setText(String.format(player2CurrentClue.toString()));
+                player2ClueText.setText(player2CurrentClue.toString());
                 break;
             case R.id.player2_clue_decrement:
                 player2CurrentClue -= 1;
-                player2ClueText.setText(String.format(player2CurrentClue.toString()));
+                player2ClueText.setText(player2CurrentClue.toString());
                 break;
             case R.id.player2_poison_increment:
                 player2CurrentPoison += 1;
-                player2PoisonText.setText(String.format(player2CurrentPoison.toString()));
+                player2PoisonText.setText(player2CurrentPoison.toString());
                 break;
             case R.id.player2_poison_decrement:
                 player2CurrentPoison += 1;
-                player2PoisonText.setText(String.format(player2CurrentPoison.toString()));
+                player2PoisonText.setText(player2CurrentPoison.toString());
                 break;
         }
 

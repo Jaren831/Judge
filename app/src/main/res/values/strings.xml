@@ -7,9 +7,7 @@
 
     <!--Nav Drawer Title-->
     <string name="nav_match_string">Match</string>
-    <string name="nav_card_search_string">Card Search</string>
     <string name="nav_rulebook_string">Rulebook</string>
-    <string name="nav_history_string">Match History</string>
     <string name="app_icon_description">Image of app icon</string>
 
     <!-- Strings related to Settings -->
@@ -64,19 +62,12 @@
     <string name="player2_color_default_value">#faaa8f</string>
     <string name="authentication_failed">Authentication failed.</string>
 
-    <string name="player1_energy">player1_energy</string>
-    <string name="player1_clue">player1_clue</string>
-    <string name="player1_poison">player1_poison</string>
-
     <string name="player1_counters_key">player1_counters</string>
     <string name="player1_counters_title">Counters</string>
 
     <string name="player2_counters_key">player2_counters</string>
     <string name="player2_counters_title">Counters</string>
 
-    <string name="player2_energy">player1_energy</string>
-    <string name="player2_clue">player1_clue</string>
-    <string name="player2_poison">player1_poison</string>
     <string name="energy_title">Energy</string>
     <string name="poison_title">Poison</string>
     <string name="clue_title">Clue</string>
@@ -88,11 +79,8 @@
     <string name="player2_clue_default_value">0</string>
     <string name="player2_poison_default_value">0</string>
 
-    <string name="energy_settings_title">Energy</string>
     <string name="energy_dialog_title">Set Energy</string>
-    <string name="clue_settings_title">Clues</string>
     <string name="clue_dialog_title">Set Clues</string>
-    <string name="poison_settings_title">Poison</string>
     <string name="poison_dialog_title">Set Poison</string>
 
     <string name="player1_energy_key">player1_energy_key</string>
@@ -104,37 +92,16 @@
     <string name="player2_clue_key">player2_clue_key</string>
 
     <!--SearchFragment-->
-    <string name="noInternet">No internet connection</string>
-    <string name="empty">No cards found</string>
-    <string name="no_results">NO RESULTS</string>
-    <string name="card_detail_description">Large image of card</string>
-    <string name="card_thumbnail_description">Thumbnail image of card</string>
 
     <!--DetailFragment-->
-    <string name="detail_title">Card Details</string>
-    <string name="image_not_found">Image not found.</string>
 
 
     <!--Search Settings-->
     <string name="search_settings_title">Card Search Settings</string>
 
     <!--Rulebook Settings-->
-    <string name="rulebook_settings_title">RuleBook Settings</string>
-    <string name="appwidget_text">EXAMPLE</string>
-    <string name="add_widget">Add widget</string>
-    <string name="pdf_broke">PDF file needs compatible viewer to open.</string>
     <string name="basic_button">Basic Rules</string>
     <string name="comprehensive_button">Comprehensive Rules</string>
-    <string name="open_with">Open with:</string>
-    <string name="open_path">application/pdf</string>
-    <string name="start_failed">start activity failed.</string>
 
     <!--History Fragment-->
-    <string name="history_title">Match History</string>
-    <string name="history_empty">No match history.</string>
-    <string name="player1_history_header_text">Player 1</string>
-    <string name="player2_history_header_text">Player 2</string>
-    <string name="history_reset_title">Delete Match History</string>
-    <string name="history_reset_message">Are you sure you want to delete Match History?</string>
-    <string name="history_header_icon">Icon for history fragment header.</string>
 </resources>

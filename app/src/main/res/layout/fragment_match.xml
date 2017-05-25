@@ -50,7 +50,6 @@
             android:layout_weight="1"
             android:background="@color/mtg_red">
             <LinearLayout
-                android:id="@+id/player1_energy_view"
                 android:background="@null"
                 android:layout_width="0dp"
                 android:orientation="horizontal"
@@ -87,7 +86,6 @@
                     android:src="@drawable/ic_navigate_next_black_24dp"/>
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/player1_clue_view"
                 android:layout_width="0dp"
                 android:background="@null"
                 android:orientation="horizontal"
@@ -124,7 +122,6 @@
                     android:contentDescription="@string/player1_clue_inc_desc" />
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/player1_poison_view"
                 android:layout_width="0dp"
                 android:background="@null"
                 android:orientation="horizontal"
@@ -149,7 +146,7 @@
                     android:textSize="24sp"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:drawableStart="@drawable/ic_opacity_black_24dp"/>
+                    android:drawableStart="@drawable/ic_flask_outline_black_24dp"/>
                 <ImageButton
                     android:id="@+id/player1_poison_increment"
                     android:background="@null"
@@ -205,7 +202,6 @@
             android:layout_weight="1"
             android:background="@color/mtg_red">
             <LinearLayout
-                android:id="@+id/player2_energy_view"
                 android:layout_width="0dp"
                 android:background="@null"
                 android:orientation="horizontal"
@@ -242,7 +238,6 @@
                     android:src="@drawable/ic_navigate_next_black_24dp"/>
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/player2_clue_view"
                 android:layout_width="0dp"
                 android:background="@null"
                 android:orientation="horizontal"
@@ -279,7 +274,6 @@
                     android:src="@drawable/ic_navigate_next_black_24dp"/>
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/player2_poison_view"
                 android:layout_width="0dp"
                 android:background="@null"
                 android:orientation="horizontal"
@@ -304,7 +298,7 @@
                     android:textSize="24sp"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:drawableStart="@drawable/ic_opacity_black_24dp"/>
+                    android:drawableStart="@drawable/ic_flask_outline_black_24dp"/>
                 <ImageButton
                     android:id="@+id/player2_poison_increment"
                     android:background="@null"

@@ -91,15 +91,15 @@ public class MatchPreferenceFragment extends PreferenceFragment
     public static void clearSharedPreferences(Context ctx){
         File dir = new File(ctx.getFilesDir().getParent() + "/shared_prefs/");
         String[] children = dir.list();
-        for (int i = 0; i < children.length; i++) {
+        for (String aChildren1 : children) {
             // clear each of the prefrances
-            ctx.getSharedPreferences(children[i].replace(".xml", ""), Context.MODE_PRIVATE).edit().clear().apply();
+            ctx.getSharedPreferences(aChildren1.replace(".xml", ""), Context.MODE_PRIVATE).edit().clear().apply();
         }
         // Make sure it has enough time to save all the commited changes
-        try { Thread.sleep(1000); } catch (InterruptedException e) {}
-        for (int i = 0; i < children.length; i++) {
+        try { Thread.sleep(1000); } catch (InterruptedException ignored) {}
+        for (String aChildren : children) {
             // delete the files
-            new File(dir, children[i]).delete();
+            new File(dir, aChildren).delete();
         }
     }
 }

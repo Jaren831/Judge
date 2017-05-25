@@ -11,7 +11,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import com.app.android.judge.Search.CardSearchFragment;
 import com.app.android.judge.Match.MatchFragment;
 import com.app.android.judge.R;
 
@@ -19,7 +18,6 @@ import com.app.android.judge.RuleBook.RuleBookFragment;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    private int currentFragmentInt;
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
 
@@ -59,10 +57,9 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void CurrentFragmentReset() {
         Fragment currentFragment = getSupportFragmentManager().findFragmentById(R.id.main_container);
+        int currentFragmentInt;
         if (currentFragment instanceof MatchFragment) {
             currentFragmentInt = 0;
-        } else if (currentFragment instanceof CardSearchFragment) {
-            currentFragmentInt = 1;
         } else if (currentFragment instanceof RuleBookFragment) {
             currentFragmentInt = 2;
         }
@@ -72,7 +69,7 @@ public class SettingsActivity extends AppCompatActivity {
         builder.setMessage(R.string.match_settings_reset_message);
         builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor = sharedPreferences.edit();
                 editor.putString(getString(R.string.player1_life_key), getString(R.string.player1_life_default_value));
                 editor.putString(getString(R.string.player1_color_key), getString(R.string.player1_color_default_value));
                 editor.putString(getString(R.string.player1_energy_key), getString(R.string.player1_energy_default_value));
