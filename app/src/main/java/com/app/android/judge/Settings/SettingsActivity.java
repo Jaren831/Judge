@@ -53,6 +53,12 @@ public class SettingsActivity extends AppCompatActivity {
                         .add(R.id.settings_container, matchPreferenceFragment)
                         .commit();
                 break;
+////            case 1:
+////                SearchPreferenceFragment searchPreferenceFragment = new SearchPreferenceFragment();
+////                getFragmentManager().beginTransaction()
+////                        .add(R.id.settings_container, searchPreferenceFragment)
+////                        .commit();
+//                break;
         }
     }
     @Override

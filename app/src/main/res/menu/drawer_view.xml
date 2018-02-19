@@ -14,9 +14,9 @@
             android:id="@+id/nav_rulebook"
             android:icon="@drawable/ic_library_books_black_24dp"
             android:title="@string/nav_rulebook_string" />
-        <item
-            android:id="@+id/nav_history"
-            android:icon="@drawable/ic_alarm_black_24dp"
-            android:title="@string/nav_history_string" />
+        <!--<item-->
+            <!--android:id="@+id/nav_history"-->
+            <!--android:icon="@drawable/ic_alarm_black_24dp"-->
+            <!--android:title="@string/nav_history_string" />-->
     </group>
 </menu>

@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity
         drawerToggle = setupDrawerToggle();
 
 
-        // Find our drawer view
+        // Add our drawer view
         NavigationView nvDrawer = (NavigationView) findViewById(R.id.nvView);
         mDrawer.addDrawerListener(drawerToggle);
 
@@ -162,9 +162,9 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_rulebook:
                 fragmentClass = RuleBookFragment.class;
                 break;
-            case R.id.nav_history:
-                fragmentClass = HistoryFragment.class;
-                break;
+//            case R.id.nav_history:
+//                fragmentClass = HistoryFragment.class;
+//                break;
             default:
                 fragmentClass = MatchFragment.class;
         }
