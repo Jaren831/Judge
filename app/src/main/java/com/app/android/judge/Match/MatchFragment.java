@@ -19,23 +19,14 @@ public class MatchFragment extends Fragment implements View.OnClickListener {
     private TextView player1LifeView;
     private TextView player2LifeView;
     private SharedPreferences sharedPreferences;
-
-
     private TextView player1EnergyText;
-
     private TextView player1ClueText;
-
     private TextView player1PoisonText;
-
     private TextView player2EnergyText;
-
     private TextView player2ClueText;
-
     private TextView player2PoisonText;
-
     private String player1Color;
     private String player2Color;
-
     private LinearLayout player1CountersLayout;
     private LinearLayout player2CountersLayout;
 

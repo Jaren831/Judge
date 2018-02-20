@@ -7,6 +7,10 @@
             android:checked="true"
             android:title="@string/nav_match_string" />
         <item
+            android:id="@+id/nav_card_search"
+            android:icon="@drawable/ic_search_black_24dp"
+            android:title="@string/nav_card_search_string" />
+        <item
             android:id="@+id/nav_rulebook"
             android:icon="@drawable/ic_library_books_black_24dp"
             android:title="@string/nav_rulebook_string" />

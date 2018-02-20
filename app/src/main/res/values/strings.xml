@@ -9,13 +9,11 @@
     <string name="nav_match_string">Match</string>
     <string name="nav_rulebook_string">Rulebook</string>
     <string name="app_icon_description">Image of app icon</string>
+    <string name="nav_card_search_string">Card Search</string>
 
     <!-- Strings related to Settings -->
     <string name="settings_menu_item">Settings</string>
     <string name="settings">Settings</string>
-
-    <!--Card Query Logs-->
-
 
     <!--Match Settings-->
     <string name="match_settings_reset_title">Reset Settings</string>
@@ -92,9 +90,15 @@
     <string name="player2_clue_key">player2_clue_key</string>
 
     <!--SearchFragment-->
+    <string name="noInternet">No internet connection</string>
+    <string name="empty">No cards found</string>
+    <string name="no_results">NO RESULTS</string>
+    <string name="card_detail_description">Large image of card</string>
+    <string name="card_thumbnail_description">Thumbnail image of card</string>
 
     <!--DetailFragment-->
-
+    <string name="detail_title">Card Details</string>
+    <string name="image_not_found">Image not found.</string>
 
     <!--Search Settings-->
     <string name="search_settings_title">Card Search Settings</string>

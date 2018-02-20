@@ -18,6 +18,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 import com.app.android.judge.Match.MatchFragment;
+import com.app.android.judge.Search.CardSearchFragment;
 import com.app.android.judge.Settings.SettingsActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -149,6 +150,9 @@ public class MainActivity extends AppCompatActivity
         switch(menuItem.getItemId()) {
             case R.id.nav_match:
                 fragmentClass = MatchFragment.class;
+                break;
+            case R.id.nav_card_search:
+                fragmentClass = CardSearchFragment.class;
                 break;
             case R.id.nav_rulebook:
                 fragmentClass = RuleBookFragment.class;
