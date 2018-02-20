@@ -84,7 +84,7 @@ public class CardSearchFragment extends Fragment
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         menu.findItem(R.id.action_reset).setVisible(false);
-        menu.findItem(R.id.action_settings).setVisible(false);
+        menu.findItem(R.id.action_settings).setVisible(true);
         MenuItem item = menu.findItem(R.id.action_search);
 
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);

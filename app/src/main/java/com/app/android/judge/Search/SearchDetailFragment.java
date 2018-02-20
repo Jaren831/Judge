@@ -33,7 +33,7 @@ public class SearchDetailFragment extends Fragment {
         Bundle args = getArguments();
         String cardUrl = args.getString("url");
         if (cardUrl != null && !cardUrl.isEmpty()) {
-            Picasso.with(getContext()).load(cardUrl).fit().into(cardDetailImage);
+            Picasso.with(getContext()).load(cardUrl).fit().centerCrop().into(cardDetailImage);
         } else {
             cardDetailImage.setImageResource(R.drawable.ic_help_outline_black_24dp);
             Toast.makeText(getContext(), getResources().getString(R.string.image_not_found), Toast.LENGTH_SHORT).show();

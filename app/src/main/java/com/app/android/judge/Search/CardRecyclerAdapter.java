@@ -87,7 +87,7 @@ public class CardRecyclerAdapter extends RecyclerView.Adapter<CardRecyclerAdapte
         holder.cardName.setText(currentCard.getName());
 
         if (currentCard.getImage() != null && !currentCard.getImage().isEmpty()) {
-            Picasso.with(mContext).load(currentCard.getImage()).fit().into(holder.cardImage);
+            Picasso.with(mContext).load(currentCard.getImage()).fit().centerCrop().into(holder.cardImage);
         }
 
         holder.cardMana.setText("");
